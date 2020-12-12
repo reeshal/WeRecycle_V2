@@ -1,1 +1,122 @@
-<p>navbar works!</p>
+<header class="header">
+    <!-- <h1 class="logo"><a href="#">Flexbox</a></h1> -->
+    <img
+      src="assets/images/logo.png"
+      alt=""
+      class="logo"
+      height="50px"
+      width="50px"
+    />
+    <!-- <links> -->
+  <ul class="main-nav">
+
+      <!-- Admin -->
+      <li class="dropdown">
+            <a class="dropbtn">Driver Allocations</a>
+            <div class="dropdown-content">
+              <a 
+                href="#"
+                [routerLink]="['View-Allocations']"
+                [routerLinkActive]="['active']">View Allocations</a>
+            
+              <a 
+                href="#"
+                [routerLink]="['Allocate-Drivers']"
+                [routerLinkActive]="['active']"
+                >Add Allocations</a>
+
+            </div>
+      </li>
+
+      <!-- Admin -->
+      <li class="dropdown">
+        <a class="dropbtn">Manage Bins</a>
+        <div class="dropdown-content">
+          <a 
+            href="#"
+            [routerLink]="['Add-Bins']"
+            [routerLinkActive]="['active']"
+            >Add Bins</a>
+        
+          <a 
+            href="#"
+            [routerLink]="['All-Bins']"
+            [routerLinkActive]="['active']"
+            >All Bins</a>
+
+          <a 
+            href="#"
+            [routerLink]="['Full-Bins']"
+            [routerLinkActive]="['active']"
+            >Reported Bins</a>
+
+        </div>
+       </li>
+
+       <!-- Admin -->
+       <li class="dropdown">
+        <a class="dropbtn">Manage Requests</a>
+        <div class="dropdown-content">
+          <a 
+            href="#"
+            [routerLink]="['Manage-Bin-Requests']"
+            [routerLinkActive]="['active']"
+            >Bin Requests</a>
+        
+          <a 
+            href="#"
+            [routerLink]="['Manage-Requests']"
+             [routerLinkActive]="['active']"
+            >Pickup Requests</a>
+
+        </div>
+       </li>       
+
+      <!-- Admin -->
+      <li>
+        <a 
+            [routerLink]="['Manage-Registered-Users']"
+            [routerLinkActive]="['active']"
+          >Manage Reg_Users</a>
+      </li>
+
+      <li>
+        <a 
+        [routerLink]="['All-Bins']"
+        [routerLinkActive]="['active']"
+        >All Bins</a>
+      </li>
+
+      <li>
+        <a
+          [routerLink]="['Our-Prices']"
+          [routerLinkActive]="['active']"
+        >Prices</a>
+      </li>
+
+      <li>
+        <a
+          [routerLink]="['New-Pickup-Request']"
+          [routerLinkActive]="['active']">Pickup Requests
+        </a>
+      </li>
+
+      <li>
+        <a
+          [routerLink]="['Sign-In']"
+          [routerLinkActive]="['active']">Sign In</a
+        >
+      </li>
+
+      <li class="dropdown">
+        
+        <a class="dropbtn">Username</a>
+        <div class="dropdown-content">
+            <a (click)="logout()">Logout</a>
+        </div>
+       </li>
+
+  </ul>
+<!-- </links> -->
+</header> 
+xsxs
