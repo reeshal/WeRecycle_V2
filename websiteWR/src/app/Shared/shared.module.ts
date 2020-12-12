@@ -4,16 +4,18 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 import { RouterModule } from '@angular/router';
 import { NgZorroModule } from '../ng-zorro.module';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, SpinnerComponent],
   imports: [
     CommonModule,
     RouterModule,
     NgZorroModule
   ],
   exports:[
-    NavbarComponent
+    NavbarComponent,
+    SpinnerComponent
   ]
 })
 export class SharedModule { }

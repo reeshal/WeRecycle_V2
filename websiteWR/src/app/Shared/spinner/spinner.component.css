@@ -1,0 +1,12 @@
+.fullscreen{
+    height:50vh;
+    /* width: 500px; */
+    display: flex;
+    vertical-align:middle;
+    justify-content: center;
+    align-items: center;
+}
+
+/* nz-spin{
+    margin: 0 auto;
+} */

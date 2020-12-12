@@ -1,0 +1,10 @@
+.wrapper {
+    margin: auto;
+    padding: 70px 30px 50px 30px;
+    width: 100%;
+    /* margin-top: 40px; */
+    z-index: 0;
+    overflow: hidden;
+    background: #f8f8f8;
+  }
+  
