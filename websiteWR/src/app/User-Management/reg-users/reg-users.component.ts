@@ -11,8 +11,10 @@ import { NzButtonSize } from 'ng-zorro-antd/button';
 export class RegUsersComponent implements OnInit {
   isLoading: boolean = true;
   search: string = "";
-  size: NzButtonSize = 'large';
-  
+  size: NzButtonSize = 'default';
+  selectedStatus:any;
+  showClearButton = false;
+
   rows:any = [];
   filteredRows:any = [];
 
@@ -42,7 +44,7 @@ export class RegUsersComponent implements OnInit {
 
   applySearch(event:any) {
     const val = event.target.value.toLowerCase();
-
+    this.showClearButton = true;
     // filter our data
     const temp = this.rows.filter((d:any)=> {
       return (d.fullname.toLowerCase().indexOf(val) !== -1 || !val)
@@ -51,6 +53,20 @@ export class RegUsersComponent implements OnInit {
 
     // update the rows
     this.filteredRows = temp;
+  }
+
+  handleStatusChange(): void{
+    console.log(this.selectedStatus);
+    this.showClearButton = true;
+    this.selectedStatus== 'All' ? this.filteredRows = this.rows :
+      this.filteredRows = this.rows.filter((b:any) => b.status === this.selectedStatus);
+  }
+
+  clearFilter():void{
+    this.showClearButton=false;
+    this.filteredRows=this.rows;
+    this.selectedStatus="";
+    this.search="";
   }
 
 }

@@ -17,20 +17,26 @@
             <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
             </ng-template>
         </div>
-        <div nz-col class="statusButton">
-            <button nz-button nz-dropdown [nzDropdownMenu]="menu" >
-                Status
-                <i nz-icon nzType="down"></i>
-            </button>
-            <nz-dropdown-menu #menu="nzDropdownMenu">
-                <ul nz-menu>
-                  <li nz-menu-item>All</li>
-                  <li nz-menu-item>Approved</li>
-                  <li nz-menu-item>Pending</li>
-                  <li nz-menu-item>Archived</li>
-                </ul>
-            </nz-dropdown-menu>
+        <div nz-col>
+            <nz-select
+                nzPlaceHolder="Status" 
+                [(ngModel)]="selectedStatus"
+                (ngModelChange)="handleStatusChange()">
+                <nz-option nzValue="All" nzLabel="All"></nz-option>
+                <nz-option nzValue="approved" nzLabel="Approved"></nz-option>
+                <nz-option nzValue="pending" nzLabel="Pending"></nz-option>
+                <nz-option nzValue="archived" nzLabel="Archived"></nz-option>
+            </nz-select>
         </div>
+
+        <div nz-col nzOffset="2" *ngIf="showClearButton">
+            <button 
+                nz-button
+                nzShape="round" 
+                (click)="clearFilter()"
+                style="background-color: #ac1010; color: #fff;"
+                >Clear Filters</button> 
+          </div>
     </div>
     
     <ngx-datatable 
@@ -39,12 +45,12 @@
     [columnMode]="'force'" 
     [headerHeight]="50" 
     [footerHeight]="50"
-    [rowHeight]="60" 
+    [rowHeight]="50" 
     [scrollbarV]="false" 
     [sorts]="[{prop: 'status', dir: 'desc'}]">
     
-      <ngx-datatable-column name="Full Name">
-        <ng-template let-row="row" ngx-datatable-cell-template>
+      <ngx-datatable-column name="Full Name" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
           {{row.fullname}}
         </ng-template>
       </ngx-datatable-column>
