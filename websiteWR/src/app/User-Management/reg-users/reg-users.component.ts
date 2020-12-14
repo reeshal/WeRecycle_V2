@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../services/users.service';
+import { finalize } from 'rxjs/operators';
+import { NzButtonSize } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-reg-users',
@@ -6,10 +9,48 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reg-users.component.css']
 })
 export class RegUsersComponent implements OnInit {
+  isLoading: boolean = true;
+  search: string = "";
+  size: NzButtonSize = 'large';
+  
+  rows:any = [];
+  filteredRows:any = [];
 
-  constructor() { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
+    this.fetchRegUsers();
+  }
+
+  fetchRegUsers(): void {
+    this.usersService.getRegUsers().pipe(
+      finalize(()=>{
+        this.isLoading = false;
+      })
+    )
+    .subscribe(   
+      (data: any) => {
+        this.rows=data;
+        this.filteredRows=data;
+        console.log(this.filteredRows);
+      },
+      (err) => {
+        console.log(err.message);
+      }
+    );
+  }
+
+  applySearch(event:any) {
+    const val = event.target.value.toLowerCase();
+
+    // filter our data
+    const temp = this.rows.filter((d:any)=> {
+      return (d.fullname.toLowerCase().indexOf(val) !== -1 || !val)
+      ||(d.phoneno.toLowerCase().indexOf(val) !== -1 || !val);
+    });
+
+    // update the rows
+    this.filteredRows = temp;
   }
 
 }

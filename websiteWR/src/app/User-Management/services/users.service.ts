@@ -11,7 +11,7 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
   //it is filtered later by driver or reguser
-  getUsers(): Observable<any> {
+  getRegUsers(): Observable<any> {
     return this.http.get(`${environment.apiURL}/Users`);
   }
 

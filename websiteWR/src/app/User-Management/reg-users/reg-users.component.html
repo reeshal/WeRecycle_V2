@@ -1,1 +1,80 @@
-<p>reg-users works!</p>
+<div *ngIf="isLoading">
+    <app-spinner></app-spinner>
+</div>
+<div *ngIf="!isLoading">
+    <div nz-row style="margin-bottom: 20px;">
+    
+        <div nz-col  [nzSpan]="6">
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input
+                 type="text" 
+                 nz-input placeholder="Filter (e.g Yuvraaj/5123455)" 
+                 (keyup)="applySearch($event)"
+                 [(ngModel)]="search"
+                 />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+            </ng-template>
+        </div>
+        <div nz-col class="statusButton">
+            <button nz-button nz-dropdown [nzDropdownMenu]="menu" >
+                Status
+                <i nz-icon nzType="down"></i>
+            </button>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu>
+                  <li nz-menu-item>All</li>
+                  <li nz-menu-item>Approved</li>
+                  <li nz-menu-item>Pending</li>
+                  <li nz-menu-item>Archived</li>
+                </ul>
+            </nz-dropdown-menu>
+        </div>
+    </div>
+    
+    <ngx-datatable 
+    class="material"
+    [rows]="filteredRows" 
+    [columnMode]="'force'" 
+    [headerHeight]="50" 
+    [footerHeight]="50"
+    [rowHeight]="60" 
+    [scrollbarV]="false" 
+    [sorts]="[{prop: 'status', dir: 'desc'}]">
+    
+      <ngx-datatable-column name="Full Name">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.fullname}}
+        </ng-template>
+      </ngx-datatable-column>
+    
+      <ngx-datatable-column name="Phone Number">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.phoneno}}
+        </ng-template>
+      </ngx-datatable-column>
+    
+      <ngx-datatable-column name="Status">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.status}}
+        </ng-template>
+      </ngx-datatable-column>
+    
+      <ngx-datatable-column name="Approve">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <button *ngIf="row.status=='pending'" nz-button  [nzSize]="size" nzShape="circle" style="background-color: #2D8F3F; color: #fff;"><i nz-icon nzType="check"></i></button>
+            <button *ngIf="row.status!='pending'" nz-button  [nzSize]="size" nzShape="circle" [disabled]="true"><i nz-icon nzType="check"></i></button>
+        </ng-template>
+      </ngx-datatable-column>
+    
+      <ngx-datatable-column name="More Details">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <button nz-button  [nzSize]="size" nzShape="circle" style="background-color: #19324D; color: #fff;"><i nz-icon nzType="arrow-right"></i></button>
+        </ng-template>
+      </ngx-datatable-column>
+    
+    
+    </ngx-datatable>
+</div>
+

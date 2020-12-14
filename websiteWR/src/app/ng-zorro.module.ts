@@ -8,7 +8,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 // import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 // import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzButtonModule} from 'ng-zorro-antd/button';
 // import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzCardModule } from 'ng-zorro-antd/card';
 // import { NzCarouselModule } from 'ng-zorro-antd/carousel';
