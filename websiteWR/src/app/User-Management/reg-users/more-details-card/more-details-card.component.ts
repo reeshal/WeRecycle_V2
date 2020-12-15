@@ -25,4 +25,8 @@ export class MoreDetailsCardComponent implements OnInit {
     this.toggleMoreDetailsModal(data);
   }
 
+  handleDeleteBin(binId: number){
+    
+  }
+
 }

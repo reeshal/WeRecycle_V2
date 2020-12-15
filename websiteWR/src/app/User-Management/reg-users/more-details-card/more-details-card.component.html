@@ -2,7 +2,7 @@
   [(nzVisible)]="showDetailsModal"
   [nzTitle]=""
   [nzContent]="modalContent"
-  [nzFooter]="modalFooter"
+  [nzFooter]="null"
   (nzOnCancel)="handleCancel(false)"
 >
     <ng-template #modalContent>
@@ -15,11 +15,41 @@
             <p><span class="font-weight-bold">PostalAddress: </span>{{moreDetailsUser.address}}</p>
             <p><span class="font-weight-bold">BRN: </span>{{moreDetailsUser.brn}}</p><hr/>
         </div>
-        
+        <p><span class="font-weight-bold">Bins Owned:</span></p>
+        <div class="binBox">
+            <div class="card" *ngFor="let bin of moreDetailsUser.bins">
+                <div nz-row [nzGutter]="{ xs: 2, sm: 10, md: 16, lg: 25 }">
+                    <div nz-col [nzSpan]="5"><span class="font-weight-bold">Bin Id: </span>{{ bin.id}}</div>
+                    <div nz-col [nzSpan]="9"><span class="font-weight-bold">Material: </span>{{ bin.material}}</div>
+                    <div nz-col [nzSpan]="7" *ngIf="bin.full==false"><span class="font-weight-bold">Status: </span>Not Full</div>
+                    <div nz-col [nzSpan]="7" *ngIf="bin.full==true"><span class="font-weight-bold">Status: </span>Full</div>
+                    <div nz-col [nzSpan]="1" >
+                        <button nz-button  
+                        nzShape="circle" 
+                        (click)="handleDeleteBin(bin.id)"
+                        style="background-color: #eb0808; color: #fff;"><i nz-icon nzType="delete"></i></button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="buttonBox">
+            <button nz-button
+                *ngIf="moreDetailsUser.status=='archived'"
+                style="background-color: #2D8F3F; color: #fff;"
+                nzShape="round"  
+                (click)="handleStatusChange()" 
+                [nzLoading]="isLoading">Unarchive this user</button>
+
+            <button nz-button
+            *ngIf="moreDetailsUser.status!='archived'"
+            style="background-color: #2D8F3F; color: #fff;"
+            nzShape="round"  
+            (click)="handleStatusChange()" 
+            [nzLoading]="isLoading">Archive this user</button>
+        </div>
+
     </ng-template>
 
-    <ng-template #modalFooter style="display:flex; align-content:center !important; ">
-        <button nz-button nzType="primary" (click)="handleStatusChange()" [nzLoading]="isLoading">Archive this user</button>
-    </ng-template>
 
 </nz-modal>
