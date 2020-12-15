@@ -38,15 +38,15 @@
                 *ngIf="moreDetailsUser.status=='archived'"
                 style="background-color: #2D8F3F; color: #fff;"
                 nzShape="round"  
-                (click)="handleStatusChange()" 
+                (click)="handleStatusChange(moreDetailsUser.phoneno, 'approved')" 
                 [nzLoading]="isLoading">Unarchive this user</button>
 
             <button nz-button
-            *ngIf="moreDetailsUser.status!='archived'"
-            style="background-color: #2D8F3F; color: #fff;"
-            nzShape="round"  
-            (click)="handleStatusChange()" 
-            [nzLoading]="isLoading">Archive this user</button>
+                *ngIf="moreDetailsUser.status!='archived'"
+                style="background-color: #2D8F3F; color: #fff;"
+                nzShape="round"  
+                (click)="handleStatusChange(moreDetailsUser.phoneno, 'archived')" 
+                [nzLoading]="isLoading">Archive this user</button>
         </div>
 
     </ng-template>

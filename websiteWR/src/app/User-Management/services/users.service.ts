@@ -37,4 +37,9 @@ export class UsersService {
       JSON.stringify('')
     );
   }
+
+  deleteUserBin(binId:number){
+    return this.http.delete(`${environment.apiURL}/Bins?BinId=${binId}`);
+  }
+  
 }

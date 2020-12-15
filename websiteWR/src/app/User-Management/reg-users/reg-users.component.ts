@@ -79,6 +79,7 @@ export class RegUsersComponent implements OnInit {
 
   public toggleMoreDetailsModal = (fetchData: boolean): void => {
     this.showDetailsModal = !this.showDetailsModal;
+    if (fetchData) this.fetchRegUsers();
   };
 
 
