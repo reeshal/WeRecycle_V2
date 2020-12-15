@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { finalize } from 'rxjs/operators';
 import { NzButtonSize } from 'ng-zorro-antd/button';
 import {Reg_Users} from '../Models/reg_users';
@@ -21,7 +22,7 @@ export class RegUsersComponent implements OnInit {
   filteredRows:Array<Reg_Users> = [];
   moreDetailedUser: any;
 
-  constructor(private usersService: UsersService) { }
+  constructor(private modal: NzModalService,private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.fetchRegUsers();
@@ -82,5 +83,35 @@ export class RegUsersComponent implements OnInit {
     if (fetchData) this.fetchRegUsers();
   };
 
-
+  handleApproval(phoneno: string): void {
+    this.modal.confirm({
+      nzTitle: 'Approve User?',
+      nzContent: 'Are you sure?',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOnOk: () => {
+        this.usersService.changeStatusUser(phoneno,"approved").pipe(finalize(
+          ()=>{
+            this.fetchRegUsers();
+          }
+        )).subscribe(
+          () => {
+            this.modal.success({
+              nzTitle: 'Success',
+              nzContent: 'User has been approved'
+            });
+          },
+          (err) => {
+            this.modal.error({
+              nzTitle: 'Error',
+              nzContent: 'Your request failed due to connectivity issues'
+            });
+          }
+        );
+      },
+      nzCancelText: 'No',
+      nzOnCancel: () => {}
+    });
+  }
+  
 }
