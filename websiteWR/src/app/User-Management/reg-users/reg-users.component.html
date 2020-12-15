@@ -76,11 +76,25 @@
     
       <ngx-datatable-column name="More Details">
         <ng-template let-row="row" ngx-datatable-cell-template>
-            <button nz-button  [nzSize]="size" nzShape="circle" style="background-color: #19324D; color: #fff;"><i nz-icon nzType="arrow-right"></i></button>
+            <button nz-button  
+              [nzSize]="size" 
+              nzShape="circle" 
+              style="background-color: #19324D; color: #fff;"
+              (click)="viewMoreDetails(row.phoneno)"
+              ><i nz-icon nzType="arrow-right"></i></button>
         </ng-template>
       </ngx-datatable-column>
     
     
     </ngx-datatable>
+
+    <app-more-details-card
+    [showDetailsModal]="showDetailsModal"
+    [toggleMoreDetailsModal]="toggleMoreDetailsModal"
+    [moreDetailsUser]="moreDetailedUser"
+    >
+
+    </app-more-details-card>
+
 </div>
 

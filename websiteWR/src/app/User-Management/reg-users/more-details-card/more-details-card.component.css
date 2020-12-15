@@ -1,0 +1,11 @@
+.font-weight-bold{
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.title{
+    font-weight: bold;
+    margin: 0px;
+    color:#19324D;
+    text-align: center !important;
+}

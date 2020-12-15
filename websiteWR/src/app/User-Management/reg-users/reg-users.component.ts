@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { finalize } from 'rxjs/operators';
 import { NzButtonSize } from 'ng-zorro-antd/button';
+import {Reg_Users} from '../Models/reg_users';
 
 @Component({
   selector: 'app-reg-users',
@@ -14,9 +15,11 @@ export class RegUsersComponent implements OnInit {
   size: NzButtonSize = 'default';
   selectedStatus:any;
   showClearButton = false;
+  showDetailsModal: boolean = false;
 
-  rows:any = [];
-  filteredRows:any = [];
+  rows:Array<Reg_Users> = [];
+  filteredRows:Array<Reg_Users> = [];
+  moreDetailedUser: any;
 
   constructor(private usersService: UsersService) { }
 
@@ -31,7 +34,7 @@ export class RegUsersComponent implements OnInit {
       })
     )
     .subscribe(   
-      (data: any) => {
+      (data: Array<Reg_Users>) => {
         this.rows=data;
         this.filteredRows=data;
         console.log(this.filteredRows);
@@ -68,5 +71,15 @@ export class RegUsersComponent implements OnInit {
     this.selectedStatus="";
     this.search="";
   }
+
+  viewMoreDetails(phoneno: string):void{
+    this.moreDetailedUser = this.rows.filter((b)=> b.phoneno == phoneno)[0];
+    this.toggleMoreDetailsModal(false);
+  }
+
+  public toggleMoreDetailsModal = (fetchData: boolean): void => {
+    this.showDetailsModal = !this.showDetailsModal;
+  };
+
 
 }

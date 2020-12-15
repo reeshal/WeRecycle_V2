@@ -6,10 +6,11 @@ import { DriversComponent } from './drivers/drivers.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { RouterModule } from '@angular/router';
 import { NgZorroModule } from '../ng-zorro.module';
-import { SharedModule} from '../Shared/shared.module'
+import { SharedModule} from '../Shared/shared.module';
+import { MoreDetailsCardComponent } from './reg-users/more-details-card/more-details-card.component'
 
 @NgModule({
-  declarations: [RegUsersComponent, DriversComponent],
+  declarations: [RegUsersComponent, DriversComponent, MoreDetailsCardComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -20,7 +21,8 @@ import { SharedModule} from '../Shared/shared.module'
   ],
   exports:[
     RegUsersComponent,
-    DriversComponent
+    DriversComponent,
+    MoreDetailsCardComponent
   ]
 })
 export class UserManagementModule { }

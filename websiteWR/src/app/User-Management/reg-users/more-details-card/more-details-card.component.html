@@ -1,0 +1,25 @@
+<nz-modal
+  [(nzVisible)]="showDetailsModal"
+  [nzTitle]=""
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel(false)"
+>
+    <ng-template #modalContent>
+        <div class="title">
+            <h2>{{moreDetailsUser.fullname}}</h2>
+        </div>
+        <div>
+            <p><span class="font-weight-bold">Phone Number:</span> {{moreDetailsUser.phoneno}}</p>
+            <p><span class="font-weight-bold">Email:</span> {{moreDetailsUser.email}}</p>
+            <p><span class="font-weight-bold">PostalAddress: </span>{{moreDetailsUser.address}}</p>
+            <p><span class="font-weight-bold">BRN: </span>{{moreDetailsUser.brn}}</p><hr/>
+        </div>
+        
+    </ng-template>
+
+    <ng-template #modalFooter style="display:flex; align-content:center !important; ">
+        <button nz-button nzType="primary" (click)="handleStatusChange()" [nzLoading]="isLoading">Archive this user</button>
+    </ng-template>
+
+</nz-modal>
