@@ -7,7 +7,7 @@
         <th>Driver Phone</th>
         <th>Due Date</th>
         <th>Status</th>
-        <th>Bins for pickup</th>
+        <th>Pickup Bins</th>
       </tr>
     </thead>
     <tbody>
@@ -15,16 +15,16 @@
         <td>{{ data.pickup_id }}</td>
         <td>{{ data.driver.fullName }}</td>
         <td>{{ data.driver.phoneNumber }}</td>
-        <td>{{ data.pickup_date }}</td>
+        <td>{{ data.pickup_date | date: "dd/MM/yyyy" }}</td>
         <td>
           <nz-tag *ngIf="data.pickup_status == 'pending'">{{
             data.pickup_status
           }}</nz-tag>
-          <nz-tag
+          <!-- <nz-tag
             *ngIf="data.pickup_status == 'approved'"
             [nzColor]="'green'"
             >{{ data.pickup_status }}</nz-tag
-          >
+          > -->
         </td>
         <td>
           <button
@@ -32,7 +32,7 @@
             [nzType]="'primary'"
             (click)="showPickupModal(data.pickupBins)"
           >
-            <span>View bins</span>
+            <span>View pickup details</span>
           </button>
         </td>
       </tr>

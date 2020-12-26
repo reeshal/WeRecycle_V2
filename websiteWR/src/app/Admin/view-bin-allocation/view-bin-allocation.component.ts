@@ -35,15 +35,17 @@ export class ViewBinAllocationComponent implements OnInit {
       .subscribe(
         (data: any) => {
           // console.log(data);
-          this.binAllocations = data.map((a: any) => {
-            return {
-              pickup_id: a.pickups.id,
-              pickup_status: a.pickups.status,
-              pickup_date: a.pickups.date.slice(0, 10),
-              driver: a.pickups.driver,
-              pickupBins: a.pickupBins,
-            };
-          });
+          this.binAllocations = data
+            .filter((b: any) => b.pickups.status == 'pending') // get only pending
+            .map((a: any) => {
+              return {
+                pickup_id: a.pickups.id,
+                pickup_status: a.pickups.status,
+                pickup_date: a.pickups.date,
+                driver: a.pickups.driver,
+                pickupBins: a.pickupBins,
+              };
+            });
         },
         (err) => {
           console.log(err.message);
@@ -52,9 +54,8 @@ export class ViewBinAllocationComponent implements OnInit {
   }
 
   showPickupModal(bins: PickupBin[]): void {
-    console.log(bins);
-    this.modal.info({
-      nzTitle: 'Bins To Pickup',
+    this.modal.create({
+      nzTitle: '',
       nzWidth: 800,
       nzContent: PickupBinDialogComponent,
       nzComponentParams: {

@@ -21,7 +21,7 @@
         />
       </td>
       <td>{{ data.weight || "-" }}</td>
-      <td>{{ data.time || "-" }}</td>
+      <td>{{ data.time | date: "HH:MM, dd MMM" || "-" }}</td>
     </tr>
   </tbody>
 </nz-table>
