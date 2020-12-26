@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { finalize } from 'rxjs/operators';
 import { BinAllocation } from '../Models/BinAllocation.model';
+import { PickupBin } from '../Models/PickupBin.model';
 import { AllocationService } from '../Services/Allocation/allocation.service';
+import { PickupBinDialogComponent } from './pickup-bin-dialog/pickup-bin-dialog.component';
 
 @Component({
   selector: 'app-view-bin-allocation',
@@ -9,7 +12,10 @@ import { AllocationService } from '../Services/Allocation/allocation.service';
   styleUrls: ['./view-bin-allocation.component.css'],
 })
 export class ViewBinAllocationComponent implements OnInit {
-  constructor(private allocationService: AllocationService) {}
+  constructor(
+    private allocationService: AllocationService,
+    private modal: NzModalService
+  ) {}
 
   isLoading: boolean = true;
   binAllocations: BinAllocation[] = [];
@@ -28,6 +34,7 @@ export class ViewBinAllocationComponent implements OnInit {
       )
       .subscribe(
         (data: any) => {
+          // console.log(data);
           this.binAllocations = data.map((a: any) => {
             return {
               pickup_id: a.pickups.id,
@@ -37,11 +44,22 @@ export class ViewBinAllocationComponent implements OnInit {
               pickupBins: a.pickupBins,
             };
           });
-          console.log(this.binAllocations);
         },
         (err) => {
           console.log(err.message);
         }
       );
+  }
+
+  showPickupModal(bins: PickupBin[]): void {
+    console.log(bins);
+    this.modal.info({
+      nzTitle: 'Bins To Pickup',
+      nzWidth: 800,
+      nzContent: PickupBinDialogComponent,
+      nzComponentParams: {
+        pickupBins: bins,
+      },
+    });
   }
 }

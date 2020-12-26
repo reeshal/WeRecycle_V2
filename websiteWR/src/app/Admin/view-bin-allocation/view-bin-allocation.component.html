@@ -7,9 +7,7 @@
         <th>Driver Phone</th>
         <th>Due Date</th>
         <th>Status</th>
-        <th>Bins</th>
-        <th>Route</th>
-        <th>Actions</th>
+        <th>Bins for pickup</th>
       </tr>
     </thead>
     <tbody>
@@ -27,6 +25,15 @@
             [nzColor]="'green'"
             >{{ data.pickup_status }}</nz-tag
           >
+        </td>
+        <td>
+          <button
+            nz-button
+            [nzType]="'primary'"
+            (click)="showPickupModal(data.pickupBins)"
+          >
+            <span>View bins</span>
+          </button>
         </td>
       </tr>
     </tbody>
