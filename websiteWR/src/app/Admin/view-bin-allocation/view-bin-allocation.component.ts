@@ -12,6 +12,7 @@ export class ViewBinAllocationComponent implements OnInit {
   constructor(private allocationService: AllocationService) {}
 
   isLoading: boolean = true;
+  binAllocations: BinAllocation[] = [];
 
   ngOnInit(): void {
     this.fetchAllocations();
@@ -26,8 +27,17 @@ export class ViewBinAllocationComponent implements OnInit {
         })
       )
       .subscribe(
-        (data: BinAllocation) => {
-          console.log(data);
+        (data: any) => {
+          this.binAllocations = data.map((a: any) => {
+            return {
+              pickup_id: a.pickups.id,
+              pickup_status: a.pickups.status,
+              pickup_date: a.pickups.date.slice(0, 10),
+              driver: a.pickups.driver,
+              pickupBins: a.pickupBins,
+            };
+          });
+          console.log(this.binAllocations);
         },
         (err) => {
           console.log(err.message);

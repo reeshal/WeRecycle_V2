@@ -1,4 +1,35 @@
 <div *ngIf="!isLoading" class="allocations">
-  <p>view-bin-allocation works!</p>
+  <nz-table #allocationTable [nzData]="binAllocations">
+    <thead>
+      <tr>
+        <th>Pickup Id</th>
+        <th>Driver Name</th>
+        <th>Driver Phone</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th>Bins</th>
+        <th>Route</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of allocationTable.data">
+        <td>{{ data.pickup_id }}</td>
+        <td>{{ data.driver.fullName }}</td>
+        <td>{{ data.driver.phoneNumber }}</td>
+        <td>{{ data.pickup_date }}</td>
+        <td>
+          <nz-tag *ngIf="data.pickup_status == 'pending'">{{
+            data.pickup_status
+          }}</nz-tag>
+          <nz-tag
+            *ngIf="data.pickup_status == 'approved'"
+            [nzColor]="'green'"
+            >{{ data.pickup_status }}</nz-tag
+          >
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
 </div>
 <app-spinner style="margin-top: 25px" *ngIf="isLoading"></app-spinner>

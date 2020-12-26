@@ -8,7 +8,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 // import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 // import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import { NzButtonModule} from 'ng-zorro-antd/button';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 // import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzCardModule } from 'ng-zorro-antd/card';
 // import { NzCarouselModule } from 'ng-zorro-antd/carousel';
@@ -55,7 +55,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTableModule } from 'ng-zorro-antd/table';
 // import { NzTabsModule } from 'ng-zorro-antd/tabs';
-// import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 // import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 // import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
@@ -122,7 +122,7 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
     NzSwitchModule,
     NzTableModule,
     // NzTabsModule,
-    // NzTagModule,
+    NzTagModule,
     NzTimePickerModule,
     // NzTimelineModule,
     // NzToolTipModule,
@@ -135,6 +135,6 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
     // NzWaveModule,
     // NzResizableModule,
     // NzPipesModule,
-  ]
+  ],
 })
-export class NgZorroModule { }
+export class NgZorroModule {}
