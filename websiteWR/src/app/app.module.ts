@@ -15,14 +15,12 @@ import en from '@angular/common/locales/en';
 import { NgZorroModule } from './ng-zorro.module';
 import { SharedModule } from './Shared/shared.module';
 import { UserManagementModule } from './User-Management/user-management.module';
-
+import { AdminModule } from './Admin/admin.module';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,9 +29,10 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgZorroModule
+    NgZorroModule,
+    AdminModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
