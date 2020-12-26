@@ -5,9 +5,10 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from '../Shared/shared.module';
 import { NgZorroModule } from '../ng-zorro.module';
 import { PickupBinDialogComponent } from './view-bin-allocation/pickup-bin-dialog/pickup-bin-dialog.component';
+import { RouteDialogComponent } from './view-bin-allocation/route-dialog/route-dialog.component';
 
 @NgModule({
-  declarations: [ViewBinAllocationComponent, PickupBinDialogComponent],
+  declarations: [ViewBinAllocationComponent, PickupBinDialogComponent, RouteDialogComponent],
   imports: [CommonModule, AdminRoutingModule, SharedModule, NgZorroModule],
 })
 export class AdminModule {}

@@ -5,6 +5,7 @@ import { BinAllocation } from '../Models/BinAllocation.model';
 import { PickupBin } from '../Models/PickupBin.model';
 import { AllocationService } from '../Services/Allocation/allocation.service';
 import { PickupBinDialogComponent } from './pickup-bin-dialog/pickup-bin-dialog.component';
+import { RouteDialogComponent } from './route-dialog/route-dialog.component';
 
 @Component({
   selector: 'app-view-bin-allocation',
@@ -58,6 +59,16 @@ export class ViewBinAllocationComponent implements OnInit {
       nzTitle: '',
       nzWidth: 800,
       nzContent: PickupBinDialogComponent,
+      nzComponentParams: {
+        pickupBins: bins,
+      },
+    });
+  }
+  showRouteModal(bins: PickupBin[]): void {
+    this.modal.create({
+      nzTitle: '',
+      nzWidth: 800,
+      nzContent: RouteDialogComponent,
       nzComponentParams: {
         pickupBins: bins,
       },

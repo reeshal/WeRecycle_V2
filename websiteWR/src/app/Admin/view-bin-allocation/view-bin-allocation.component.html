@@ -8,6 +8,7 @@
         <th>Due Date</th>
         <th>Status</th>
         <th>Pickup Bins</th>
+        <th>Driver Route</th>
       </tr>
     </thead>
     <tbody>
@@ -32,7 +33,16 @@
             [nzType]="'primary'"
             (click)="showPickupModal(data.pickupBins)"
           >
-            <span>View pickup details</span>
+            <span>View pickup bins</span>
+          </button>
+        </td>
+        <td>
+          <button
+            nz-button
+            [nzType]="'primary'"
+            (click)="showRouteModal(data.pickupBins)"
+          >
+            <span>View route</span>
           </button>
         </td>
       </tr>
