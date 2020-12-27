@@ -78,7 +78,7 @@
             *ngIf="row.status=='pending'" 
             nz-button  
             nzShape="circle" 
-            (click)="handleStatusChange(row.bin_id,row.temptime)"
+            (click)="handleStatusChange(row.bin_id,row.original_date_requested)"
             style="background-color: #2D8F3F; color: #fff;"><i nz-icon nzType="check"></i></button>
 
             <button 

@@ -1,1 +1,132 @@
-<p>bin-requests works!</p>
+<div *ngIf="isLoading">
+    <app-spinner></app-spinner>
+</div>
+<div *ngIf="!isLoading">
+    <div nz-row style="margin-bottom: 20px;">
+    
+        <div nz-col  [nzSpan]="6">
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input
+                 type="text" 
+                 nz-input placeholder="Filter by name/ phone no/ material" 
+                 (keyup)="applySearch($event)"
+                 [(ngModel)]="search"
+                 />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+            </ng-template>
+        </div>
+
+        <div nz-col nzOffset="1">
+            <nz-range-picker [(ngModel)]="date" (ngModelChange)="onDateChange($event)"></nz-range-picker>
+        </div>
+
+        <div nz-col nzOffset="1">
+            <nz-select
+                nzPlaceHolder="Status" 
+                [(ngModel)]="selectedStatus"
+                (ngModelChange)="handleStatusChange()">
+                <nz-option nzValue="All" nzLabel="All"></nz-option>
+                <nz-option nzValue="approved" nzLabel="Approved"></nz-option>
+                <nz-option nzValue="pending" nzLabel="Pending"></nz-option>
+                <nz-option nzValue="declined" nzLabel="Declined"></nz-option>
+            </nz-select>
+        </div>
+
+ 
+        <div nz-col nzOffset="1" *ngIf="showClearButton">
+            <button 
+                nz-button
+                nzShape="round" 
+                (click)="clearFilter()"
+                style="background-color: #ac1010; color: #fff;"
+                >Clear Filters</button> 
+          </div>
+    </div>
+    
+    <ngx-datatable 
+    class="material"
+    [rows]="filteredRows" 
+    [columnMode]="'force'" 
+    [headerHeight]="50" 
+    [footerHeight]="50"
+    [rowHeight]="50" 
+    [scrollbarV]="false" 
+    [sorts]="[{prop: 'status', dir: 'desc'}]">
+    
+      <ngx-datatable-column name="Full Name" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
+          {{row.fullname}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Phone Number" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
+          {{row.phoneno}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Material" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
+          {{row.material}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Units" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
+          {{row.count}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Date Request was Made" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
+          {{row.dateTime}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Location">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <button nz-button  
+              nzShape="circle" 
+              style="background-color: #19324D; color: #fff;"
+              ><i nz-icon nzType="fullscreen"></i></button>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Status" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
+          {{row.status}}
+        </ng-template>
+      </ngx-datatable-column>
+    
+      <ngx-datatable-column name="Approve/Decline">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <div class=""> 
+                <button 
+                *ngIf="row.status=='pending'" 
+                nz-button  
+                nzShape="circle" 
+                (click)="handleNewStatus(row.request_id,'approved')"  
+                style="background-color: #2D8F3F; color: #fff;"><i nz-icon nzType="check"></i></button>
+
+                <button 
+                *ngIf="row.status=='pending'" 
+                nz-button  
+                nzShape="circle" 
+                (click)="handleNewStatus(row.request_id,'declined')"  
+                style="background-color: #eb0808; color: #fff;"><i nz-icon nzType="delete"></i></button>
+
+                <button 
+                *ngIf="row.status!='pending'" 
+                nz-button
+                nzShape="circle" [disabled]="true"><i nz-icon nzType="check"></i></button>
+            </div>
+            
+        </ng-template>
+      </ngx-datatable-column>
+        
+    </ngx-datatable>
+
+</div>
+
