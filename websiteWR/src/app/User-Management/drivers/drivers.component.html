@@ -21,6 +21,7 @@
             <button 
                 nz-button
                 nzShape="round" 
+                (click)="toggleAddDriverModal(false)"
                 style="background-color: #19324D; color: #fff;"
                 >Add Driver</button> 
         </div>
@@ -97,6 +98,13 @@
       
     
     </ngx-datatable>
+
+    <app-add-driver-form
+     [showAddDriverModal]="showAddDriverModal"
+     [toggleAddDriverModal]="toggleAddDriverModal"
+    >
+
+    </app-add-driver-form>
 
 </div>
 

@@ -95,4 +95,11 @@ export class DriversComponent implements OnInit {
     });
   }
 
+
+  public toggleAddDriverModal = (fetchData: boolean): void => {
+    this.showAddDriverModal = !this.showAddDriverModal;
+    if (fetchData) this.fetchDrivers();
+  };
+
+
 }
