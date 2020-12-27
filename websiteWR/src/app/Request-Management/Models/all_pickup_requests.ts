@@ -6,4 +6,5 @@ export interface allPickupRequestsLog{
     fullname: string;
     phoneno: string;
     temptime:string;
+    original_date_requested: Date;
 }

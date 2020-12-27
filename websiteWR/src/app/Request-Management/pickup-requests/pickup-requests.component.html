@@ -17,6 +17,10 @@
             <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
             </ng-template>
         </div>
+
+        <div nz-col nzOffset="1">
+            <nz-range-picker [(ngModel)]="date" (ngModelChange)="onDateChange($event)"></nz-range-picker>
+        </div>
  
         <div nz-col nzOffset="2" *ngIf="showClearButton">
             <button 

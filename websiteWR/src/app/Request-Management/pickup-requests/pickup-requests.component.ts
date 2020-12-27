@@ -13,6 +13,7 @@ export class PickupRequestsComponent implements OnInit {
   isLoading: boolean = true;
   search: string = "";
   showClearButton = false;
+  date = null;
 
   rows:Array<allPickupRequestsLog> = [];
   filteredRows:Array<allPickupRequestsLog> = [];
@@ -37,6 +38,8 @@ export class PickupRequestsComponent implements OnInit {
         console.log(this.filteredRows);
 
         this.rows.forEach((value)=>{
+          value.original_date_requested= new Date(value.date_applied);
+          console.log(value.original_date_requested);
           value.temptime = value.date_requested;
           value.date_requested=value.date_requested.slice(8,10)+'/'+value.date_requested.slice(5,7)+'/'+value.date_requested.slice(0,4)+' at '+value.date_requested.slice(11,16);
           value.date_applied=value.date_applied.slice(8,10)+'/'+value.date_applied.slice(5,7)+'/'+value.date_applied.slice(0,4)+' at '+value.date_applied.slice(11,16);
@@ -103,6 +106,22 @@ export class PickupRequestsComponent implements OnInit {
       nzCancelText: 'No',
       nzOnCancel: () => {}
     });
+  }
+
+  onDateChange(result: Date[]): void {
+    if(result.length>0){
+      const temp = this.rows.filter((d:allPickupRequestsLog)=> {
+        return(d.original_date_requested < result[1] && d.original_date_requested> result[0])
+      });
+  
+      // update the rows
+      this.filteredRows = temp;
+    }
+    else{
+      this.filteredRows= this.rows;
+    }
+    
+    console.log('onChange: ', result);
   }
 
 }
