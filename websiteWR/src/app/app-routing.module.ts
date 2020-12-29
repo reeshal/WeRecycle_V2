@@ -9,7 +9,10 @@ const routes: Routes = [
   {
     path:'Request-Management',
     loadChildren: ()=> import('./Request-Management/request-management-routing.module').then(m=>m.RequestManagementRoutingModule)
-
+  },
+  {
+    path:'General',
+    loadChildren: ()=> import('./General-User/general-user-routing.module').then(m=>m.GeneralUserRoutingModule)
   }
 ];
 

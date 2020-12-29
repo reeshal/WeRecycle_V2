@@ -1,0 +1,23 @@
+<div style="text-align:center">
+    <h1>Our Prices for pickups per region</h1>
+    <div class="grid">
+        <div *ngFor= "let region of listPrices" style="margin:10px; width:270px;" class="grid-item">
+            <app-region-card
+                [imageUrl]="region.imageUrl"
+                [regionName]="region.regionName"
+                [regionPrice]="region.regionPrice"
+            ></app-region-card>
+        </div>
+    </div>
+    <hr/>
+    <h1>Others</h1>
+    <div style="margin:10px; width:270px;">
+        <app-region-card 
+        [imageUrl]="'assets/images/bin.jpg'"
+        [regionName]="'Bins'"
+        [regionPrice]="'Price to be negotiated'"
+        ></app-region-card>
+    </div>
+    <hr/>
+</div>
+

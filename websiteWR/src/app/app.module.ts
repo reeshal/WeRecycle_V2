@@ -15,7 +15,8 @@ import en from '@angular/common/locales/en';
 import { NgZorroModule } from './ng-zorro.module';
 import { SharedModule } from './Shared/shared.module';
 import { UserManagementModule } from './User-Management/user-management.module';
-import {RequestManagementModule} from './Request-Management/request-management.module';
+import { RequestManagementModule } from './Request-Management/request-management.module';
+import { GeneralUserModule } from './General-User/general-user.module';
 
 registerLocaleData(en);
 
@@ -29,6 +30,7 @@ registerLocaleData(en);
     SharedModule,
     UserManagementModule,
     RequestManagementModule,
+    GeneralUserModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
