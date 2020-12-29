@@ -5,8 +5,8 @@ export interface allBinsRequests{
     material: string;
     count: number;
     dateTime: string;
-    latitude: number;
-    longitude: number;
+    lat: number;
+    lng: number;
     request_id: number;
     original_datetime: Date;
 }

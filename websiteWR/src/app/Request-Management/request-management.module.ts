@@ -7,9 +7,10 @@ import { NgZorroModule } from '../ng-zorro.module';
 import { SharedModule} from '../Shared/shared.module';
 import { BinRequestsComponent } from './bin-requests/bin-requests.component';
 import { PickupRequestsComponent } from './pickup-requests/pickup-requests.component';
+import { MapModalComponent } from './bin-requests/map-modal/map-modal.component';
 
 @NgModule({
-  declarations: [BinRequestsComponent, PickupRequestsComponent],
+  declarations: [BinRequestsComponent, PickupRequestsComponent, MapModalComponent],
   imports: [
     CommonModule,
     FormsModule,

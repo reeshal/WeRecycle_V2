@@ -10,8 +10,6 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./add-driver-form.component.css']
 })
 export class AddDriverFormComponent implements OnInit {
-  isLoading: boolean = false;
-  // addDriverForm!: FormGroup;
 
   AddDriverForm = new FormGroup({
     phonenumber: new FormControl('', [Validators.required,Validators.pattern("^[0-9]{8}$"), Validators.minLength(8)]),

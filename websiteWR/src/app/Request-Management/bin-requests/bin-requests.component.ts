@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { allBinsRequests } from '../Models/all_bin_requests';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -16,12 +16,15 @@ export class BinRequestsComponent implements OnInit {
   isLoading: boolean = true;
   search: string = "";
   showClearButton = false;
+  showMapModal: boolean = false;
   selectedStatus:any;
+  selectedLatitude: number =0; //initialised
+  selectedLongitude: number=0; //initialised
   date = null;
 
   rows:Array<allBinsRequests> = [];
   filteredRows:Array<allBinsRequests> = [];
-
+  
   constructor(private requestsService: BinRequestService,private modal: NzModalService) { }
 
   ngOnInit(): void {
@@ -54,7 +57,35 @@ export class BinRequestsComponent implements OnInit {
   }
 
   handleNewStatus(requestId: number, status:string){
-
+    this.modal.confirm({
+      nzTitle: 'Approve Bin Request?',
+      nzContent: 'Are you sure?',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOnOk: () => {
+        this.requestsService.updateStatus(requestId,status).pipe(finalize(
+          ()=>{
+            this.isLoading=true;
+            this.fetchRequests();
+          }
+        )).subscribe(
+          () => {
+            this.modal.success({
+              nzTitle: 'Success',
+              nzContent: 'Bin Request has been approved'
+            });
+          },
+          (err) => {
+            this.modal.error({
+              nzTitle: 'Error',
+              nzContent: 'Your request failed due to connectivity issues'
+            });
+          }
+        );
+      },
+      nzCancelText: 'No',
+      nzOnCancel: () => {}
+    });
   }
 
   applySearch(event:any) {
@@ -97,5 +128,31 @@ export class BinRequestsComponent implements OnInit {
       this.filteredRows= this.rows;
     }
   }
+
+  openMap(lat:number, lng:number){
+    this.selectedLatitude=lat;
+    this.selectedLongitude=lng
+    this.toggleMapModal();
+    // console.log([this.selectedLatitude, this.selectedLongitude]);
+    // const map = new mapboxgl.Map({
+    //   container: 'mapbox',
+    //   accessToken: environment.mapbox.accessToken,
+    //   style: 'mapbox://styles/mapbox/streets-v11',
+    //   zoom: 13,
+    //   center: [this.selectedLatitude, this.selectedLongitude],
+    // });
+    // console.log([this.selectedLatitude, this.selectedLongitude])
+    // const el = document.createElement('img');
+    // el.className = 'marker';
+    // el.src = `assets/images/bin-3.png`;
+    // el.style.width = '40px';
+    // new mapboxgl.Marker(el)
+    //   .setLngLat([this.selectedLatitude, this.selectedLongitude])
+    //   .addTo(map);
+  }
+
+  public toggleMapModal = (): void => {
+    this.showMapModal = !this.showMapModal;
+  };
 
 }
