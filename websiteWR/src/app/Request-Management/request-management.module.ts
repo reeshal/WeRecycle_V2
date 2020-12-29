@@ -20,6 +20,9 @@ import { MapModalComponent } from './bin-requests/map-modal/map-modal.component'
     SharedModule,
   ],
   exports:[
+    BinRequestsComponent,
+    PickupRequestsComponent,
+    MapModalComponent
   ]
 })
 export class RequestManagementModule { }

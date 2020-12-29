@@ -129,32 +129,5 @@
         
     </ngx-datatable>
 
-    <!-- <app-map-modal
-     [showMapModal]="showMapModal"
-     [toggleMapModal]="toggleMapModal"
-     [latitude]="selectedLatitude"
-     [longitude]="selectedLongitude">
-     
-    </app-map-modal> -->
-
-    <nz-modal
-    [(nzVisible)]="showMapModal"
-    [nzTitle]="modalTitle"
-    [nzContent]="modalContent"
-    [nzFooter]="null"
-    (nzOnCancel)="toggleMapModal()"
-    >
-    <ng-template #modalTitle>
-        <div style="text-align: center;"> 
-            <h3>Location to place bin</h3>
-        </div>
-    </ng-template>
-
-    <ng-template #modalContent >
-      <!-- <div id="mapbox" style="width: 40vw; height: 50vh"></div> -->
-      <app-map-modal></app-map-modal>
-    </ng-template>
-    </nz-modal>
-
 </div>
 

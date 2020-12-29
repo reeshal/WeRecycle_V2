@@ -3,7 +3,7 @@ import { finalize } from 'rxjs/operators';
 import { allBinsRequests } from '../Models/all_bin_requests';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { BinRequestService } from '../services/bin-request.service';
-
+import { MapModalComponent } from './map-modal/map-modal.component';
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment';
 
@@ -130,29 +130,17 @@ export class BinRequestsComponent implements OnInit {
   }
 
   openMap(lat:number, lng:number){
-    this.selectedLatitude=lat;
-    this.selectedLongitude=lng
-    this.toggleMapModal();
-    // console.log([this.selectedLatitude, this.selectedLongitude]);
-    // const map = new mapboxgl.Map({
-    //   container: 'mapbox',
-    //   accessToken: environment.mapbox.accessToken,
-    //   style: 'mapbox://styles/mapbox/streets-v11',
-    //   zoom: 13,
-    //   center: [this.selectedLatitude, this.selectedLongitude],
-    // });
-    // console.log([this.selectedLatitude, this.selectedLongitude])
-    // const el = document.createElement('img');
-    // el.className = 'marker';
-    // el.src = `assets/images/bin-3.png`;
-    // el.style.width = '40px';
-    // new mapboxgl.Marker(el)
-    //   .setLngLat([this.selectedLatitude, this.selectedLongitude])
-    //   .addTo(map);
+    this.modal.create({
+      nzTitle: '',
+      nzFooter:"null",
+      nzWidth: 800,
+      nzContent: MapModalComponent,
+      nzComponentParams: {
+        latitude: lat,
+        longitude:lng
+      },
+    });   
   }
 
-  public toggleMapModal = (): void => {
-    this.showMapModal = !this.showMapModal;
-  };
 
 }

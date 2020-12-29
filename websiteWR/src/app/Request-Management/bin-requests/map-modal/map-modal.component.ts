@@ -9,34 +9,29 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./map-modal.component.css']
 })
 export class MapModalComponent implements OnInit {
-  @Input() showMapModal: boolean=false;
-  @Input() toggleMapModal: Function = ()=>{};
+
   @Input() latitude: number = -20; //default initialised
   @Input() longitude: number = 57; //default initialised
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log('hello')
+    console.log([this.latitude, this.longitude])
     const map = new mapboxgl.Map({
       container: 'mapbox',
       accessToken: environment.mapbox.accessToken,
       style: 'mapbox://styles/mapbox/streets-v11',
-      zoom: 13,
-      center: [this.latitude, this.longitude],
+      zoom: 10,
+      center: [-20,57],
     });
-    console.log([this.latitude, this.longitude])
     const el = document.createElement('img');
     el.className = 'marker';
     el.src = `assets/images/bin-3.png`;
     el.style.width = '40px';
     new mapboxgl.Marker(el)
-      .setLngLat([this.latitude, this.longitude])
+      .setLngLat([-20,57])
       .addTo(map);
-  }
-
-  handleCancel(): void {
-    this.showMapModal = false;
-    this.toggleMapModal();
   }
 
 }
