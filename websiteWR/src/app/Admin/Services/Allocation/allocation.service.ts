@@ -12,4 +12,8 @@ export class AllocationService {
   getDriverAllocations(): Observable<any> {
     return this.http.get(`${environment.apiURL}/pickups/allocations`);
   }
+  getGarageLocation(): Observable<any> {
+    // TODO: change url
+    return this.http.get(`assets/data/garage.json`);
+  }
 }

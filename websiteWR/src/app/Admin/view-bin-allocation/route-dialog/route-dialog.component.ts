@@ -17,6 +17,7 @@ export class RouteDialogComponent implements OnInit {
   lat = -20.2349416;
   lng = 57.49629944;
   @Input() pickupBins: PickupBin[] = [];
+  @Input() garageLocation: { lat: number; lng: number } = { lat: 0, lng: 0 };
   isLoading: boolean = true;
 
   ngOnInit() {
@@ -28,7 +29,10 @@ export class RouteDialogComponent implements OnInit {
     });
 
     this.mapboxService
-      .getOptimisedRoute(binsCoordinates)
+      .getOptimisedRoute([
+        { lng: this.garageLocation.lng, lat: this.garageLocation.lat },
+        ...binsCoordinates,
+      ])
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -36,7 +40,7 @@ export class RouteDialogComponent implements OnInit {
       )
       .subscribe(
         (data: any) => {
-          console.log(data);
+          // console.log(data);
           const map = new mapboxgl.Map({
             container: 'map',
             accessToken: environment.mapbox.accessToken,
@@ -54,6 +58,15 @@ export class RouteDialogComponent implements OnInit {
               el.style.width = '40px';
               new mapboxgl.Marker(el).setLngLat([bin.lng, bin.lat]).addTo(map);
             });
+
+            // Show garage
+            const el = document.createElement('img');
+            el.className = 'marker';
+            el.src = `assets/images/home.png`;
+            el.style.width = '40px';
+            new mapboxgl.Marker(el)
+              .setLngLat([this.garageLocation.lng, this.garageLocation.lat])
+              .addTo(map);
 
             // Display route
             map.addSource('route', {
@@ -80,6 +93,42 @@ export class RouteDialogComponent implements OnInit {
                     22,
                     12,
                   ],
+                },
+              },
+              'waterway-label'
+            );
+            map.addLayer(
+              {
+                id: 'routearrows',
+                type: 'symbol',
+                source: 'route',
+                layout: {
+                  'symbol-placement': 'line',
+                  'text-field': '▶',
+                  'text-size': [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    12,
+                    24,
+                    22,
+                    60,
+                  ],
+                  'symbol-spacing': [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    12,
+                    30,
+                    22,
+                    160,
+                  ],
+                  'text-keep-upright': false,
+                },
+                paint: {
+                  'text-color': '#3887be',
+                  'text-halo-color': 'hsl(55, 11%, 96%)',
+                  'text-halo-width': 3,
                 },
               },
               'waterway-label'

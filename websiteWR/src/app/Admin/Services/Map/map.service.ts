@@ -19,7 +19,7 @@ export class MapboxService {
       .join(';');
 
     return this.http.get(
-      `https://api.mapbox.com/optimized-trips/v1/mapbox/walking/${new_coordinates}?geometries=geojson&access_token=${environment.mapbox.accessToken}`
+      `https://api.mapbox.com/optimized-trips/v1/mapbox/driving/${new_coordinates}?geometries=geojson&source=first&roundtrip=true&access_token=${environment.mapbox.accessToken}`
     );
   }
 

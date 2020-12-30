@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { forkJoin } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { BinAllocation } from '../Models/BinAllocation.model';
 import { PickupBin } from '../Models/PickupBin.model';
@@ -20,14 +21,18 @@ export class ViewBinAllocationComponent implements OnInit {
 
   isLoading: boolean = true;
   binAllocations: BinAllocation[] = [];
+  garageLocation: { lat: number; lng: number } = { lat: 0, lng: 0 };
 
   ngOnInit(): void {
     this.fetchAllocations();
   }
 
   fetchAllocations(): void {
-    this.allocationService
-      .getDriverAllocations()
+    const requests = forkJoin([
+      this.allocationService.getDriverAllocations(),
+      this.allocationService.getGarageLocation(),
+    ]);
+    requests
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -36,7 +41,8 @@ export class ViewBinAllocationComponent implements OnInit {
       .subscribe(
         (data: any) => {
           // console.log(data);
-          this.binAllocations = data
+          this.garageLocation = data[1];
+          this.binAllocations = data[0]
             .filter((b: any) => b.pickups.status == 'pending') // get only pending
             .map((a: any) => {
               return {
@@ -57,7 +63,7 @@ export class ViewBinAllocationComponent implements OnInit {
   showPickupModal(bins: PickupBin[]): void {
     this.modal.create({
       nzTitle: '',
-      nzWidth: 800,
+      nzWidth: 1200,
       nzContent: PickupBinDialogComponent,
       nzComponentParams: {
         pickupBins: bins,
@@ -67,10 +73,11 @@ export class ViewBinAllocationComponent implements OnInit {
   showRouteModal(bins: PickupBin[]): void {
     this.modal.create({
       nzTitle: '',
-      nzWidth: 800,
+      nzWidth: 1200,
       nzContent: RouteDialogComponent,
       nzComponentParams: {
         pickupBins: bins,
+        garageLocation: this.garageLocation,
       },
     });
   }
