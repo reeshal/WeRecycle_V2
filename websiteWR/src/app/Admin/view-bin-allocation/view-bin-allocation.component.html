@@ -9,6 +9,7 @@
         <th>Status</th>
         <th>Pickup Bins</th>
         <th>Driver Route</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -21,11 +22,9 @@
           <nz-tag *ngIf="data.pickup_status == 'pending'">{{
             data.pickup_status
           }}</nz-tag>
-          <!-- <nz-tag
-            *ngIf="data.pickup_status == 'approved'"
-            [nzColor]="'green'"
-            >{{ data.pickup_status }}</nz-tag
-          > -->
+          <nz-tag *ngIf="data.pickup_status == 'rejected'" [nzColor]="'red'">{{
+            data.pickup_status
+          }}</nz-tag>
         </td>
         <td>
           <button
@@ -43,6 +42,30 @@
             (click)="showRouteModal(data.pickupBins)"
           >
             <span>View route</span>
+          </button>
+        </td>
+        <td>
+          <button
+            *ngIf="
+              data.pickup_status == 'pending' ||
+              data.pickup_status == 'rejected'
+            "
+            (click)="handleAction(data.pickup_id, 1)"
+            nz-button
+            nzType="default"
+            nzShape="circle"
+          >
+            <i nz-icon nzType="check"></i>
+          </button>
+          &nbsp;
+          <button
+            *ngIf="data.pickup_status == 'pending'"
+            (click)="handleAction(data.pickup_id, 0)"
+            nz-button
+            nzType="danger"
+            nzShape="circle"
+          >
+            <i nz-icon nzType="close"></i>
           </button>
         </td>
       </tr>

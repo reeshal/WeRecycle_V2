@@ -43,7 +43,7 @@ export class ViewBinAllocationComponent implements OnInit {
           // console.log(data);
           this.garageLocation = data[1];
           this.binAllocations = data[0]
-            .filter((b: any) => b.pickups.status == 'pending') // get only pending
+            .filter((b: any) => b.pickups.status != 'approved') // get only pending & declined
             .map((a: any) => {
               return {
                 pickup_id: a.pickups.id,
@@ -70,6 +70,7 @@ export class ViewBinAllocationComponent implements OnInit {
       },
     });
   }
+
   showRouteModal(bins: PickupBin[]): void {
     this.modal.create({
       nzTitle: '',
@@ -80,5 +81,20 @@ export class ViewBinAllocationComponent implements OnInit {
         garageLocation: this.garageLocation,
       },
     });
+  }
+
+  handleAction(pickup_id: number, status: number) {
+    this.isLoading = true;
+    this.allocationService
+      .changePickupStatus(pickup_id, status == 0 ? 'rejected' : 'approved')
+      .subscribe(
+        (data) => {
+          this.fetchAllocations();
+        },
+        (err) => {
+          this.isLoading = false;
+          console.log(err.message);
+        }
+      );
   }
 }

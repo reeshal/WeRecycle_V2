@@ -16,4 +16,10 @@ export class AllocationService {
     // TODO: change url
     return this.http.get(`assets/data/garage.json`);
   }
+  changePickupStatus(pickup_id: number, status: string): Observable<any> {
+    return this.http.post(
+      `${environment.apiURL}/pickup/manage?pickup_id=${pickup_id}&status=${status}`,
+      {}
+    );
+  }
 }
