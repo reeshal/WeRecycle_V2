@@ -6,9 +6,15 @@ import { SharedModule } from '../Shared/shared.module';
 import { NgZorroModule } from '../ng-zorro.module';
 import { PickupBinDialogComponent } from './view-bin-allocation/pickup-bin-dialog/pickup-bin-dialog.component';
 import { RouteDialogComponent } from './view-bin-allocation/route-dialog/route-dialog.component';
+import { AllocateDriversComponent } from './allocate-drivers/AllocateDriversComponent';
 
 @NgModule({
-  declarations: [ViewBinAllocationComponent, PickupBinDialogComponent, RouteDialogComponent],
+  declarations: [
+    ViewBinAllocationComponent,
+    PickupBinDialogComponent,
+    RouteDialogComponent,
+    AllocateDriversComponent,
+  ],
   imports: [CommonModule, AdminRoutingModule, SharedModule, NgZorroModule],
 })
 export class AdminModule {}
