@@ -55,7 +55,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzTableModule } from 'ng-zorro-antd/table';
 // import { NzTabsModule } from 'ng-zorro-antd/tabs';
-// import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 // import { NzTimelineModule } from 'ng-zorro-antd/timeline';
 // import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
@@ -122,7 +122,7 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
     NzSwitchModule,
     NzTableModule,
     // NzTabsModule,
-    // NzTagModule,
+    NzTagModule,
     NzTimePickerModule,
     // NzTimelineModule,
     // NzToolTipModule,
