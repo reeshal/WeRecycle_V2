@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Prices } from '../Models/Prices';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-all-prices',
@@ -8,6 +9,12 @@ import { Prices } from '../Models/Prices';
 })
 export class AllPricesComponent implements OnInit {
   listPrices: Array<Prices> =[];  
+
+  BinRequestForm= new FormGroup({
+    material: new FormControl('', [Validators.required]),
+    count: new FormControl('', [Validators.required]),
+  });
+
   constructor() { }
 
   ngOnInit(): void {
@@ -42,6 +49,18 @@ export class AllPricesComponent implements OnInit {
       regionPrice:'Rs 2500'
     }
     this.listPrices.push(reg1, reg2, reg3, reg4, reg5, reg6);
+  }
+
+  get count(){
+    return this.BinRequestForm.get('count') as FormControl;
+  }
+
+  get material(){
+    return this.BinRequestForm.get('count') as FormControl;
+  }
+
+  changeMaterial(e:any){
+    this.material.setValue(e.target.value, {onlySelf: true})
   }
 
 }
