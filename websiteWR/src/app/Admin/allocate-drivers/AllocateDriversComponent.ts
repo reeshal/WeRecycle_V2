@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import * as mapboxgl from 'mapbox-gl';
 import { forkJoin } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Bin } from '../Models/Bin.model';
 import { Driver } from '../Models/Driver.model';
-import { AllocationService } from '../Services/Allocation/allocation.service';
 import { BinService } from '../Services/Bin/bin.service';
+import { MapboxService } from '../Services/Map/map.service';
 import { UserService } from '../Services/Users/user.service';
+import * as turf from 'turf';
+import { AllocationService } from '../Services/Allocation/allocation.service';
 
 @Component({
   selector: 'app-allocate-drivers',
@@ -14,13 +19,28 @@ import { UserService } from '../Services/Users/user.service';
 export class AllocateDriversComponent implements OnInit {
   constructor(
     private userService: UserService,
-    private binService: BinService
+    private binService: BinService,
+    private mapService: MapboxService,
+    private allocationService: AllocationService
   ) {}
 
   isLoading: boolean = true;
-  drivers: Driver[] = [];
-  filteredDrivers: Driver[] = [];
+  // TODO: Fix type
+  // drivers: Driver[] = [];
+  // filteredDrivers: Driver[] = [];
+  drivers: any;
+  filteredDrivers: any;
   selectedDriver: String = '';
+  bins: Bin[] = [];
+
+  map!: mapboxgl.Map;
+  style = 'mapbox://styles/mapbox/light-v10';
+  lat = -20.2349416;
+  lng = 57.49629944;
+
+  selectedBins: Bin[] = [];
+  garageCoordinates: { lng: number; lat: number } = { lat: 0, lng: 0 };
+  nothing = turf.featureCollection([]);
 
   ngOnInit(): void {
     this.fetchData();
@@ -30,6 +50,7 @@ export class AllocateDriversComponent implements OnInit {
     const requests = forkJoin([
       this.userService.getUsers(),
       this.binService.getFullUnallocatedBins(),
+      this.allocationService.getGarageLocation(),
     ]);
 
     requests
@@ -42,7 +63,9 @@ export class AllocateDriversComponent implements OnInit {
         (data: any) => {
           this.drivers = data[0].filter((d: Driver) => d.type == 'driver');
           this.filteredDrivers = this.drivers;
-          // console.log(this.drivers);
+          this.bins = data[1];
+          this.garageCoordinates = data[2];
+          this.createMap();
         },
         (err) => {
           console.log(err.message);
@@ -57,5 +80,143 @@ export class AllocateDriversComponent implements OnInit {
           (d: any) => d.fullname.toLowerCase().indexOf(value) > -1
         )
       : [];
+  }
+
+  createMap() {
+    this.map = new mapboxgl.Map({
+      accessToken: environment.mapbox.accessToken,
+      container: 'map',
+      style: this.style,
+      zoom: 10,
+      center: [this.lng, this.lat],
+    });
+
+    // this.map.addControl(
+    //   new MapboxGeocoder({
+    //     accessToken: environment.mapbox.accessToken,
+    //     countries: 'mu',
+    //     mapboxgl: mapboxgl,
+    //   })
+    // );
+
+    this.map.on('load', () => {
+      this.createBinMarkers();
+
+      this.map.addSource('route', {
+        type: 'geojson',
+        data: this.nothing,
+      });
+      this.map.addLayer(
+        {
+          id: 'routeline-active',
+          type: 'line',
+          source: 'route',
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round',
+          },
+          paint: {
+            'line-color': '#00FF00',
+            'line-width': ['interpolate', ['linear'], ['zoom'], 12, 3, 22, 12],
+          },
+        },
+        'waterway-label'
+      );
+
+      this.map.addLayer(
+        {
+          id: 'routearrows',
+          type: 'symbol',
+          source: 'route',
+          layout: {
+            'symbol-placement': 'line',
+            'text-field': '▶',
+            'text-size': ['interpolate', ['linear'], ['zoom'], 12, 24, 22, 60],
+            'symbol-spacing': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              12,
+              30,
+              22,
+              160,
+            ],
+            'text-keep-upright': false,
+          },
+          paint: {
+            'text-color': '#3887be',
+            'text-halo-color': 'hsl(55, 11%, 96%)',
+            'text-halo-width': 3,
+          },
+        },
+        'waterway-label'
+      );
+    });
+  }
+
+  createBinMarkers() {
+    const homeEle = document.createElement('img');
+    homeEle.className = 'marker';
+    homeEle.src = `assets/images/home.png`;
+    homeEle.style.width = '55px';
+
+    new mapboxgl.Marker(homeEle)
+      .setLngLat([this.garageCoordinates.lng, this.garageCoordinates.lat])
+      .addTo(this.map);
+
+    this.bins.forEach((station: Bin) => {
+      const el = document.createElement('img');
+      el.className = 'marker';
+      el.src = `assets/images/bin-${station.full ? 1 : 0}.png`;
+      el.style.width = '30px';
+      el.onclick = () => {
+        if (
+          this.selectedBins.filter((b: Bin) => b.id == station.id).length == 0
+        ) {
+          this.selectedBins.push(station);
+          el.src = `assets/images/bin-${2}.png`;
+
+          if (this.selectedBins.length > 0 && this.selectedBins.length <= 12) {
+            this.createRoute();
+          }
+        }
+      };
+      new mapboxgl.Marker(el)
+        .setLngLat([station.lng, station.lat])
+        .addTo(this.map);
+    });
+  }
+
+  createRoute() {
+    const coordinates = this.selectedBins.map((b) => {
+      return {
+        lng: b.lng,
+        lat: b.lat,
+      };
+    });
+    this.mapService
+      .getOptimisedRoute([
+        { lng: this.garageCoordinates.lng, lat: this.garageCoordinates.lat },
+        ...coordinates,
+      ])
+      .subscribe(
+        (data) => {
+          console.log();
+          var routeGeoJSON = turf.featureCollection([
+            turf.feature(data.trips[0].geometry),
+          ]);
+
+          // If there is no route provided, reset
+          if (!data.trips[0]) {
+            routeGeoJSON = this.nothing;
+          } else {
+            let s: any = this.map.getSource('route');
+            s.setData(routeGeoJSON);
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 }
