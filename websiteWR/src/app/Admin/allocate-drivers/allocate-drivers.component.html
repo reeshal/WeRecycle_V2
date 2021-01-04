@@ -1,1 +1,17 @@
 <app-spinner style="margin-top: 25px" *ngIf="isLoading"></app-spinner>
+<div class="allocate-driver" *ngIf="!isLoading">
+  <input
+    placeholder="Choose driver"
+    nz-input
+    [(ngModel)]="selectedDriver"
+    (input)="onInput($event)"
+    [nzAutocomplete]="driverAutocomplete"
+  />
+  <nz-autocomplete #driverAutocomplete>
+    <nz-auto-option
+      *ngFor="let option of filteredDrivers"
+      [nzValue]="option.phoneno"
+      >{{ option.fullname }}</nz-auto-option
+    >
+  </nz-autocomplete>
+</div>

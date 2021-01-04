@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { Driver } from '../Models/Driver.model';
 import { AllocationService } from '../Services/Allocation/allocation.service';
 import { BinService } from '../Services/Bin/bin.service';
 import { UserService } from '../Services/Users/user.service';
@@ -17,6 +18,9 @@ export class AllocateDriversComponent implements OnInit {
   ) {}
 
   isLoading: boolean = true;
+  drivers: Driver[] = [];
+  filteredDrivers: Driver[] = [];
+  selectedDriver: String = '';
 
   ngOnInit(): void {
     this.fetchData();
@@ -36,11 +40,22 @@ export class AllocateDriversComponent implements OnInit {
       )
       .subscribe(
         (data: any) => {
-          console.log(data);
+          this.drivers = data[0].filter((d: Driver) => d.type == 'driver');
+          this.filteredDrivers = this.drivers;
+          // console.log(this.drivers);
         },
         (err) => {
           console.log(err.message);
         }
       );
+  }
+
+  onInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value.toLowerCase();
+    this.filteredDrivers = value
+      ? this.drivers.filter(
+          (d: any) => d.fullname.toLowerCase().indexOf(value) > -1
+        )
+      : [];
   }
 }

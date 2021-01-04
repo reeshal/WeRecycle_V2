@@ -40,7 +40,6 @@ export class ViewBinAllocationComponent implements OnInit {
       )
       .subscribe(
         (data: any) => {
-          // console.log(data);
           this.garageLocation = data[1];
           this.binAllocations = data[0]
             .filter((b: any) => b.pickups.status != 'approved') // get only pending & declined

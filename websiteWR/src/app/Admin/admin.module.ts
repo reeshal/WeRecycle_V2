@@ -7,6 +7,7 @@ import { NgZorroModule } from '../ng-zorro.module';
 import { PickupBinDialogComponent } from './view-bin-allocation/pickup-bin-dialog/pickup-bin-dialog.component';
 import { RouteDialogComponent } from './view-bin-allocation/route-dialog/route-dialog.component';
 import { AllocateDriversComponent } from './allocate-drivers/AllocateDriversComponent';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,12 @@ import { AllocateDriversComponent } from './allocate-drivers/AllocateDriversComp
     RouteDialogComponent,
     AllocateDriversComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule, SharedModule, NgZorroModule],
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    SharedModule,
+    NgZorroModule,
+    FormsModule,
+  ],
 })
 export class AdminModule {}
