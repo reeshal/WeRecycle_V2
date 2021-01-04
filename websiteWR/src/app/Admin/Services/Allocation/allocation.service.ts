@@ -22,4 +22,16 @@ export class AllocationService {
       {}
     );
   }
+
+  allocateDriver(
+    driverPhoneNumber: string,
+    binsID: number[],
+    date: string
+  ): Observable<any> {
+    return this.http.post(`${environment.apiURL}/pickups`, {
+      driverPhoneNumber,
+      binsID,
+      date,
+    });
+  }
 }

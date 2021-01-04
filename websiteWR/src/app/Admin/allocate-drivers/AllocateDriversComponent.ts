@@ -10,6 +10,8 @@ import { MapboxService } from '../Services/Map/map.service';
 import { UserService } from '../Services/Users/user.service';
 import * as turf from 'turf';
 import { AllocationService } from '../Services/Allocation/allocation.service';
+import { DatePipe } from '@angular/common';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-allocate-drivers',
@@ -21,7 +23,8 @@ export class AllocateDriversComponent implements OnInit {
     private userService: UserService,
     private binService: BinService,
     private mapService: MapboxService,
-    private allocationService: AllocationService
+    private allocationService: AllocationService,
+    private modal: NzModalService
   ) {}
 
   isLoading: boolean = true;
@@ -30,7 +33,7 @@ export class AllocateDriversComponent implements OnInit {
   // filteredDrivers: Driver[] = [];
   drivers: any;
   filteredDrivers: any;
-  selectedDriver: String = '';
+  selectedDriver: any;
   bins: Bin[] = [];
 
   map!: mapboxgl.Map;
@@ -216,6 +219,45 @@ export class AllocateDriversComponent implements OnInit {
         },
         (err) => {
           console.log(err);
+        }
+      );
+  }
+
+  handleCancel(): void {
+    this.selectedBins = [];
+    this.selectedDriver = '';
+    this.nothing = turf.featureCollection([]);
+    let s: any = this.map.getSource('route');
+    s.setData(this.nothing);
+    this.createBinMarkers();
+    this.filteredDrivers = this.drivers;
+  }
+
+  handleSubmit(): void {
+    var datePipe = new DatePipe('en-US');
+    const data = {
+      driverPhoneNumber: this.selectedDriver['phoneno'],
+      bins: this.selectedBins.map((b) => b.id),
+      date: datePipe.transform(new Date(), 'dd/MM/yyyy') || '',
+    };
+
+    this.isLoading = true;
+    this.allocationService
+      .allocateDriver(data.driverPhoneNumber, data.bins, data.date)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.modal.info({
+            nzTitle: 'Success',
+            nzContent: '<p>Driver allocation for pickups completed.</p>',
+            nzOnOk: () => {
+              this.fetchData();
+              this.handleCancel();
+            },
+          });
+        },
+        (err) => {
+          console.log(err.message);
         }
       );
   }

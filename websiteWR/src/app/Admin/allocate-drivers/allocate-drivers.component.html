@@ -13,10 +13,31 @@
     <nz-autocomplete #driverAutocomplete>
       <nz-auto-option
         *ngFor="let option of filteredDrivers"
-        [nzValue]="option.phoneno"
+        [nzValue]="option"
+        [nzLabel]="option.fullname"
         >{{ option.fullname }}</nz-auto-option
       >
     </nz-autocomplete>
+    <p *ngIf="selectedBins.length == 0">
+      Please select atleast 1 bin on the map
+    </p>
+    <button
+      nz-button
+      nzType="primary"
+      [disabled]="selectedBins.length == 0 || !selectedDriver"
+      type="button"
+      (click)="handleSubmit()"
+    >
+      Allocate driver
+    </button>
+    <button
+      nz-button
+      *ngIf="selectedBins.length > 0 || selectedDriver"
+      type="button"
+      (click)="handleCancel()"
+    >
+      Cancel
+    </button>
   </div>
   <div id="map" class="map"></div>
 </div>
