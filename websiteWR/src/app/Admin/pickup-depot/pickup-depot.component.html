@@ -3,6 +3,20 @@
 <div nz-row>
   <div nz-col nzSpan="8" *ngIf="!isLoading">
     <h3>Click on the map to change pickpup depot location.</h3>
+    <div *ngIf="newMarker" class="buttons">
+      <button nz-button nzType="primary" type="button" (click)="handleSubmit()">
+        Save
+      </button>
+      &nbsp;
+      <button
+        nz-button
+        *ngIf="newMarker"
+        type="button"
+        (click)="handleCancel()"
+      >
+        Cancel
+      </button>
+    </div>
   </div>
 
   <div nz-col nzSpan="16">
