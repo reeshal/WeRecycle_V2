@@ -8,6 +8,7 @@ import { PickupBinDialogComponent } from './view-bin-allocation/pickup-bin-dialo
 import { RouteDialogComponent } from './view-bin-allocation/route-dialog/route-dialog.component';
 import { AllocateDriversComponent } from './allocate-drivers/AllocateDriversComponent';
 import { FormsModule } from '@angular/forms';
+import { PickupDepotComponent } from './pickup-depot/pickup-depot.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
     PickupBinDialogComponent,
     RouteDialogComponent,
     AllocateDriversComponent,
+    PickupDepotComponent,
   ],
   imports: [
     CommonModule,

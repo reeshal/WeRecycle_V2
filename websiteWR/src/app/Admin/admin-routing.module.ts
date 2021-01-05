@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ViewBinAllocationComponent } from './view-bin-allocation/view-bin-allocation.component';
 import { AllocateDriversComponent } from './allocate-drivers/AllocateDriversComponent';
+import { PickupDepotComponent } from './pickup-depot/pickup-depot.component';
 const routes: Routes = [
   {
     path: 'View-Allocations',
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'Allocate-Drivers',
     component: AllocateDriversComponent,
+  },
+  {
+    path: 'Pickup-Depot',
+    component: PickupDepotComponent,
   },
 ];
 

@@ -1,0 +1,11 @@
+<app-spinner style="margin-top: 25px" *ngIf="isLoading"></app-spinner>
+
+<div nz-row>
+  <div nz-col nzSpan="8" *ngIf="!isLoading">
+    <h3>Click on the map to change pickpup depot location.</h3>
+  </div>
+
+  <div nz-col nzSpan="16">
+    <div id="map" class="map"></div>
+  </div>
+</div>
