@@ -1,43 +1,60 @@
 <app-spinner style="margin-top: 25px" *ngIf="isLoading"></app-spinner>
-<div class="driver-allocation">
-  <div class="main" *ngIf="!isLoading">
-    <h2>Driver Allocation</h2>
 
-    <input
-      placeholder="Choose driver"
-      nz-input
-      [(ngModel)]="selectedDriver"
-      (input)="onInput($event)"
-      [nzAutocomplete]="driverAutocomplete"
-    />
-    <nz-autocomplete #driverAutocomplete>
-      <nz-auto-option
-        *ngFor="let option of filteredDrivers"
-        [nzValue]="option"
-        [nzLabel]="option.fullname"
-        >{{ option.fullname }}</nz-auto-option
+<div nz-row>
+  <div nz-col nzSpan="8" *ngIf="!isLoading">
+    <div class="main">
+      <h2>Driver Allocation</h2>
+
+      <input
+        placeholder="Choose driver"
+        nz-input
+        [(ngModel)]="selectedDriver"
+        (input)="onInput($event)"
+        [nzAutocomplete]="driverAutocomplete"
+      />
+      <nz-autocomplete #driverAutocomplete>
+        <nz-auto-option
+          *ngFor="let option of filteredDrivers"
+          [nzValue]="option"
+          [nzLabel]="option.fullname"
+          >{{ option.fullname }}</nz-auto-option
+        >
+      </nz-autocomplete>
+      <p *ngIf="selectedBins.length == 0" class="message">
+        Please select atleast 1 bin on the map (max: 11)
+      </p>
+      <div class="bins-display">
+        <nz-card *ngFor="let bin of selectedBins">
+          <div nz-row>
+            <div nz-col nzSpan="8">
+              <img class="bin-image" src="{{ bin.image }}" alt="binImage" />
+            </div>
+            <div nz-col nzSpan="16">
+              <p class="bin-id">Bin #{{ bin.id }}</p>
+            </div>
+          </div>
+        </nz-card>
+      </div>
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="selectedBins.length == 0 || !selectedDriver"
+        type="button"
+        (click)="handleSubmit()"
       >
-    </nz-autocomplete>
-    <p *ngIf="selectedBins.length == 0">
-      Please select atleast 1 bin on the map
-    </p>
-    <button
-      nz-button
-      nzType="primary"
-      [disabled]="selectedBins.length == 0 || !selectedDriver"
-      type="button"
-      (click)="handleSubmit()"
-    >
-      Allocate driver
-    </button>
-    <button
-      nz-button
-      *ngIf="selectedBins.length > 0 || selectedDriver"
-      type="button"
-      (click)="handleCancel()"
-    >
-      Cancel
-    </button>
+        Allocate driver
+      </button>
+      <button
+        nz-button
+        *ngIf="selectedBins.length > 0 || selectedDriver"
+        type="button"
+        (click)="handleCancel()"
+      >
+        Cancel
+      </button>
+    </div>
   </div>
-  <div id="map" class="map"></div>
+  <div nz-col nzSpan="16">
+    <div id="map" class="map"></div>
+  </div>
 </div>

@@ -246,7 +246,6 @@ export class AllocateDriversComponent implements OnInit {
       .allocateDriver(data.driverPhoneNumber, data.bins, data.date)
       .subscribe(
         (data) => {
-          console.log(data);
           this.modal.info({
             nzTitle: 'Success',
             nzContent: '<p>Driver allocation for pickups completed.</p>',
