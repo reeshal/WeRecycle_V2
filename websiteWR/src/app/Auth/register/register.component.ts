@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from '../Services/auth/auth.service';
 
@@ -14,7 +15,11 @@ export class RegisterComponent implements OnInit {
   hasError: boolean = false;
   passwordVisible: boolean = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private modal: NzModalService
+  ) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -57,9 +62,12 @@ export class RegisterComponent implements OnInit {
           })
         )
         .subscribe(
-          (data: any) => {
-            console.log(data);
-            // this.registerForm.reset();
+          () => {
+            this.registerForm.reset();
+            this.modal.success({
+              nzTitle: 'Success',
+              nzContent: 'Your registration has been sent for approval. ',
+            });
           },
           (err: any) => {
             console.log(err.message);
