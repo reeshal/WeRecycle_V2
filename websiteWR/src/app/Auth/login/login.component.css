@@ -1,3 +1,6 @@
 img.login-image {
   height: 500px;
 }
+p.error {
+  color: red;
+}

@@ -6,15 +6,15 @@
     <h2>Sign In</h2>
     <form
       nz-form
-      [formGroup]="validateForm"
+      [formGroup]="loginForm"
       class="login-form"
       (ngSubmit)="submitForm()"
     >
       <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your phone number!">
+        <nz-form-control nzErrorTip="Please enter a valid phone number!">
           <nz-input-group nzPrefixIcon="phone">
             <input
-              type="text"
+              type="number"
               nz-input
               formControlName="phone"
               placeholder="Phone number"
@@ -23,7 +23,7 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your password!">
+        <nz-form-control nzErrorTip="Please enter a valid password!">
           <nz-input-group nzPrefixIcon="lock">
             <input
               type="password"
@@ -35,11 +35,16 @@
         </nz-form-control>
       </nz-form-item>
 
+      <p *ngIf="hasError" class="error">
+        Invalid phone or password. Please try again.
+      </p>
+
       <button
         nz-button
         class="login-form-button login-form-margin"
         [nzType]="'primary'"
         nzBlock
+        [nzLoading]="isLoading"
       >
         Sign in
       </button>
