@@ -16,6 +16,7 @@ import { NgZorroModule } from './ng-zorro.module';
 import { SharedModule } from './Shared/shared.module';
 import { UserManagementModule } from './User-Management/user-management.module';
 import { AdminModule } from './Admin/admin.module';
+import { AuthModule } from './Auth/auth.module';
 
 registerLocaleData(en);
 
@@ -31,6 +32,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     NgZorroModule,
     AdminModule,
+    AuthModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],
