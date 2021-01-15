@@ -1,180 +1,187 @@
 <header class="header">
-    <!-- <h1 class="logo"><a href="#">Flexbox</a></h1> -->
-    <img
-      src="assets/images/logo.png"
-      alt=""
-      class="logo"
-      height="50px"
-      width="50px"
-    />
-    <!-- <links> -->
-  <ul class="main-nav">
+  <!-- <h1 class="logo"><a href="#">Flexbox</a></h1> -->
+  <img
+    src="assets/images/logo.png"
+    alt=""
+    class="logo"
+    height="50px"
+    width="50px"
+  />
+  <!-- <links> -->
+<ul class="main-nav">
 
-      <!-- Admin -->
-      <li class="dropdown">
-        <a nz-dropdown [nzDropdownMenu]="menu1">
-            Driver Allocations
-            <i nz-icon nzType="down"></i>
-        </a>
-        <nz-dropdown-menu #menu1="nzDropdownMenu">
-            <a 
-            nz-menu-item 
-            class="dropdown-content"
-            href="#"
-            [routerLink]="['View-Allocations']"
-            [routerLinkActive]="['active']">View Allocations</a>
-
-            <a 
-            nz-menu-item 
-            class="dropdown-content"
-            href="#"
-            [routerLink]="['Allocate-Drivers']"
-                [routerLinkActive]="['active']"
-                >Add Allocations</a>
-        </nz-dropdown-menu>
-
-      </li>
-
-      <!-- Admin -->
-      <li class="dropdown">
-        <a nz-dropdown [nzDropdownMenu]="menu2">
-            Manage Bins
-            <i nz-icon nzType="down"></i>
-        </a>
-        <nz-dropdown-menu #menu2="nzDropdownMenu">
-            <a 
-            nz-menu-item 
-            href="#"
-            class="dropdown-content"
-            [routerLink]="['Add-Bins']"
-            [routerLinkActive]="['active']"
-            >Add Bins</a>
-        
-          <a 
-            nz-menu-item 
-            href="#"
-            class="dropdown-content"
-            [routerLink]="['All-Bins']"
-            [routerLinkActive]="['active']"
-            >All Bins</a>
-
-          <a 
-            nz-menu-item 
-            href="#"
-            class="dropdown-content"
-            [routerLink]="['Full-Bins']"
-            [routerLinkActive]="['active']"
-            >Reported Bins</a>
-
-        </nz-dropdown-menu>
-       </li>
-
-       <!-- Admin -->
-       <li class="dropdown">
-        <a nz-dropdown [nzDropdownMenu]="menu3">
-            Manage Requests
-            <i nz-icon nzType="down"></i>
-        </a>
-        <nz-dropdown-menu #menu3="nzDropdownMenu">
-            <a 
-            nz-menu-item 
-            href="#"
-            class="dropdown-content"
-            [routerLink]="['Request-Management/Bins']"
-            [routerLinkActive]="['active']"
-            >Bin Requests</a>
-        
-          <a 
-            nz-menu-item 
-            href="#"
-            class="dropdown-content"
-            [routerLink]="['Request-Management/Pickups']"
-             [routerLinkActive]="['active']"
-            >Pickup Requests</a>
-
-        </nz-dropdown-menu>
-       </li>       
-
-      <!-- Admin -->
-      <li>
-        <a 
-            [routerLink]="['User-Management/Registered-Users']"
-            [routerLinkActive]="['active']"
-          >Manage Reg Users</a>
-      </li>
-
-      <!-- Admin -->
-      <li>
-        <a 
-            [routerLink]="['User-Management/Drivers']"
-            [routerLinkActive]="['active']"
-          >Manage Drivers</a>
-      </li>
-
-
-      <li>
-        <a 
-        [routerLink]="['General/Bins']"
-        [routerLinkActive]="['active']"
-        >All Bins</a>
-      </li>
-
-      <li>
-        <a
-          [routerLink]="['General/Prices']"
-          [routerLinkActive]="['active']"
-        >Prices</a>
-      </li>
-
-      <li>
-        <a
-          [routerLink]="['Reg-User/My-Pickup-Requests']"
-          [routerLinkActive]="['active']">Pickup Requests
-        </a>
-      </li>
-
-      <li>
-        <a
-          [routerLink]="['Sign-In']"
-          [routerLinkActive]="['active']">Sign In</a
-        >
-      </li>
-
-      <li class="dropdown">
-       <a nz-dropdown [nzDropdownMenu]="menu">
-        Username
-        <i nz-icon nzType="down"></i>
+    <!-- Admin -->
+    <li class="dropdown">
+      <a nz-dropdown [nzDropdownMenu]="menu1">
+          Driver Allocations
+          <i nz-icon nzType="down"></i>
       </a>
-      <nz-dropdown-menu #menu="nzDropdownMenu">
-        <a nz-menu-item class="dropdown-content"(click)="logout()">Logout</a>
-      </nz-dropdown-menu>
-      </li>
-       
+      <nz-dropdown-menu #menu1="nzDropdownMenu">
+          <a 
+          nz-menu-item 
+          class="dropdown-content"
+          href="#"
+          [routerLink]="['View-Allocations']"
+          [routerLinkActive]="['active']">View Allocations</a>
 
-  </ul>
+          <a 
+          nz-menu-item 
+          class="dropdown-content"
+          href="#"
+          [routerLink]="['Allocate-Drivers']"
+              [routerLinkActive]="['active']"
+              >Add Allocations</a>
+
+          <a
+          nz-menu-item
+          class="dropdown-content"
+          href="#"
+          [routerLink]="['Pickup-Depot']"
+          [routerLinkActive]="['active']"
+          >Pickup Depot</a
+        >
+      </nz-dropdown-menu>
+
+    </li>
+
+    <!-- Admin -->
+    <li class="dropdown">
+      <a nz-dropdown [nzDropdownMenu]="menu2">
+          Manage Bins
+          <i nz-icon nzType="down"></i>
+      </a>
+      <nz-dropdown-menu #menu2="nzDropdownMenu">
+          <a 
+          nz-menu-item 
+          href="#"
+          class="dropdown-content"
+          [routerLink]="['Add-Bins']"
+          [routerLinkActive]="['active']"
+          >Add Bins</a>
+      
+        <a 
+          nz-menu-item 
+          href="#"
+          class="dropdown-content"
+          [routerLink]="['All-Bins']"
+          [routerLinkActive]="['active']"
+          >All Bins</a>
+
+        <a 
+          nz-menu-item 
+          href="#"
+          class="dropdown-content"
+          [routerLink]="['Full-Bins']"
+          [routerLinkActive]="['active']"
+          >Reported Bins</a>
+
+      </nz-dropdown-menu>
+     </li>
+
+     <!-- Admin -->
+     <li class="dropdown">
+      <a nz-dropdown [nzDropdownMenu]="menu3">
+          Manage Requests
+          <i nz-icon nzType="down"></i>
+      </a>
+      <nz-dropdown-menu #menu3="nzDropdownMenu">
+          <a 
+          nz-menu-item 
+          href="#"
+          class="dropdown-content"
+          [routerLink]="['Request-Management/Bins']"
+          [routerLinkActive]="['active']"
+          >Bin Requests</a>
+      
+        <a 
+          nz-menu-item 
+          href="#"
+          class="dropdown-content"
+          [routerLink]="['Request-Management/Pickups']"
+           [routerLinkActive]="['active']"
+          >Pickup Requests</a>
+
+      </nz-dropdown-menu>
+     </li>       
+
+    <!-- Admin -->
+    <li>
+      <a 
+          [routerLink]="['User-Management/Registered-Users']"
+          [routerLinkActive]="['active']"
+        >Manage Reg Users</a>
+    </li>
+
+    <!-- Admin -->
+    <li>
+      <a 
+          [routerLink]="['User-Management/Drivers']"
+          [routerLinkActive]="['active']"
+        >Manage Drivers</a>
+    </li>
+
+
+    <li>
+      <a 
+      [routerLink]="['General/Bins']"
+      [routerLinkActive]="['active']"
+      >All Bins</a>
+    </li>
+
+    <li>
+      <a
+        [routerLink]="['General/Prices']"
+        [routerLinkActive]="['active']"
+      >Prices</a>
+    </li>
+
+    <li>
+      <a
+        [routerLink]="['Reg-User/My-Pickup-Requests']"
+        [routerLinkActive]="['active']">Pickup Requests
+      </a>
+    </li>
+
+    <li>
+      <a
+        [routerLink]="['Sign-In']"
+        [routerLinkActive]="['active']">Sign In</a
+      >
+    </li>
+
+    <li class="dropdown">
+     <a nz-dropdown [nzDropdownMenu]="menu">
+      Username
+      <i nz-icon nzType="down"></i>
+    </a>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <a nz-menu-item class="dropdown-content"(click)="logout()">Logout</a>
+    </nz-dropdown-menu>
+    </li>
+     
+
+</ul>
 <!-- </links> -->
 </header> 
 
 
 <!-- <li class="dropdown">
-    
-    <a class="dropbtn">Username</a>
-    <div class="dropdown-content">
-        <a (click)="logout()">Logout</a>
-    </div>
+  
+  <a class="dropbtn">Username</a>
+  <div class="dropdown-content">
+      <a (click)="logout()">Logout</a>
+  </div>
 </li> -->
 
 <!-- <a class="dropbtn">Driver Allocations</a>
 <div class="dropdown-content">
-    <a 
-    href="#"
-    [routerLink]="['View-Allocations']"
-    [routerLinkActive]="['active']">View Allocations</a>
-
-    <a 
-    href="#"
-    [routerLink]="['Allocate-Drivers']"
-    [routerLinkActive]="['active']"
-    >Add Allocations</a>
-
+  <a 
+  href="#"
+  [routerLink]="['View-Allocations']"
+  [routerLinkActive]="['active']">View Allocations</a>
+  <a 
+  href="#"
+  [routerLink]="['Allocate-Drivers']"
+  [routerLinkActive]="['active']"
+  >Add Allocations</a>
 </div> -->

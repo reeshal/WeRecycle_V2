@@ -1,0 +1,27 @@
+<nz-table #pickupBinsTable [nzData]="pickupBins">
+  <thead>
+    <tr>
+      <th>Bin Id</th>
+      <th>Material</th>
+      <th>Image taken by driver</th>
+      <th>Weight recorded (Kg)</th>
+      <th>Timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of pickupBinsTable.data">
+      <td>{{ data.bin.id }}</td>
+      <td>{{ data.bin.material }}</td>
+      <td>
+        <p *ngIf="!data.image">-</p>
+        <img
+          *ngIf="data.image"
+          style="width: 200px; height: 200px"
+          [src]="getSantizeUrl(data.image)"
+        />
+      </td>
+      <td>{{ data.weight || "-" }}</td>
+      <td>{{ data.time | date: "HH:MM, dd MMM" || "-" }}</td>
+    </tr>
+  </tbody>
+</nz-table>

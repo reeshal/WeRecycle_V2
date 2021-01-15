@@ -22,12 +22,13 @@
     "@mapbox/mapbox-gl-geocoder": "^4.7.0",
     "@swimlane/ngx-datatable": "^18.0.0",
     "@types/mapbox-gl": "^2.0.0",
+    "@types/turf": "^3.5.32",
     "mapbox-gl": "^2.0.1",
-    "mapbox-gl-geocoder": "^2.0.1",
     "material-icons-font": "^2.1.0",
     "ng-zorro-antd": "^10.2.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "turf": "^3.0.14",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

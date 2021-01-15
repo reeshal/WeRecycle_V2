@@ -18,13 +18,12 @@ import { UserManagementModule } from './User-Management/user-management.module';
 import { RequestManagementModule } from './Request-Management/request-management.module';
 import { GeneralUserModule } from './General-User/general-user.module';
 import { RegUserModule } from './Reg-User/reg-user.module';
+import { AdminModule } from './Admin/admin.module';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,9 +35,10 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgZorroModule
+    NgZorroModule,
+    AdminModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
