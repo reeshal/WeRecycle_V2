@@ -19,10 +19,12 @@ export class AuthService {
 
   register(
     fullName: string,
+    phoneNumber: string,
     title: string,
     password: string,
-    phoneNumber: string,
-    brn: number
+    brn: number,
+    email: string,
+    address: string
   ) {
     return this.http.post(`${environment.apiURL}/register/business`, {
       fullName,
@@ -30,6 +32,8 @@ export class AuthService {
       title,
       password,
       brn,
+      email,
+      address,
     });
   }
 
