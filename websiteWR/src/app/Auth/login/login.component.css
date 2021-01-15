@@ -1,6 +1,26 @@
 img.login-image {
-  height: 500px;
+  height: 300px;
+  margin: 0 auto;
 }
+.image-container {
+  text-align: center;
+}
+
 p.error {
   color: red;
+}
+
+.login-page {
+  padding: 25px;
+}
+.main {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 25px;
+}
+
+h1 {
+  color: #2d8f3f;
+  margin-bottom: 25px;
 }

@@ -1,53 +1,56 @@
-<div nz-row>
-  <div nz-col nzSpan="12">
-    <img class="login-image" src="assets/images/login.jpg" alt="" srcset="" />
-  </div>
-  <div nz-col nzSpan="12">
-    <h2>Sign In</h2>
-    <form
-      nz-form
-      [formGroup]="loginForm"
-      class="login-form"
-      (ngSubmit)="submitForm()"
-    >
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please enter a valid phone number!">
-          <nz-input-group nzPrefixIcon="phone">
-            <input
-              type="number"
-              nz-input
-              formControlName="phone"
-              placeholder="Phone number"
-            />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please enter a valid password!">
-          <nz-input-group nzPrefixIcon="lock">
-            <input
-              type="password"
-              nz-input
-              formControlName="password"
-              placeholder="Password"
-            />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-
-      <p *ngIf="hasError" class="error">
-        Invalid phone or password. Please try again.
-      </p>
-
-      <button
-        nz-button
-        class="login-form-button login-form-margin"
-        [nzType]="'primary'"
-        nzBlock
-        [nzLoading]="isLoading"
+<div class="login-page">
+  <div nz-row class="main">
+    <div nz-col nzSpan="12" class="image-container">
+      <img class="login-image" src="assets/images/login.jpg" alt="" srcset="" />
+    </div>
+    <div nz-col nzSpan="8">
+      <h1>Sign In</h1>
+      <form
+        class="login-form"
+        nz-form
+        [formGroup]="loginForm"
+        class="login-form"
+        (ngSubmit)="submitForm()"
       >
-        Sign in
-      </button>
-    </form>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please enter a valid phone number!">
+            <nz-input-group nzPrefixIcon="phone">
+              <input
+                type="number"
+                nz-input
+                formControlName="phone"
+                placeholder="Phone number"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please enter a valid password!">
+            <nz-input-group nzPrefixIcon="lock">
+              <input
+                type="password"
+                nz-input
+                formControlName="password"
+                placeholder="Password"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <p *ngIf="hasError" class="error">
+          Invalid phone or password. Please try again.
+        </p>
+
+        <button
+          nz-button
+          class="login-form-button login-form-margin"
+          [nzType]="'primary'"
+          nzBlock
+          [nzLoading]="isLoading"
+        >
+          Sign in
+        </button>
+      </form>
+    </div>
   </div>
 </div>
