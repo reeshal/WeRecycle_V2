@@ -17,6 +17,7 @@ import { SharedModule } from './Shared/shared.module';
 import { UserManagementModule } from './User-Management/user-management.module';
 import { RequestManagementModule } from './Request-Management/request-management.module';
 import { GeneralUserModule } from './General-User/general-user.module';
+import { RegUserModule } from './Reg-User/reg-user.module';
 
 registerLocaleData(en);
 
@@ -31,6 +32,7 @@ registerLocaleData(en);
     UserManagementModule,
     RequestManagementModule,
     GeneralUserModule,
+    RegUserModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
