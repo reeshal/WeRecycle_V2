@@ -1,6 +1,7 @@
-interface AuthRes {
-  fullname: String;
-  phoneNumber: String;
-  token: String;
-  type: String;
+export interface AuthRes {
+  id: number;
+  firstName: string;
+  lastName: string;
+  role: string;
+  token: string;
 }
