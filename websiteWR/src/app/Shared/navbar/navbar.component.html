@@ -113,7 +113,7 @@
       <a
         [routerLink]="['User-Management/Registered-Users']"
         [routerLinkActive]="['active']"
-        >Manage Reg Users</a
+        >Manage Registered Users</a
       >
     </li>
 
@@ -163,17 +163,19 @@
         <a nz-menu-item class="dropdown-content" (click)="logout()">Logout</a>
       </nz-dropdown-menu>
     </li> -->
+
+    <li class="dropdown" *ngIf="isLoggedIn">
+      <a nz-dropdown [nzDropdownMenu]="menu">
+        {{ fullname }}
+        <i nz-icon nzType="down"></i>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <a nz-menu-item class="dropdown-content" (click)="logout()">Logout</a>
+      </nz-dropdown-menu>
+    </li>
   </ul>
   <!-- </links> -->
 </header>
-
-<!-- <li class="dropdown">
-    
-    <a class="dropbtn">Username</a>
-    <div class="dropdown-content">
-        <a (click)="logout()">Logout</a>
-    </div>
-</li> -->
 
 <!-- <a class="dropbtn">Driver Allocations</a>
 <div class="dropdown-content">

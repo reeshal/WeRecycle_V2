@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
         )
         .subscribe(
           (data: any) => {
-            // console.log(data);
+            console.log(data);
             // this.storageService.createCookie('id', data.id.toString(), 1);
             // this.storageService.createCookie(
             //   'fullName',
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
             //   1
             // );
             this.storageService.createCookie('token', data.token, 1);
-            // this.storageService.createCookie('role', data.role, 1);
+            this.storageService.createCookie('fullname', data.fullname, 1);
             // this.storageService.createCookie('role', data.role, 1);
 
             window.location.href = '/View-Allocations';
