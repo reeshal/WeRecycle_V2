@@ -24,10 +24,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       phone: [
-        '51234567',
+        '57263859',
         [Validators.required, Validators.pattern('^[0-9]{8}$')],
       ],
-      password: ['12345', [Validators.required]],
+      password: ['admin', [Validators.required]],
     });
   }
 
@@ -52,17 +52,17 @@ export class LoginComponent implements OnInit {
           })
         )
         .subscribe(
-          (data: AuthRes) => {
+          (data: any) => {
             // console.log(data);
-            this.storageService.createCookie('id', data.id.toString(), 1);
-            this.storageService.createCookie(
-              'fullName',
-              data.firstName + '' + data.lastName,
-              1
-            );
+            // this.storageService.createCookie('id', data.id.toString(), 1);
+            // this.storageService.createCookie(
+            //   'fullName',
+            //   data.firstName + '' + data.lastName,
+            //   1
+            // );
             this.storageService.createCookie('token', data.token, 1);
-            this.storageService.createCookie('role', data.role, 1);
-            this.storageService.createCookie('role', data.role, 1);
+            // this.storageService.createCookie('role', data.role, 1);
+            // this.storageService.createCookie('role', data.role, 1);
 
             window.location.href = '/View-Allocations';
           },

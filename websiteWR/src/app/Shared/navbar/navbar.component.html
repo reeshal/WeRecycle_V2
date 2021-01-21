@@ -10,7 +10,7 @@
   <!-- <links> -->
   <ul class="main-nav">
     <!-- Admin -->
-    <li class="dropdown">
+    <li class="dropdown" *ngIf="isLoggedIn">
       <a nz-dropdown [nzDropdownMenu]="menu1">
         Driver Allocations
         <i nz-icon nzType="down"></i>
@@ -34,19 +34,19 @@
           >Allocate Drivers</a
         >
 
-        <a
+        <!-- <a
           nz-menu-item
           class="dropdown-content"
           href="#"
           [routerLink]="['Pickup-Depot']"
           [routerLinkActive]="['active']"
           >Pickup Depot</a
-        >
+        > -->
       </nz-dropdown-menu>
     </li>
 
     <!-- Admin -->
-    <li class="dropdown">
+    <!-- <li class="dropdown">
       <a nz-dropdown [nzDropdownMenu]="menu2">
         Manage Bins
         <i nz-icon nzType="down"></i>
@@ -79,10 +79,10 @@
           >Reported Bins</a
         >
       </nz-dropdown-menu>
-    </li>
+    </li> -->
 
     <!-- Admin -->
-    <li class="dropdown">
+    <!-- <li class="dropdown" *ngIf="isLoggedIn">
       <a nz-dropdown [nzDropdownMenu]="menu3">
         Manage Requests
         <i nz-icon nzType="down"></i>
@@ -106,10 +106,10 @@
           >Pickup Requests</a
         >
       </nz-dropdown-menu>
-    </li>
+    </li> -->
 
     <!-- Admin -->
-    <li>
+    <li *ngIf="isLoggedIn">
       <a
         [routerLink]="['User-Management/Registered-Users']"
         [routerLinkActive]="['active']"
@@ -118,15 +118,15 @@
     </li>
 
     <!-- Admin -->
-    <li>
+    <!-- <li *ngIf="isLoggedIn">
       <a
         [routerLink]="['User-Management/Drivers']"
         [routerLinkActive]="['active']"
         >Manage Drivers</a
       >
-    </li>
+    </li> -->
 
-    <li>
+    <!-- <li>
       <a [routerLink]="['All-Bins']" [routerLinkActive]="['active']"
         >All Bins</a
       >
@@ -136,25 +136,25 @@
       <a [routerLink]="['Our-Prices']" [routerLinkActive]="['active']"
         >Prices</a
       >
-    </li>
-
+    </li> -->
+    <!-- 
     <li>
       <a [routerLink]="['New-Pickup-Request']" [routerLinkActive]="['active']"
         >Pickup Requests
       </a>
-    </li>
+    </li> -->
 
-    <li>
+    <li *ngIf="!isLoggedIn">
       <a [routerLink]="['Login']" [routerLinkActive]="['active']">Login</a>
     </li>
 
-    <li>
+    <li *ngIf="!isLoggedIn">
       <a [routerLink]="['Register-Business']" [routerLinkActive]="['active']"
-        >Register business</a
+        >Register as business</a
       >
     </li>
 
-    <li class="dropdown">
+    <!-- <li class="dropdown">
       <a nz-dropdown [nzDropdownMenu]="menu">
         Username
         <i nz-icon nzType="down"></i>
@@ -162,7 +162,7 @@
       <nz-dropdown-menu #menu="nzDropdownMenu">
         <a nz-menu-item class="dropdown-content" (click)="logout()">Logout</a>
       </nz-dropdown-menu>
-    </li>
+    </li> -->
   </ul>
   <!-- </links> -->
 </header>

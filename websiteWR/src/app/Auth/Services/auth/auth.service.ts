@@ -16,7 +16,7 @@ export class AuthService {
   ) {}
 
   login(phone: string, password: string): Observable<any> {
-    return this.http.post(`http://localhost:51433/api/auth/login`, {
+    return this.http.post(`${environment.apiURL}/login`, {
       phoneNumber: phone,
       password,
     });
@@ -49,17 +49,10 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const id = this.storageService.getCookie('id');
-    const firstName = this.storageService.getCookie('firstName');
-    const lastName = this.storageService.getCookie('lastName');
+    // const fullName = this.storageService.getCookie('fullName');
     const role = this.storageService.getCookie('role');
     const token = this.storageService.getCookie('token');
 
-    return (
-      id.length > 0 &&
-      role.length > 0 &&
-      token.length > 0 &&
-      firstName.length > 0 &&
-      lastName.length > 0
-    );
+    return token.length > 0;
   }
 }
