@@ -1,1 +1,110 @@
-<p>drivers works!</p>
+<div *ngIf="isLoading">
+    <app-spinner></app-spinner>
+</div>
+<div *ngIf="!isLoading">
+    <div nz-row style="margin-bottom: 20px;">
+    
+        <div nz-col  [nzSpan]="6">
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input
+                 type="text" 
+                 nz-input placeholder="Filter (e.g Yuvraaj/5123455/Souillac)" 
+                 (keyup)="applySearch($event)"
+                 [(ngModel)]="search"
+                 />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+            </ng-template>
+        </div>
+        <div nz-col nzOffset="2">
+            <button 
+                nz-button
+                nzShape="round" 
+                (click)="toggleAddDriverModal(false)"
+                style="background-color: #19324D; color: #fff;"
+                >Add Driver</button> 
+        </div>
+
+        <div nz-col nzOffset="2" *ngIf="showClearButton">
+            <button 
+                nz-button
+                nzShape="round" 
+                (click)="clearFilter()"
+                style="background-color: #ac1010; color: #fff;"
+                >Clear Filters</button> 
+          </div>
+    </div>
+    
+    <ngx-datatable 
+    class="material"
+    [rows]="filteredRows" 
+    [columnMode]="'force'" 
+    [headerHeight]="50" 
+    [footerHeight]="50"
+    [rowHeight]="50" 
+    [scrollbarV]="false" 
+    [sorts]="[{prop: 'status', dir: 'desc'}]">
+    
+      <ngx-datatable-column name="Full Name" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
+          {{row.fullname}}
+        </ng-template>
+      </ngx-datatable-column>
+    
+      <ngx-datatable-column name="Phone Number">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.phoneno}}
+        </ng-template>
+      </ngx-datatable-column>
+    
+      <ngx-datatable-column name="Email">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.email}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Address">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.address}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Status">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{row.status}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Approve">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <button 
+            *ngIf="row.status=='approved'" 
+            nz-button  
+            [nzSize]="size" 
+            nzShape="circle" 
+            (click)="handleStatusChange(row.phoneno, 'archived')"
+            style="background-color: #ac1010; color: #fff;"><i nz-icon nzType="vertical-align-bottom" nzTheme="outline"></i></button>
+            
+            <button 
+            *ngIf="row.status!='approved'" 
+            nz-button  
+            [nzSize]="size" 
+            nzShape="circle"
+            (click)="handleStatusChange(row.phoneno, 'approved')"
+            style="background-color: #2D8F3F; color: #fff;"><i nz-icon nzType="vertical-align-top" nzTheme="outline"></i></button>
+        </ng-template>
+      </ngx-datatable-column>
+      
+    
+    </ngx-datatable>
+
+    <app-add-driver-form
+     [showAddDriverModal]="showAddDriverModal"
+     [toggleAddDriverModal]="toggleAddDriverModal"
+    >
+
+    </app-add-driver-form>
+
+</div>
+

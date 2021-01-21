@@ -1,0 +1,75 @@
+/* .foodcardbox{
+    padding-top:50px;
+    z-index:0;
+} */
+
+.grid {
+    /* display: inline-grid;
+    grid-gap: 1em;
+    grid-template-columns: repeat(4, 1fr);
+    /*grid-template-rows: repeat(3, 1fr);*/
+    /*overflow: auto; */
+    /* align-items: center; */
+    max-width: 1200px;
+    /* margin: 0 auto; */
+    display: grid;
+    grid-gap: 1rem;
+  }
+
+  @media (min-width: 800px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (min-width: 1100px) {
+    .grid { grid-template-columns: repeat(4, 0fr); }
+  }
+
+  @media (min-width: 1500px) {
+    .grid { grid-template-columns: repeat(5, 0fr); }
+  }
+
+  @media (min-width: 2000px) {
+    .grid { grid-template-columns: repeat(7, 0fr); }
+  }
+
+  .grid-item {
+    font-size: 60%;
+    padding: 1em;
+    text-align: center;
+    
+  }
+
+.requestbinContainer{
+  height: 650px;
+  width: 100%;
+  background: #fff;
+  margin: 0 auto;
+  box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+  -o-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+  -ms-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -o-border-radius: 20px;
+  -ms-border-radius: 20px;
+}
+
+.mapContainer{
+  margin: 0px 30px 0px 30px;
+  width: 60%;
+  overflow: hidden;
+  height:500px;
+}
+
+.formContainer{
+  width: 30%;
+  overflow: hidden;
+  padding: 150px 20px 0px 0px;
+}
+
+.mapformContainer{
+  display: flex;
+  padding: 20px 0;
+}

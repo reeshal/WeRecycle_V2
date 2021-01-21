@@ -63,6 +63,7 @@ li a{
 	.header,
 	.main-nav {
 		display: flex;
+		
 	}
 	.header {
 		flex-direction: column;
@@ -71,8 +72,8 @@ li a{
 		width: 100%;
 		/* margin: 0 auto; */
 		max-width: 100%;
-
 	}
+	
 
 }
 

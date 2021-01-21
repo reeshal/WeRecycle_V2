@@ -36,8 +36,8 @@ export class RegUsersComponent implements OnInit {
     )
     .subscribe(   
       (data: Array<Reg_Users>) => {
-        this.rows=data;
-        this.filteredRows=data;
+        this.rows=data.filter(d=>d.type=="registered");
+        this.filteredRows=this.rows;
         console.log(this.filteredRows);
       },
       (err) => {

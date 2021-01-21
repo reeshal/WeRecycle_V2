@@ -1,0 +1,94 @@
+<div *ngIf="isLoading">
+    <app-spinner></app-spinner>
+</div>
+<div *ngIf="!isLoading">
+    <div nz-row style="margin-bottom: 20px;">
+    
+        <div nz-col  [nzSpan]="6">
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input
+                 type="text" 
+                 nz-input placeholder="Filter by name/ material" 
+                 (keyup)="applySearch($event)"
+                 [(ngModel)]="search"
+                 />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+            </ng-template>
+        </div>
+
+        <div nz-col nzOffset="1">
+            <nz-range-picker [(ngModel)]="date" (ngModelChange)="onDateChange($event)"></nz-range-picker>
+        </div>
+ 
+        <div nz-col nzOffset="2" *ngIf="showClearButton">
+            <button 
+                nz-button
+                nzShape="round" 
+                (click)="clearFilter()"
+                style="background-color: #ac1010; color: #fff;"
+                >Clear Filters</button> 
+          </div>
+    </div>
+    
+    <ngx-datatable 
+    class="material"
+    [rows]="filteredRows" 
+    [columnMode]="'force'" 
+    [headerHeight]="50" 
+    [footerHeight]="50"
+    [rowHeight]="50" 
+    [scrollbarV]="false" 
+    [sorts]="[{prop: 'status', dir: 'desc'}]">
+    
+      <ngx-datatable-column name="Full Name" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
+          {{row.fullname}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Bin Id" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
+          {{row.bin_id}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Material" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
+          {{row.material}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Date Request was Made" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
+          {{row.date_requested}}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Date Requested for Pickup" >
+        <ng-template let-row="row" ngx-datatable-cell-template >
+          {{row.date_applied}}
+        </ng-template>
+      </ngx-datatable-column>
+    
+      <ngx-datatable-column name="Status">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+            <button 
+            *ngIf="row.status=='pending'" 
+            nz-button  
+            nzShape="circle" 
+            (click)="handleStatusChange(row.bin_id,row.original_date_requested)"
+            style="background-color: #2D8F3F; color: #fff;"><i nz-icon nzType="check"></i></button>
+
+            <button 
+            *ngIf="row.status!='pending'" 
+            nz-button
+            nzShape="circle" [disabled]="true"><i nz-icon nzType="check"></i></button>
+        </ng-template>
+      </ngx-datatable-column>
+        
+    </ngx-datatable>
+
+</div>
+

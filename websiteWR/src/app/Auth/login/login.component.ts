@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
             this.storageService.createCookie('fullname', data.fullname, 1);
             // this.storageService.createCookie('role', data.role, 1);
 
-            window.location.href = '/View-Allocations';
+            window.location.href = '/User-Management/Registered-Users';
           },
           (err: any) => {
             console.log(err.message);

@@ -1,0 +1,11 @@
+<nz-card nzHoverable style="height:250px" [nzCover]="coverTemplate">
+    <nz-card-meta [nzTitle]="title" nzDescription="{{regionPrice}}"></nz-card-meta>
+</nz-card>
+
+<ng-template #coverTemplate>
+    <img width="150" height="150" alt="Photo of region" src="{{imageUrl}}" />
+</ng-template>
+
+<ng-template #title >
+    <h3 class="header-container "> {{regionName}}</h3>
+</ng-template>

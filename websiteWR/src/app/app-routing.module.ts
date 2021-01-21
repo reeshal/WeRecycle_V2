@@ -5,6 +5,18 @@ const routes: Routes = [
   {
     path:'User-Management',
     loadChildren: ()=> import('./User-Management/user-management-routing.module').then(m=>m.UserManagementRoutingModule)
+  },
+  {
+    path:'Request-Management',
+    loadChildren: ()=> import('./Request-Management/request-management-routing.module').then(m=>m.RequestManagementRoutingModule)
+  },
+  {
+    path:'General',
+    loadChildren: ()=> import('./General-User/general-user-routing.module').then(m=>m.GeneralUserRoutingModule)
+  },
+  {
+    path:'Reg-User',
+    loadChildren: ()=> import('./Reg-User/reg-user-routing.module').then(m=>m.RegUserRoutingModule)
   }
 ];
 
