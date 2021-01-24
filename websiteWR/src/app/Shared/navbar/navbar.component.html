@@ -124,6 +124,24 @@
       >
     </li>
 
+    <!--Registered User-->
+    <li *ngIf="isLoggedIn">
+      <a
+        [routerLink]="['Reg-User/My-Pickup-Requests']"
+        [routerLinkActive]="['active']"
+        >My Pickup Requests</a
+      >
+    </li>
+
+    <li *ngIf="isLoggedIn">
+      <a
+        [routerLink]="['Reg-User/New-Bin-Requests']"
+        [routerLinkActive]="['active']"
+        >Request Bins</a
+      >
+    </li>
+
+
     <li>
       <a [routerLink]="['Bins']" [routerLinkActive]="['active']">All Bins</a>
     </li>

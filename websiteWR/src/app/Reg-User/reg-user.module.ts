@@ -7,9 +7,10 @@ import { RouterModule } from '@angular/router';
 import { NgZorroModule } from '../ng-zorro.module';
 import { SharedModule} from '../Shared/shared.module';
 import { PickupRequestsComponent } from './pickup-requests/pickup-requests.component';
+import { BinRequestsComponent } from './bin-requests/bin-requests.component';
 
 @NgModule({
-  declarations: [PickupRequestsComponent],
+  declarations: [PickupRequestsComponent, BinRequestsComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -20,7 +21,8 @@ import { PickupRequestsComponent } from './pickup-requests/pickup-requests.compo
     SharedModule,
   ],
   exports:[
-    PickupRequestsComponent
+    PickupRequestsComponent,
+    BinRequestsComponent
   ]
 })
 export class RegUserModule { }
