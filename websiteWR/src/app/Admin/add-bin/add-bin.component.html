@@ -1,1 +1,93 @@
-<p>add-bin works!</p>
+<app-spinner style="margin-top: 25px" *ngIf="isLoading"></app-spinner>
+
+<div nz-row>
+  <div nz-col nzSpan="8" *ngIf="!isLoading">
+    <div
+      class="main"
+      *ngIf="selectedLocation.lat && selectedLocation.lng; else other_content"
+    >
+      <h2>Add a new bin</h2>
+      <form
+        class="addbin-form"
+        nz-form
+        [formGroup]="addBinForm"
+        (ngSubmit)="submitForm()"
+      >
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please enter type of material!">
+            <nz-input-group nzPrefixIcon="phone">
+              <input
+                type="text"
+                nz-input
+                formControlName="material"
+                placeholder="Material accepted"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzPrefixIcon="lock">
+              <input
+                type="text"
+                nz-input
+                formControlName="description"
+                placeholder="Description"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <button
+            *ngIf="imageUrl.length == 0"
+            nz-button
+            type="button"
+            [nzType]="'default'"
+            nzBlock
+          >
+            <label id="imageUploadLabel" for="imageUpload">
+              Upload image of bin
+            </label>
+          </button>
+
+          <input
+            style="display: none"
+            id="imageUpload"
+            type="file"
+            accept=".png,.jpg,jpeg"
+            name="image-upload"
+            (change)="handleFileInput($event)"
+          />
+        </nz-form-item>
+
+        <img *ngIf="imageUrl.length > 0" src="{{ imageUrl }}" alt="" />
+
+        <button
+          [disabled]="imageUrl.length == 0 || !addBinForm.valid"
+          nz-button
+          [nzType]="'primary'"
+          [nzLoading]="isLoading2"
+          type="submit"
+        >
+          Save bin
+        </button>
+        <button
+          (click)="handleCancel()"
+          class="cancel"
+          nz-button
+          [nzType]="'default'"
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div nz-col nzSpan="16">
+    <div id="map" class="map"></div>
+  </div>
+</div>
+<ng-template #other_content>
+  <h2 style="text-align: center">Click on map to add a new bin.</h2>
+</ng-template>
