@@ -1,0 +1,146 @@
+<div class="register-page">
+  <div nz-row class="main">
+    <div nz-col nzSpan="8">
+      <h1>Register as a business</h1>
+      <form
+        class="register-form"
+        nz-form
+        [formGroup]="registerForm"
+        class="register-form"
+        (ngSubmit)="submitForm()"
+      >
+        <!-- Title -->
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Title is required">
+            <nz-select
+              id="title"
+              nzPrefixIcon="user"
+              formControlName="title"
+              nzPlaceHolder="Your title"
+              (ngModelChange)="titleChange($event)"
+            >
+              <nz-option nzValue="mr" nzLabel="Mr"></nz-option>
+              <nz-option nzValue="mrs" nzLabel="Mrs"></nz-option>
+              <nz-option nzValue="ms" nzLabel="Ms"></nz-option>
+              <nz-option nzValue="Dr" nzLabel="Dr"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- Full name -->
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Full name is required">
+            <nz-input-group nzPrefixIcon="user">
+              <input
+                type="text"
+                nz-input
+                formControlName="fullName"
+                placeholder="Your full name"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- Phone -->
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please provide a valid phone number">
+            <nz-input-group nzPrefixIcon="phone">
+              <input
+                type="number"
+                nz-input
+                formControlName="phone"
+                placeholder="Phone number"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- Address -->
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Address is required">
+            <nz-input-group nzPrefixIcon="home">
+              <input
+                type="text"
+                nz-input
+                formControlName="address"
+                placeholder="Your business' postal address"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- BRN -->
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please provide a valid BRN">
+            <nz-input-group nzPrefixIcon="field-number">
+              <input
+                type="text"
+                nz-input
+                formControlName="brn"
+                placeholder="Your business registration number"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- Email -->
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please provide a valid email">
+            <nz-input-group nzPrefixIcon="mail">
+              <input
+                type="email"
+                nz-input
+                formControlName="email"
+                placeholder="Your email address"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- Password -->
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please provide a strong password">
+            <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
+              <input
+                [type]="passwordVisible ? 'text' : 'password'"
+                nz-input
+                formControlName="password"
+                placeholder="Password"
+              />
+              <ng-template #suffixTemplate>
+                <i
+                  nz-icon
+                  [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                  (click)="passwordVisible = !passwordVisible"
+                ></i>
+              </ng-template>
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <p *ngIf="hasError" class="error">
+          An error occurred. Please try again.
+        </p>
+
+        <button
+          nz-button
+          class="register-form-button register-form-margin"
+          [nzType]="'primary'"
+          nzBlock
+          [nzLoading]="isLoading"
+        >
+          Save
+        </button>
+      </form>
+    </div>
+    <div nz-col nzSpan="3"></div>
+    <div nz-col nzSpan="12" class="image-container">
+      <img
+        class="register-image"
+        src="assets/images/signup.jpg"
+        alt=""
+        srcset=""
+      />
+    </div>
+  </div>
+</div>
