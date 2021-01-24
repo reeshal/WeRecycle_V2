@@ -40,13 +40,11 @@
                             nzShowTime
                             formControlName="dateRequested"
                             nzFormat="yyyy-MM-dd HH:mm:ss"
-                            ngModel
-                            (ngModelChange)="onDateSelected($event)"
                         ></nz-date-picker>
                       </div>
                       <ng-template #userErrorTp2 let-control>
                         <ng-container *ngIf="control.hasError('required')">
-                          Please select a date1
+                          Please select a date
                         </ng-container>
                       </ng-template>
                     </nz-form-control>

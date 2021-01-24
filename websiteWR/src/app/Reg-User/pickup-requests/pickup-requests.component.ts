@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { PickupRequestsService } from '../Services/pickup-requests.service';
 import { myPickupRequests } from '../Models/pickup_request';
 import { forkJoin } from 'rxjs';
@@ -17,18 +17,17 @@ export class PickupRequestsComponent implements OnInit {
   showClearButton = false;
   selectedStatus:any;
   dateRange = null;
-  dateSelected:Date= new Date();
 
   rows:Array<myPickupRequests> = [];
   filteredRows:Array<myPickupRequests> = [];
   binIdList:any;
 
   requestForm= new FormGroup({
-    dateRequested: new FormControl(this.dateSelected),
+    dateRequested: new FormControl('', [Validators.required]),
     binId: new FormControl('', [Validators.required]),
   });
 
-  constructor(private pickupreq: PickupRequestsService) { }
+  constructor(private pickupreq: PickupRequestsService,private modal: NzModalService) { }
 
   ngOnInit(): void {
     // this.phoneno=this.storageService.getCookie('phoneno');
@@ -93,22 +92,53 @@ export class PickupRequestsComponent implements OnInit {
     }
   }
 
-  onDateSelected(result: Date){
-    this.dateSelected=result;
-    console.log(this.dateSelected);
-  }
-
-  changeBinId(e:any){
-    this.binId.setValue(e.target.value, {onlySelf: true})
-    console.log(e.target.value)
-  }
-
   get binId(){
     return this.requestForm.get('binId') as FormControl;
   }
 
+  get dateRequested(){
+    return this.requestForm.get('dateRequested') as FormControl;
+  }
+
   sendRequest(){
-    
+    if (this.requestForm.valid) {
+      let jsonBody={
+        date_requested: this.requestForm.value.dateRequested,
+        phoneno: this.phoneno,
+        binId: this.requestForm.value.binId
+      }
+      console.log(jsonBody);
+
+      this.modal.confirm({
+        nzTitle: 'Request New Pickup?',
+        nzContent: 'Are you sure?',
+        nzOkText: 'Yes',
+        nzOkType: 'danger',
+        nzOnOk: () => {
+          this.pickupreq.addRequest(jsonBody).pipe(finalize(
+            ()=>{
+              this.fetchData();
+            }
+          )).subscribe(
+            () => {
+              this.modal.success({
+                nzTitle: 'Success',
+                nzContent: 'Your pickup request has been sent'
+              });
+            },
+            (err) => {
+              this.modal.error({
+                nzTitle: 'Error',
+                nzContent: 'Your request failed due to connectivity issues'
+              });
+            }
+          );
+        },
+        nzCancelText: 'No',
+        nzOnCancel: () => {}
+      });
+
+    }
   }
 
 }
