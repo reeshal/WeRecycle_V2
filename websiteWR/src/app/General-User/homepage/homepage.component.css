@@ -1,0 +1,28 @@
+::ng-deep :root {
+  --main-color: #29c32f;
+}
+
+h1 {
+  color: var(--main-color) !important;
+  font-size: 40px;
+  margin-bottom: 7%;
+}
+
+.map {
+  height: 550px;
+  width: 550px;
+  border-radius: 275px;
+  margin: 0 auto;
+}
+button.registerBtn {
+  margin-right: 10px;
+}
+
+p.description {
+  font-size: 19px;
+  margin-bottom: 8%;
+}
+
+.left-container {
+  margin-left: 10%;
+}

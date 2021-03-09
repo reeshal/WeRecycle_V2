@@ -9,6 +9,7 @@ import { RegionCardComponent } from './all-prices/region-card/region-card.compon
 import { AllBinsComponent } from './all-bins/all-bins.component';
 import { DescriptionComponent } from './all-bins/description/description.component';
 import { GeneralUserRoutingModule } from './general-user-routing.module';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { GeneralUserRoutingModule } from './general-user-routing.module';
     RegionCardComponent,
     AllBinsComponent,
     DescriptionComponent,
+    HomepageComponent,
   ],
   imports: [
     CommonModule,
