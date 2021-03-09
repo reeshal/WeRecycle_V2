@@ -74,9 +74,9 @@ export class RegisterComponent implements OnInit {
     // form.append('idcard',this.registerForm.get('idcardFile')!.value)
     // console.log(form);
     if (this.registerForm.valid) {
-      const form= new FormData();
+      const form = new FormData();
       form.append("PhoneNumber",this.registerForm.get('phoneNumber')!.value)
-      form.append("FirstName",this.registerForm.get('lastName')!.value);
+      form.append("FirstName",this.registerForm.get('firstName')!.value);
       form.append("LastName",this.registerForm.get('lastName')!.value);
       form.append("Password",this.registerForm.get('password')!.value);
       form.append("IdCard",this.selectedIdFile!);
@@ -85,16 +85,19 @@ export class RegisterComponent implements OnInit {
 
       this.isLoading = true;
 
-      const headerDict = {
-        'Content-Type': 'multipart/form-data',
-        'Accept': 'application/json',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      }
+      // const headerDict = {
+      //   'Content-Type': 'multipart/form-data',
+      //   'Accept': 'application/json',
+      //   'Access-Control-Allow-Headers': 'Content-Type',
+      // }
       
-      const requestOptions = {                                                                                                                                                                                 
-        headers: new HttpHeaders(headerDict), 
-      };
-      this.http.post("http://localhost:5000/api/Auth/RegisterDriver",form, requestOptions).subscribe(res => {
+      // const requestOptions = {                                                                                                                                                                                 
+      //   headers: new HttpHeaders(headerDict), 
+      // };
+
+      // disabled options :)
+
+      this.http.post("http://localhost:5000/api/Account/RegisterDriver", form).subscribe(res => {
         console.log(res);
         alert('Uploaded Successfully.');
       });
