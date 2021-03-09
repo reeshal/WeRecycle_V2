@@ -7,12 +7,19 @@ h1 {
   margin-bottom: 10%;
 }
 
+div.addButtons {
+  margin-top: 25px;
+}
+
 .map {
   height: 590px;
   width: 100%;
 }
 .left-container {
   padding: 15px 25px;
+}
+button.submitAddBtn {
+  margin-right: 10px;
 }
 
 @media screen and (min-width: 1400px) {

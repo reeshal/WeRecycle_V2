@@ -69,7 +69,7 @@ export class AddBinComponent implements OnInit {
           });
 
           this.bins.forEach((station: Bin) => {
-            this.addMarker(station.lat, station.lng, station.full ? 1 : 0);
+            // this.addMarker(station.lat, station.lng, station.full ? 1 : 0);
           });
         },
         (err) => {

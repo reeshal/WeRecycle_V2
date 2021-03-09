@@ -1,22 +1,80 @@
-<app-spinner style="margin-top: 25px" *ngIf="isLoading"></app-spinner>
-
 <div nz-row style="margin: 0; padding: 0">
   <div nz-col nzSpan="6">
     <div class="left-container">
-      <h1>Manage Bins</h1>
-      <nz-alert
-        nzType="info"
-        nzMessage="Add new bin"
-        nzDescription="Click anywhere on the map."
-        nzShowIcon
-      ></nz-alert>
-      <br />
-      <nz-alert
-        nzType="info"
-        nzMessage="Change location / Delete bin"
-        nzDescription="Click on a bin."
-        nzShowIcon
-      ></nz-alert>
+      <div *ngIf="currentView == 'view'">
+        <h1>Manage Bins</h1>
+        <nz-alert
+          nzType="info"
+          nzMessage="Add new bin"
+          nzDescription="Click anywhere on the map."
+          nzShowIcon
+        ></nz-alert>
+        <br />
+        <nz-alert
+          nzType="info"
+          nzMessage="Change location / Delete bin"
+          nzDescription="Click on a bin."
+          nzShowIcon
+        ></nz-alert>
+      </div>
+      <div *ngIf="currentView == 'add'">
+        <h1>Add Bin</h1>
+        <form
+          class="addbin-form"
+          nz-form
+          [formGroup]="addBinForm"
+          (ngSubmit)="submitAddForm()"
+        >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please enter type of material!">
+              <nz-input-group nzPrefixIcon="inbox">
+                <input
+                  type="text"
+                  nz-input
+                  formControlName="material"
+                  placeholder="Material accepted"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="home">
+                <input
+                  type="text"
+                  nz-input
+                  formControlName="address"
+                  placeholder="Address"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <h4>Latitude: {{ selectedLocation.lat }}</h4>
+          <h4>Longitude: {{ selectedLocation.lng }}</h4>
+
+          <div class="addButtons">
+            <button
+              class="submitAddBtn"
+              [disabled]="!addBinForm.valid"
+              nz-button
+              [nzType]="'primary'"
+              [nzLoading]="isLoading2"
+              type="submit"
+            >
+              Save bin
+            </button>
+
+            <button
+              *ngIf="!isLoading2"
+              (click)="handleCancel()"
+              nz-button
+              nzType="default"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
   <div nz-col nzSpan="18">
