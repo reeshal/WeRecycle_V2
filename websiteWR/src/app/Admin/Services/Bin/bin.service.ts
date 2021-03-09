@@ -9,11 +9,8 @@ import { environment } from 'src/environments/environment';
 export class BinService {
   constructor(private http: HttpClient) {}
 
-  getFullUnallocatedBins(): Observable<any> {
-    return this.http.get(`${environment.apiURL}/reports/unallocatedbins`);
-  }
   getAllBins(): Observable<any> {
-    return this.http.get(`${environment.apiURL}/bins`);
+    return this.http.get(`${environment.apiURL}/Bins/Get`);
   }
 
   addBin(

@@ -10,30 +10,11 @@
   <!-- <links> -->
   <ul class="main-nav">
     <!-- Admin -->
-    <li class="dropdown" *ngIf="isLoggedIn">
-      <a nz-dropdown [nzDropdownMenu]="menu3">
-        Manage Bins
-        <i nz-icon nzType="down"></i>
-      </a>
-      <nz-dropdown-menu #menu3="nzDropdownMenu">
-        <a
-          nz-menu-item
-          href="#"
-          class="dropdown-content"
-          [routerLink]="['Bins']"
-          [routerLinkActive]="['active']"
-          >All Bins</a
-        >
 
-        <a
-          nz-menu-item
-          href="#"
-          class="dropdown-content"
-          [routerLink]="['Add-Bin']"
-          [routerLinkActive]="['active']"
-          >Add Bin</a
-        >
-      </nz-dropdown-menu>
+    <li *ngIf="isLoggedIn">
+      <a [routerLink]="['Manage-Bins']" [routerLinkActive]="['active']"
+        >Manage Bins</a
+      >
     </li>
 
     <li *ngIf="isLoggedIn">

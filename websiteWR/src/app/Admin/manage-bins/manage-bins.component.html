@@ -1,0 +1,25 @@
+<app-spinner style="margin-top: 25px" *ngIf="isLoading"></app-spinner>
+
+<div nz-row style="margin: 0; padding: 0">
+  <div nz-col nzSpan="6">
+    <div class="left-container">
+      <h1>Manage Bins</h1>
+      <nz-alert
+        nzType="info"
+        nzMessage="Add new bin"
+        nzDescription="Click anywhere on the map."
+        nzShowIcon
+      ></nz-alert>
+      <br />
+      <nz-alert
+        nzType="info"
+        nzMessage="Change location / Delete bin"
+        nzDescription="Click on a bin."
+        nzShowIcon
+      ></nz-alert>
+    </div>
+  </div>
+  <div nz-col nzSpan="18">
+    <div id="map" class="map"></div>
+  </div>
+</div>

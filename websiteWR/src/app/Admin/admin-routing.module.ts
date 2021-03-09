@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { AddBinComponent } from './add-bin/add-bin.component';
+import { ManageBinsComponent } from './manage-bins/manage-bins.component';
 const routes: Routes = [
   {
-    path: 'Add-Bin',
-    component: AddBinComponent,
+    path: 'Manage-Bins',
+    component: ManageBinsComponent,
   },
 ];
 

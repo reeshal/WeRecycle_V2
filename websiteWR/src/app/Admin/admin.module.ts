@@ -5,9 +5,10 @@ import { SharedModule } from '../Shared/shared.module';
 import { NgZorroModule } from '../ng-zorro.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddBinComponent } from './add-bin/add-bin.component';
+import { ManageBinsComponent } from './manage-bins/manage-bins.component';
 
 @NgModule({
-  declarations: [AddBinComponent],
+  declarations: [AddBinComponent, ManageBinsComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

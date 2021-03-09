@@ -1,0 +1,23 @@
+::ng-deep :root {
+  --main-color: #29c32f;
+}
+
+h1 {
+  color: var(--main-color) !important;
+  margin-bottom: 10%;
+}
+
+.map {
+  height: 590px;
+  width: 100%;
+}
+.left-container {
+  padding: 15px 25px;
+}
+
+@media screen and (min-width: 1400px) {
+  .map {
+    height: 900px;
+    width: 100%;
+  }
+}
