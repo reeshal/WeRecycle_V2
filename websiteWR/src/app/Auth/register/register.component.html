@@ -1,7 +1,12 @@
 <div class="register-page">
   <div nz-row class="main">
     <div nz-col nzSpan="8">
-      <h1>Register as a business</h1>
+      <h1>Get Started</h1>
+      <div class="already_have_acc_text">
+        <span>Already have a driver account?</span>
+        <span class="sign_in_text" (click)="changePage()">Sign In</span>
+      </div>
+      
       <form
         class="register-form"
         nz-form
@@ -9,33 +14,30 @@
         class="register-form"
         (ngSubmit)="submitForm()"
       >
-        <!-- Title -->
-        <nz-form-item>
-          <nz-form-control nzErrorTip="Title is required">
-            <nz-select
-              id="title"
-              nzPrefixIcon="user"
-              formControlName="title"
-              nzPlaceHolder="Your title"
-              (ngModelChange)="titleChange($event)"
-            >
-              <nz-option nzValue="mr" nzLabel="Mr"></nz-option>
-              <nz-option nzValue="mrs" nzLabel="Mrs"></nz-option>
-              <nz-option nzValue="ms" nzLabel="Ms"></nz-option>
-              <nz-option nzValue="Dr" nzLabel="Dr"></nz-option>
-            </nz-select>
-          </nz-form-control>
-        </nz-form-item>
 
-        <!-- Full name -->
+        <!-- First name -->
         <nz-form-item>
-          <nz-form-control nzErrorTip="Full name is required">
+          <nz-form-control nzErrorTip="First name is required">
             <nz-input-group nzPrefixIcon="user">
               <input
                 type="text"
                 nz-input
-                formControlName="fullName"
-                placeholder="Your full name"
+                formControlName="firstName"
+                placeholder="Your first name"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <!-- Last name -->
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Last name is required">
+            <nz-input-group nzPrefixIcon="user">
+              <input
+                type="text"
+                nz-input
+                formControlName="lastName"
+                placeholder="Your last name"
               />
             </nz-input-group>
           </nz-form-control>
@@ -48,50 +50,8 @@
               <input
                 type="number"
                 nz-input
-                formControlName="phone"
-                placeholder="Phone number"
-              />
-            </nz-input-group>
-          </nz-form-control>
-        </nz-form-item>
-
-        <!-- Address -->
-        <nz-form-item>
-          <nz-form-control nzErrorTip="Address is required">
-            <nz-input-group nzPrefixIcon="home">
-              <input
-                type="text"
-                nz-input
-                formControlName="address"
-                placeholder="Your business' postal address"
-              />
-            </nz-input-group>
-          </nz-form-control>
-        </nz-form-item>
-
-        <!-- BRN -->
-        <nz-form-item>
-          <nz-form-control nzErrorTip="Please provide a valid BRN">
-            <nz-input-group nzPrefixIcon="field-number">
-              <input
-                type="text"
-                nz-input
-                formControlName="brn"
-                placeholder="Your business registration number"
-              />
-            </nz-input-group>
-          </nz-form-control>
-        </nz-form-item>
-
-        <!-- Email -->
-        <nz-form-item>
-          <nz-form-control nzErrorTip="Please provide a valid email">
-            <nz-input-group nzPrefixIcon="mail">
-              <input
-                type="email"
-                nz-input
-                formControlName="email"
-                placeholder="Your email address"
+                formControlName="phoneNumber"
+                placeholder="Your Phone number"
               />
             </nz-input-group>
           </nz-form-control>
@@ -129,7 +89,7 @@
           nzBlock
           [nzLoading]="isLoading"
         >
-          Save
+          Sign Up
         </button>
       </form>
     </div>

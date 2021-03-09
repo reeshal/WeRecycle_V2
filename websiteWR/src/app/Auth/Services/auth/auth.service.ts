@@ -23,22 +23,16 @@ export class AuthService {
   }
 
   register(
-    fullName: string,
+    firstName: string,
+    lastName:string,
     phoneNumber: string,
-    title: string,
-    password: string,
-    brn: number,
-    email: string,
-    address: string
+    password: string
   ) {
     return this.http.post(`${environment.apiURL}/register/business`, {
-      fullName,
+      firstName,
+      lastName,
       phoneNumber,
-      title,
-      password,
-      brn,
-      email,
-      address,
+      password
     });
   }
 
