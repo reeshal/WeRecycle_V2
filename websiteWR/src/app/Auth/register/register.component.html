@@ -78,6 +78,58 @@
           </nz-form-control>
         </nz-form-item>
 
+        <span>Click to upload images of the below documents</span>
+        
+        <nz-input-group nzCompact>
+          <!--Upload Id card-->
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please upload your ID card image">
+              <nz-input-group>  
+                <input 
+                  #idfile 
+                  formControlName="idcardFile"
+                  type="file" 
+                  (change)="onIdFileChange($event)"
+                  style="display:none;"
+                />
+                <button type="button" nz-button (click)="idfile.click()">Id Card</button>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+
+          <!--Upload Driving license-->
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please upload your driving license image">
+              <nz-input-group>  
+                <input 
+                  #dlfile 
+                  formControlName="licenseFile"
+                  type="file" 
+                  (change)="onLicenseFileChange($event)"
+                  style="display:none;"
+                />
+                <button type="button" nz-button (click)="dlfile.click()">Driving license</button>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+
+          <!--Upload Proof of Address-->
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please upload your proof of address image">
+              <nz-input-group>  
+                <input 
+                  #poafile 
+                  formControlName="addressFile"
+                  type="file" 
+                  (change)="onAddressFileChange($event)"
+                  style="display:none;"
+                />
+                <button type="button" nz-button (click)="poafile.click()">Proof of Address</button>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </nz-input-group>        
+
         <p *ngIf="hasError" class="error">
           An error occurred. Please try again.
         </p>

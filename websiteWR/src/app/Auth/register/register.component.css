@@ -11,7 +11,7 @@ p.error {
 }
 
 .register-page {
-  padding: 25px;
+  padding-top: 20px;
   height: 80vh;
 }
 .main {
@@ -20,7 +20,8 @@ p.error {
   margin: 0 auto;
   background-color: #fff;
   padding: 25px;
-  height: 70vh;
+  height: 80vh;
+  overflow-y: auto;
 }
 
 h1 {

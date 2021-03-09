@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,11 +17,16 @@ export class RegisterComponent implements OnInit {
   hasError: boolean = false;
   passwordVisible: boolean = false;
 
+  selectedIdFile?: File;
+  selectedLicenseFile?: File;
+  selectedAddressFile?: File;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private modal: NzModalService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {
@@ -29,8 +35,33 @@ export class RegisterComponent implements OnInit {
       lastName: [null, [Validators.required]],
       phoneNumber: [null, [Validators.required, Validators.pattern('^[0-9]{8}$')]],
       password: [null, [Validators.required, Validators.minLength(8)]],
+      idcardFile: [null, [Validators.required]],
+      licenseFile: [null, [Validators.required]],
+      addressFile: [null, [Validators.required]],
     });
   }
+
+  onLicenseFileChange(event:any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.selectedLicenseFile=file;
+    }
+  }
+
+  onAddressFileChange(event:any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.selectedAddressFile=file;
+    }
+  }
+
+  onIdFileChange(event:any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.selectedIdFile=file;
+    }
+  }
+
 
   submitForm(): void {
     this.hasError = false;
@@ -38,35 +69,60 @@ export class RegisterComponent implements OnInit {
       this.registerForm.controls[i].markAsDirty();
       this.registerForm.controls[i].updateValueAndValidity();
     }
-
+    // const form= new FormData();
+    // form.append('firstName',this.registerForm.get('firstName')!.value);
+    // form.append('idcard',this.registerForm.get('idcardFile')!.value)
+    // console.log(form);
     if (this.registerForm.valid) {
+      const form= new FormData();
+      form.append("PhoneNumber",this.registerForm.get('phoneNumber')!.value)
+      form.append("FirstName",this.registerForm.get('lastName')!.value);
+      form.append("LastName",this.registerForm.get('lastName')!.value);
+      form.append("Password",this.registerForm.get('password')!.value);
+      form.append("IdCard",this.selectedIdFile!);
+      form.append("DrivingLicense",this.selectedLicenseFile!);
+      form.append("ProofOfAddress",this.selectedAddressFile!);
+
       this.isLoading = true;
 
-      this.authService
-        .register(
-          this.registerForm.get('firstName')!.value,
-          this.registerForm.get('lastName')!.value,
-          this.registerForm.get('phoneNumber')!.value,
-          this.registerForm.get('password')!.value
-        )
-        .pipe(
-          finalize(() => {
-            this.isLoading = false;
-          })
-        )
-        .subscribe(
-          () => {
-            this.registerForm.reset();
-            this.modal.success({
-              nzTitle: 'Success',
-              nzContent: 'Your registration has been sent for approval. ',
-            });
-          },
-          (err: any) => {
-            console.log(err.message);
-            this.hasError = true;
-          }
-        );
+      const headerDict = {
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      }
+      
+      const requestOptions = {                                                                                                                                                                                 
+        headers: new HttpHeaders(headerDict), 
+      };
+      this.http.post("http://localhost:5000/api/Auth/RegisterDriver",form, requestOptions).subscribe(res => {
+        console.log(res);
+        alert('Uploaded Successfully.');
+      });
+      // this.authService
+      //   .register(
+      //     this.registerForm.get('firstName')!.value,
+      //     this.registerForm.get('lastName')!.value,
+      //     this.registerForm.get('phoneNumber')!.value,
+      //     this.registerForm.get('password')!.value
+      //   )
+      //   .pipe(
+      //     finalize(() => {
+      //       this.isLoading = false;
+      //     })
+      //   )
+      //   .subscribe(
+      //     () => {
+      //       this.registerForm.reset();
+      //       this.modal.success({
+      //         nzTitle: 'Success',
+      //         nzContent: 'Your registration has been sent for approval. ',
+      //       });
+      //     },
+      //     (err: any) => {
+      //       console.log(err.message);
+      //       this.hasError = true;
+      //     }
+      //   );
     }
   }
 
