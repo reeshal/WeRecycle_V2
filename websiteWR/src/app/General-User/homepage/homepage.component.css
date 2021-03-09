@@ -1,5 +1,6 @@
 ::ng-deep :root {
   --main-color: #29c32f;
+  --map-length: 550px;
 }
 
 h1 {
@@ -9,9 +10,9 @@ h1 {
 }
 
 .map {
-  height: 550px;
-  width: 550px;
-  border-radius: 275px;
+  height: var(--map-length);
+  width: var(--map-length);
+  border-radius: calc(var(--map-length) / 2);
   margin: 0 auto;
 }
 button.registerBtn {
@@ -25,4 +26,17 @@ p.description {
 
 .left-container {
   margin-left: 10%;
+}
+
+@media screen and (min-width: 1400px) {
+  ::ng-deep :root {
+    --main-color: #29c32f;
+    --map-length: 800px;
+  }
+  .map {
+    height: var(--map-length);
+    width: var(--map-length);
+    border-radius: calc(var(--map-length) / 2);
+    margin: 0 auto;
+  }
 }
