@@ -12,14 +12,9 @@ export class InterceptorService implements HttpInterceptor  {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     // console.log(req.url);
-    // if(req.url==this.urlToNotUse){
-    //   console.log("yes")
-    //   const new_req = req.clone({
-    //   headers: req.headers
-    //     .append('Content-Type', 'application/json'),
-    // });
-    //   return next.handle(new_req);
-    // }
+    if(req.url==this.urlToNotUse){
+      return next.handle(req);
+    }
     const token = this.storageService.getCookie('token');
     const new_req = req.clone({
       headers: req.headers
