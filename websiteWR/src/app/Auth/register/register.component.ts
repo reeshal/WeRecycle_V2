@@ -85,47 +85,26 @@ export class RegisterComponent implements OnInit {
 
       this.isLoading = true;
 
-      // const headerDict = {
-      //   'Content-Type': 'multipart/form-data',
-      //   'Accept': 'application/json',
-      //   'Access-Control-Allow-Headers': 'Content-Type',
-      // }
-      
-      // const requestOptions = {                                                                                                                                                                                 
-      //   headers: new HttpHeaders(headerDict), 
-      // };
-
-      // disabled options :)
-
-      this.http.post("http://localhost:5000/api/Account/RegisterDriver", form).subscribe(res => {
-        console.log(res);
-        alert('Uploaded Successfully.');
-      });
-      // this.authService
-      //   .register(
-      //     this.registerForm.get('firstName')!.value,
-      //     this.registerForm.get('lastName')!.value,
-      //     this.registerForm.get('phoneNumber')!.value,
-      //     this.registerForm.get('password')!.value
-      //   )
-      //   .pipe(
-      //     finalize(() => {
-      //       this.isLoading = false;
-      //     })
-      //   )
-      //   .subscribe(
-      //     () => {
-      //       this.registerForm.reset();
-      //       this.modal.success({
-      //         nzTitle: 'Success',
-      //         nzContent: 'Your registration has been sent for approval. ',
-      //       });
-      //     },
-      //     (err: any) => {
-      //       console.log(err.message);
-      //       this.hasError = true;
-      //     }
-      //   );
+      this.authService
+        .register(form)
+        .pipe(
+          finalize(() => {
+            this.isLoading = false;
+          })
+        )
+        .subscribe(
+          () => {
+            this.registerForm.reset();
+            this.modal.success({
+              nzTitle: 'Success',
+              nzContent: 'Your registration has been sent for approval. ',
+            });
+          },
+          (err: any) => {
+            console.log(err.message);
+            this.hasError = true;
+          }
+        );
     }
   }
 

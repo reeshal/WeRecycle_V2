@@ -22,18 +22,8 @@ export class AuthService {
     });
   }
 
-  register(
-    firstName: string,
-    lastName:string,
-    phoneNumber: string,
-    password: string
-  ) {
-    return this.http.post(`${environment.apiURL}/register/business`, {
-      firstName,
-      lastName,
-      phoneNumber,
-      password
-    });
+  register(formData: FormData){
+    return this.http.post(`${environment.apiURL2}/Account/RegisterDriver`,formData);
   }
 
   logout(): void {

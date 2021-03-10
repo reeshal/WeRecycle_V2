@@ -1,0 +1,50 @@
+<div>
+    <div nz-row style="margin-bottom: 20px;">
+        <div nz-col  [nzSpan]="6">
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input
+                 type="text" 
+                 nz-input placeholder="Filter (e.g Yuvraaj/5123455/Souillac)" 
+                 (keyup)="applySearch($event)"
+                 [(ngModel)]="search"
+                 />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+            </ng-template>
+        </div>
+
+        
+    </div>
+</div>
+
+<div style="text-align:center">
+    <h1>Manage Drivers</h1>
+    <div class="grid">
+        <!-- <div *ngFor= "let region of listPrices" style="margin:10px; width:270px;" class="grid-item">
+            <app-region-card
+                [imageUrl]="region.imageUrl"
+                [regionName]="region.regionName"
+                [regionPrice]="region.regionPrice"
+            ></app-region-card>
+        </div> -->
+        <app-driver-card></app-driver-card>
+        <app-driver-card></app-driver-card>
+        <app-driver-card></app-driver-card>
+        <app-driver-card></app-driver-card>
+    </div>
+</div>
+
+
+
+
+<!-- <div class="grid">
+    <div class="grid-item">
+        <app-driver-card></app-driver-card>
+    </div>
+  
+
+
+
+
+</div> -->
