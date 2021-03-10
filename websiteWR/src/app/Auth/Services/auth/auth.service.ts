@@ -16,7 +16,7 @@ export class AuthService {
   ) {}
 
   login(phone: string, password: string): Observable<any> {
-    return this.http.post(`${environment.apiURL}/login`, {
+    return this.http.post(`${environment.apiURL2}/Account/Login`, {
       phoneNumber: phone,
       password,
     });

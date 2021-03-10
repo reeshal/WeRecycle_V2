@@ -1,10 +1,10 @@
 export interface Driver {
+  id:number;
+  idCard:string;
+  drivingLicense: string;
+  proofOfAddress: string;
   phoneNumber: string;
-  email: string;
-  fullName: string;
-  address: string;
+  firstName: string;
+  lastName: string;
   status: string;
-  type: string;
-  brn: string;
-  title: string;
 }
