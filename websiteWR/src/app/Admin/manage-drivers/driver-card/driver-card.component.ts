@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Driver } from '../../Models/Driver.model';
 
 @Component({
   selector: 'app-driver-card',
@@ -8,8 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class DriverCardComponent implements OnInit {
 
   constructor() { }
+  @Input() driverObject: Driver;
+  // @Input() id:string ='';
+  // @Input() idCardUrl:string ='';
+  // @Input() drivingLicenseUrl:string ='';
+  // @Input() proofOfAddressUrl:string ='';
+  // @Input() phoneNumber:string ='';
+  // @Input() phoneNumber:string ='';
+
 
   ngOnInit(): void {
+    console.log(this.driverObject);
   }
 
 }

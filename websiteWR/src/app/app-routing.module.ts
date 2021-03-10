@@ -3,10 +3,6 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
   {
-    path:'User-Management',
-    loadChildren: ()=> import('./User-Management/user-management-routing.module').then(m=>m.UserManagementRoutingModule)
-  },
-  {
     path:'General',
     loadChildren: ()=> import('./General-User/general-user-routing.module').then(m=>m.GeneralUserRoutingModule)
   },{
