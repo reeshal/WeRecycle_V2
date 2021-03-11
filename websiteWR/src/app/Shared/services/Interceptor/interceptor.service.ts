@@ -23,7 +23,6 @@ export class InterceptorService implements HttpInterceptor  {
     });
     return next.handle(new_req);
   }
-  
 }
 
 // https://stackoverflow.com/questions/55522320/angular-interceptor-exclude-specific-urls/55522787

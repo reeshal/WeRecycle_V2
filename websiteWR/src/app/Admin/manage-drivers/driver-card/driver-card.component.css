@@ -14,3 +14,34 @@
     position: relative;
     background: #fff;
 }
+
+h4{
+    /* color: #2d8f3f; */
+    color: #19324D;
+    text-align: left;
+    font-weight: bold;
+}
+
+.details{
+    color: grey;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.popupButton{
+	width: 100%;
+	/* background-color: #19324D; */
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+    color: #19324D;
+    
+}
+
+.iconCss{
+    position: relative;
+  /* Adjust these values accordingly */
+  top: 4px;
+  left: 5px;
+  float: right;
+}

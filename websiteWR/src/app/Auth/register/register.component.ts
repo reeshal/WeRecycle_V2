@@ -80,15 +80,6 @@ export class RegisterComponent implements OnInit {
       form.append("DrivingLicense",this.selectedLicenseFile!);
       form.append("ProofOfAddress",this.selectedAddressFile!);
 
-      console.log(form.get('PhoneNumber'))
-      console.log(form.get('FirstName'))
-      console.log(form.get('LastName'))
-      console.log(form.get('Password'))
-      console.log(form.get('IdCard'))
-      console.log(form.get('DrivingLicense'))
-      console.log(form.get('ProofOfAddress'))
-
-
       this.isLoading = true;
 
       this.authService

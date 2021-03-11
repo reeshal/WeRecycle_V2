@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Driver } from '../../Models/Driver.model';
-
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-driver-card',
   templateUrl: './driver-card.component.html',
@@ -10,16 +10,14 @@ export class DriverCardComponent implements OnInit {
 
   constructor() { }
   @Input() driverObject: Driver;
-  // @Input() id:string ='';
-  // @Input() idCardUrl:string ='';
-  // @Input() drivingLicenseUrl:string ='';
-  // @Input() proofOfAddressUrl:string ='';
-  // @Input() phoneNumber:string ='';
-  // @Input() phoneNumber:string ='';
-
 
   ngOnInit(): void {
     console.log(this.driverObject);
+  }
+
+  openUrl(url:string){
+    // alert(url);
+    window.open(`${environment.imageURL}${url}`, "_blank");
   }
 
 }
