@@ -5,9 +5,14 @@ const routes: Routes = [
   {
     path:'General',
     loadChildren: ()=> import('./General-User/general-user-routing.module').then(m=>m.GeneralUserRoutingModule)
-  },{
+  },
+  {
     path:'Admin',
     loadChildren: ()=> import('./Admin/admin-routing.module').then(m=>m.AdminRoutingModule)
+  },
+  {
+    path:'Driver',
+    loadChildren: ()=> import('./Drivers/drivers-routing.module').then(m=>m.DriversRoutingModule)
   }
 ];
 

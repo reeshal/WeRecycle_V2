@@ -44,6 +44,14 @@
       >
     </li>
 
+    <li *ngIf="isLoggedIn">
+      <a
+        [routerLink]="['Admin/My-Profile']"
+        [routerLinkActive]="['active']"
+        >My Profile</a
+      >
+    </li>
+
     <li *ngIf="!isLoggedIn">
       <a [routerLink]="['Bins']" [routerLinkActive]="['active']">All Bins</a>
     </li>

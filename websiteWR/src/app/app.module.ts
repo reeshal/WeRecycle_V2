@@ -16,6 +16,7 @@ import { GeneralUserModule } from './General-User/general-user.module';
 import { AdminModule } from './Admin/admin.module';
 import { AuthModule } from './Auth/auth.module';
 import { InterceptorService } from './Shared/services/Interceptor/interceptor.service';
+import { DriversModule } from './Drivers/drivers.module';
 
 registerLocaleData(en);
 
@@ -32,6 +33,7 @@ registerLocaleData(en);
     NgZorroModule,
     AdminModule,
     AuthModule,
+    DriversModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
