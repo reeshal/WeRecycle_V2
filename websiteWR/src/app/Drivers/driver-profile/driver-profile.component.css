@@ -54,3 +54,34 @@ img {
     border-top-right-radius:30px ;
     border-bottom-right-radius:30px ;
 }
+
+.informationBox{
+    padding-left: 30px;
+    padding-right: 30px;
+    /* padding-top: 10px; */
+}
+
+.informationBox h3{
+    color: #19324D;
+    /* font-weight: bold; */
+}
+
+.inner-box {
+    padding: 10px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.inner-box p{
+    color: #19324D;
+    font-weight: bold;
+}
+
+.inner-box span{
+    color: grey;
+}
+
+hr{
+    margin-bottom: 15px;
+}
