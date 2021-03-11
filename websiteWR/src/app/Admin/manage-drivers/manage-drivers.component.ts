@@ -43,6 +43,10 @@ export class ManageDriversComponent implements OnInit {
     );
   }
 
+  public refreshPage = (fetchData: boolean): void => {
+    if (fetchData) this.fetchDrivers();
+  };
+  
   // applySearch(event:any) {
   //   const val = event.target.value.toLowerCase();
   //   this.showClearButton = true;

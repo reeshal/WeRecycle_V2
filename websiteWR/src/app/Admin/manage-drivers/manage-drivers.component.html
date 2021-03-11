@@ -44,7 +44,10 @@
     <div style="text-align:center">    
         <div class="grid">
             <div *ngFor= "let driver of filteredRows" class="grid-item">
-                <app-driver-card [driverObject]="driver" ></app-driver-card>
+                <app-driver-card 
+                [driverObject]="driver"
+                [refreshPage]="refreshPage" 
+                ></app-driver-card>
             </div>
         </div>
     </div>

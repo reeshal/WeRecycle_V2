@@ -12,4 +12,11 @@ export class UserService {
   getDrivers():Observable<any> {
     return this.http.get(`${environment.apiURL2}/Account/Drivers`);
   }
+
+  updateStatus(driverId:number, status:string){
+    return this.http.patch(
+      `${environment.apiURL2}/Account/UpdateStatus?driverId=${driverId}&newStatus=${status}`,
+      JSON.stringify('')
+    );
+  }
 }

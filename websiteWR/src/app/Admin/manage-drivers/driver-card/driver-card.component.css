@@ -35,7 +35,16 @@ h4{
     margin-bottom: 5px;
     text-align: left;
     color: #19324D;
-    
+}
+
+.approveButton{
+    background-color: #2D8F3F;
+    color:#f0f0f0;
+}
+
+.declineButton{
+    background-color: #19324D ;
+    color:#f0f0f0;
 }
 
 .iconCss{

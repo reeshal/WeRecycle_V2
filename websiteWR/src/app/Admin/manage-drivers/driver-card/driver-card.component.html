@@ -1,4 +1,4 @@
-<nz-card nzHoverable style="height:400px; width:250px" [nzCover]="coverTemplate">
+<nz-card nzHoverable style="height:425px; width:260px" [nzCover]="coverTemplate">
     <nz-card-meta [nzTitle]="title"></nz-card-meta>
 </nz-card>
 
@@ -28,7 +28,28 @@
         class="popupButton" 
         (click)="openUrl(driverObject.drivingLicense)"
     >Driving License<i nz-icon class="iconCss" nzType="right"></i></button>
-
     
+    <div *ngIf="driverObject.status == 'PENDING'" style="margin-top: 10px;">
+        <nz-button-group>
+            <button 
+                nz-button 
+                (click)="updateDriverStatus(driverObject.id,'APPROVED')"
+                class="approveButton"
+            ><i nz-icon nzType="check"></i>Approve</button>
+            <button 
+                nz-button 
+                (click)="updateDriverStatus(driverObject.id,'DECLINED')"
+                class="declineButton"
+            >Decline<i nz-icon nzType="delete"></i></button>
+          </nz-button-group>
+    </div>
+
+    <div *ngIf="driverObject.status != 'PENDING'" style="margin-top: 10px;">
+        <button 
+            disabled
+            nz-button 
+        >{{driverObject.status}}</button>
+    </div>
+
     
 </ng-template>

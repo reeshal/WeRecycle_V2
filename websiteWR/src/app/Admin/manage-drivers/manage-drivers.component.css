@@ -1,8 +1,3 @@
-/* .foodcardbox{
-    padding-top:50px;
-    z-index:0;
-} */
-
 .grid {
   /* display: inline-grid;
   grid-gap: 1em;
@@ -13,7 +8,7 @@
   max-width: 1200px;
   /* margin: 0 auto; */
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: 3rem;
 }
 
 @media (min-width: 800px) {
@@ -39,21 +34,3 @@
   
 }
 
-
-.mapContainer{
-margin: 0px 30px 0px 30px;
-width: 60%;
-overflow: hidden;
-height:500px;
-}
-
-.formContainer{
-width: 30%;
-overflow: hidden;
-padding: 150px 20px 0px 0px;
-}
-
-.mapformContainer{
-display: flex;
-padding: 20px 0;
-}
