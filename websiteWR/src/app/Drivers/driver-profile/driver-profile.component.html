@@ -1,4 +1,7 @@
-<div class="mainBox">
+<div *ngIf="isLoading">
+    <app-spinner></app-spinner>
+</div>
+<div class="mainBox" *ngIf="!isLoading">
     <div nz-row>
         <div nz-col [nzSpan]="18" [nzPush]="6" class="rightBox">
           <h1 style="text-align: center;">My Profile</h1> 
@@ -10,19 +13,19 @@
                 <div nz-col [nzSpan]="8">
                   <div class="inner-box">
                       <p>First Name</p>
-                      <span>Sam</span>
+                      <span>{{driverObject.firstName}}</span>
                   </div>
                 </div>
                 <div nz-col [nzSpan]="8">
                   <div class="inner-box">
                       <p>Last Name</p>
-                      <span>Sam</span>
+                      <span>{{driverObject.lastName}}</span>
                   </div>
                 </div>
                 <div nz-col [nzSpan]="8">
                   <div class="inner-box">
                       <p>Phone Number</p>
-                      <span>57263859</span>
+                      <span>{{driverObject.phoneNumber}}</span>
                   </div>
                 </div>
               </div>
@@ -35,6 +38,7 @@
                     nz-button 
                     nzShape="round" 
                     class="popupButton" 
+                    (click)="openUrl(driverObject.idCard)"
                     style="width: 30%;display: block;"
                 >
                 <i nz-icon nzType="idcard"></i>
@@ -46,6 +50,7 @@
                     nz-button 
                     nzShape="round" 
                     class="popupButton" 
+                    (click)="openUrl(driverObject.proofOfAddress)"
                     style="width: 30%;display: block;"
                 >
                 <i nz-icon nzType="home"></i>
@@ -57,6 +62,7 @@
                     nz-button 
                     nzShape="round" 
                     class="popupButton" 
+                    (click)="openUrl(driverObject.drivingLicense)"
                     style="width: 30%;display: block;"
                 >
                 <i nz-icon nzType="car"></i>
@@ -71,13 +77,14 @@
         <div nz-col [nzSpan]="6" [nzPull]="18" class="leftBox">
             <div class="leftCard"> 
                 <img alt="Photo of region" src="assets/images/truck.jpg" />
-                <h2>First Name </h2>
+                <h2>{{driverObject.firstName + ' '+ driverObject.lastName}} </h2>
                 <h3>Driver</h3>
 
                 <button 
                     nz-button 
                     nzShape="round" 
                     class="popupButton" 
+                    (click)="togglePasswordModal(false)"
                 >
                 <i nz-icon nzType="lock"></i>
                 Change Password
@@ -85,5 +92,11 @@
     
             </div>
         </div>
-      </div>
+    </div>
+
+    <app-update-password
+        [showPasswordModal]="showPasswordModal"
+        [togglePasswordModal]="togglePasswordModal"
+    >  
+    </app-update-password>
 </div>

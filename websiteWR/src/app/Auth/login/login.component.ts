@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 
       this.authService
         .login(
-          this.loginForm.get('phone')!.value,
+          this.loginForm.get('phone')!.value.toString(),
           this.loginForm.get('password')!.value
         )
         .pipe(
@@ -63,7 +63,13 @@ export class LoginComponent implements OnInit {
             // this.storageService.createCookie('fullname', data.fullname, 1);
             
             // window.location.href = '/User-Management/Registered-Users';
-            this.router.navigate(['/Admin/Manage-Drivers']);
+            if(data.role=='ADMIN'){
+              this.router.navigate(['/Admin/Manage-Drivers']);
+            }
+            else{
+              this.router.navigate(['/Driver/My-Profile']);
+            }
+            
           },
           (err: any) => {
             console.log(err.message);
