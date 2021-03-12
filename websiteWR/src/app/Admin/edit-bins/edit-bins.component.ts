@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as mapboxgl from 'mapbox-gl';
 import { forkJoin } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Bin } from '../Models/Bin.model';
 import { BinService } from '../Services/Bin/bin.service';
@@ -100,14 +101,22 @@ export class EditBinsComponent implements OnInit {
   }
 
   handleDelete(): void {
-    this.binsService.deleteBin(this.selectedBin.id).subscribe(
-      (data) => {
-        this.fetchData();
-      },
-      (err: any) => {
-        console.log(err.message);
-      }
-    );
+    this.isLoading2 = true;
+    this.binsService
+      .deleteBin(this.selectedBin.id)
+      .pipe(
+        finalize(() => {
+          this.isLoading2 = false;
+        })
+      )
+      .subscribe(
+        (data) => {
+          this.fetchData();
+        },
+        (err: any) => {
+          console.log(err.message);
+        }
+      );
   }
 
   reset(): void {

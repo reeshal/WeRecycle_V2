@@ -32,7 +32,7 @@ export class AuthService {
   logout(): void {
     this.storageService.deleteAllCookies();
     window.location.href = 'Login';
-    // this.router.navigate(['/login']);
+    // this.router.navigate(['/Login']);
   }
 
   isAuthenticated(): boolean {

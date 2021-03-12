@@ -19,4 +19,14 @@ export class UserService {
       JSON.stringify('')
     );
   }
+
+  // to change url
+  updatePassword(jsonBody: any): Observable<any> {
+    return this.http.post(`${environment.apiURL}/Account/Driver`, jsonBody);
+  }
+
+  // to change url
+  getAdminDetail(): Observable<any> {
+    return this.http.get(`${environment.apiURL}/Account/Drivers`);
+  }
 }

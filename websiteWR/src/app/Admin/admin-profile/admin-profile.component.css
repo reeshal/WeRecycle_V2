@@ -16,7 +16,7 @@
 .leftCard{
     display: block;
     margin: auto;
-    padding-top: 10vh;
+    padding-top: 20vh;
 }
 
 .leftCard h2,h3{
@@ -53,4 +53,59 @@ img {
     background-color: white;
     border-top-right-radius:30px ;
     border-bottom-right-radius:30px ;
+}
+
+.informationBox{
+    padding-left: 30px;
+    padding-right: 30px;
+    /* padding-top: 10px; */
+}
+
+.informationBox h3{
+    color: #19324D;
+    /* font-weight: bold; */
+}
+
+.inner-box {
+    padding: 10px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.inner-box p{
+    color: #19324D;
+    font-weight: bold;
+}
+
+.inner-box span{
+    color: grey;
+}
+
+hr{
+    margin-bottom: 15px;
+}
+
+i {
+    color: white;
+}
+
+  
+.input-container {
+    display: flex;
+    /* width: 60%; */
+}
+
+.icon {
+    /* height: 30px; */
+    padding: 10px;
+    background: #7b99b9;
+    color: white;
+    /* min-width: 40px; */
+    text-align: center;
+}
+
+.updateButton{
+    background-color: #7b99b9; 
+    border-color: transparent;
 }

@@ -5,10 +5,11 @@ import { SharedModule } from '../Shared/shared.module';
 import { NgZorroModule } from '../ng-zorro.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DriversRoutingModule } from './drivers-routing.module';
+import { UpdatePasswordComponent } from './driver-profile/update-password/update-password.component';
 
 
 @NgModule({
-  declarations: [DriverProfileComponent],
+  declarations: [DriverProfileComponent, UpdatePasswordComponent],
   imports: [
     CommonModule,
     SharedModule,

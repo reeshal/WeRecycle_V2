@@ -1,44 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { DriverService } from '../../Services/Driver/driver.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
-import { UserService } from '../Services/Users/user.service';
-import { Admin } from '../Models/Admin.model';
 
 @Component({
-  selector: 'app-admin-profile',
-  templateUrl: './admin-profile.component.html',
-  styleUrls: ['./admin-profile.component.css']
+  selector: 'app-update-password',
+  templateUrl: './update-password.component.html',
+  styleUrls: ['./update-password.component.css']
 })
-export class AdminProfileComponent implements OnInit {
-  isLoading: boolean = true;
-  adminObject: Admin;
+export class UpdatePasswordComponent implements OnInit {
+  
   changePasswordForm= new FormGroup({
     oldPassword: new FormControl('', [Validators.required]),
     newPassword: new FormControl('', [Validators.required]),
   });
 
-  constructor(private modal: NzModalService, private userService: UserService) { }
+  @Input() showPasswordModal: boolean=false;
+  @Input() togglePasswordModal: Function = ()=>{};
+
+  constructor(private modal: NzModalService, private driverService: DriverService) { }
 
   ngOnInit(): void {
-    this.fetchAdminDetail();
   }
 
-  fetchAdminDetail(){
-    this.userService.getAdminDetail().pipe(
-      finalize(()=>{
-        this.isLoading = false;
-      })
-    )
-    .subscribe(   
-      (data: Admin) => {
-        this.adminObject=data;
-        console.log(this.adminObject)
-      },
-      (err) => {
-        console.log(err.message);
-      }
-    );
+  handleCancel(data:boolean): void {
+    this.showPasswordModal = false;
+    this.togglePasswordModal(data);
   }
 
   handleChangePassword(){
@@ -55,9 +43,9 @@ export class AdminProfileComponent implements OnInit {
         nzOkText: 'Yes',
         nzOkType: 'danger',
         nzOnOk: () => {
-          this.userService.updatePassword(jsonBody).pipe(finalize(
+          this.driverService.updatePassword(jsonBody).pipe(finalize(
             ()=>{
-              this.fetchAdminDetail();
+              this.handleCancel(true);
             }
           )).subscribe(
             () => {
