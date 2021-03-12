@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { ManageBinsComponent } from './manage-bins/manage-bins.component';
 import { ManageDriversComponent } from './manage-drivers/manage-drivers.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { AddBinsComponent } from './add-bins/add-bins.component';
 
 const routes: Routes = [
   {
-    path: 'Manage-Bins',
-    component: ManageBinsComponent,
+    path: 'Add-Bins',
+    component: AddBinsComponent,
   },
   {
     path: 'Manage-Drivers',

@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as mapboxgl from 'mapbox-gl';
+import { forkJoin } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { Bin } from 'src/app/General-User/Models/Bins';
 import { environment } from 'src/environments/environment';
-import { Bin } from '../Models/Bin.model';
 import { BinService } from '../Services/Bin/bin.service';
 
 @Component({
-  selector: 'app-manage-bins',
-  templateUrl: './manage-bins.component.html',
-  styleUrls: ['./manage-bins.component.css'],
+  selector: 'app-add-bins',
+  templateUrl: './add-bins.component.html',
+  styleUrls: ['./add-bins.component.css'],
 })
-export class ManageBinsComponent implements OnInit {
+export class AddBinsComponent implements OnInit {
   constructor(private binsService: BinService, private fb: FormBuilder) {}
 
   map: mapboxgl.Map;
@@ -21,7 +22,7 @@ export class ManageBinsComponent implements OnInit {
   lng = 57.3652;
   currentView = 'view';
   addBinForm!: FormGroup;
-
+  binMaterials: string[] = [];
   marker: any;
   selectedLocation = {
     lat: 0,
@@ -32,12 +33,20 @@ export class ManageBinsComponent implements OnInit {
 
   ngOnInit() {
     this.addBinForm = this.fb.group({
-      material: [null, [Validators.required]],
-      address: [null],
+      address: [null, Validators.required],
+      selectedMaterial: [null, Validators.required],
     });
 
-    this.binsService.getAllBins().subscribe(
-      (data: Array<Bin>) => {
+    this.fetchData();
+  }
+  fetchData(): void {
+    const requests = forkJoin([
+      this.binsService.getAllBins(),
+      this.binsService.getBinMaterials(),
+    ]);
+
+    requests.subscribe(
+      (data: [Array<Bin>, any]) => {
         this.map = new mapboxgl.Map({
           accessToken: environment.mapbox.accessToken,
           container: 'map',
@@ -52,20 +61,16 @@ export class ManageBinsComponent implements OnInit {
           this.addMarker(e.lngLat.lat, e.lngLat.lng, 3);
         });
 
-        data.forEach((bin: Bin) => {
+        this.binMaterials = Object.keys(data[1]);
+
+        data[0].forEach((bin: Bin) => {
           const el = document.createElement('img');
           el.className = 'marker';
           el.src = `assets/images/logo.webp`;
           el.style.width = '40px';
 
-          var popup = new mapboxgl.Popup({
-            offset: 25,
-            closeButton: false,
-          }).setText('Material: ' + bin.material);
-
-          new mapboxgl.Marker(el)
+          const m = new mapboxgl.Marker(el)
             .setLngLat([bin.longitude, bin.latitude])
-            .setPopup(popup)
             .addTo(this.map);
         });
       },
@@ -74,7 +79,6 @@ export class ManageBinsComponent implements OnInit {
       }
     );
   }
-
   addMarker(lat: number, lng: number, status: number) {
     const el = document.createElement('img');
     el.className = 'marker';
@@ -92,7 +96,7 @@ export class ManageBinsComponent implements OnInit {
         .addBin(
           this.selectedLocation.lat,
           this.selectedLocation.lng,
-          this.addBinForm.get('material')?.value,
+          this.addBinForm.get('selectedMaterial')?.value,
           this.addBinForm.get('address')?.value
         )
         .pipe(
@@ -102,7 +106,8 @@ export class ManageBinsComponent implements OnInit {
         )
         .subscribe(
           (data: any) => {
-            console.log(data);
+            this.fetchData();
+            this.handleCancel();
           },
           (err: any) => {
             console.log(err.message);

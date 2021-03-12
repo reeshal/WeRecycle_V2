@@ -2,18 +2,10 @@
   <div nz-col nzSpan="6">
     <div class="left-container">
       <div *ngIf="currentView == 'view'">
-        <h1>Manage Bins</h1>
+        <h1>Add Bins</h1>
         <nz-alert
           nzType="info"
-          nzMessage="Add a new bin"
-          nzDescription="Click anywhere on the map."
-          nzShowIcon
-        ></nz-alert>
-        <br />
-        <nz-alert
-          nzType="info"
-          nzMessage="Change location / Delete bin"
-          nzDescription="Click on a bin."
+          nzMessage="Click on the map to add a new bin."
           nzShowIcon
         ></nz-alert>
       </div>
@@ -26,16 +18,18 @@
           (ngSubmit)="submitAddForm()"
         >
           <nz-form-item>
-            <nz-form-control nzErrorTip="Please enter type of material!">
-              <nz-input-group nzPrefixIcon="inbox">
-                <input
-                  type="text"
-                  nz-input
-                  formControlName="material"
-                  placeholder="Material accepted"
-                />
-              </nz-input-group>
-            </nz-form-control>
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Choose material accepted"
+              formControlName="selectedMaterial"
+            >
+              <nz-option
+                *ngFor="let m of binMaterials"
+                nzLabel="{{ m }}"
+                nzValue="{{ m }}"
+              ></nz-option>
+            </nz-select>
           </nz-form-item>
           <nz-form-item>
             <nz-form-control>

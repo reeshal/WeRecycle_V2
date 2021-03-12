@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from '../Storage/storage.service';
-import { HttpInterceptor,HttpRequest,HttpHandler} from '@angular/common/http';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class InterceptorService implements HttpInterceptor  {
+export class InterceptorService implements HttpInterceptor {
   constructor(private storageService: StorageService) {}
-  urlToNotUse:string=`${environment.apiURL2}/Account/RegisterDriver`;
+  urlToNotUse: string = `${environment.apiURL}/Account/RegisterDriver`;
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     // console.log(req.url);
-    if(req.url==this.urlToNotUse){
+    if (req.url == this.urlToNotUse) {
       return next.handle(req);
     }
     const token = this.storageService.getCookie('token');

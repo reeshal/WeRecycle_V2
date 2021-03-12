@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManageBinsComponent } from './manage-bins.component';
+import { AddBinsComponent } from './add-bins.component';
 
-describe('ManageBinsComponent', () => {
-  let component: ManageBinsComponent;
-  let fixture: ComponentFixture<ManageBinsComponent>;
+describe('AddBinsComponent', () => {
+  let component: AddBinsComponent;
+  let fixture: ComponentFixture<AddBinsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManageBinsComponent ]
+      declarations: [ AddBinsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManageBinsComponent);
+    fixture = TestBed.createComponent(AddBinsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

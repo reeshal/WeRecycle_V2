@@ -12,6 +12,9 @@ export class BinService {
   getAllBins(): Observable<any> {
     return this.http.get(`${environment.apiURL}/Bins/Get`);
   }
+  getBinMaterials(): Observable<any> {
+    return this.http.get(`${environment.apiURL}/Bins/GetBinMaterials`);
+  }
 
   addBin(
     latitude: number,
