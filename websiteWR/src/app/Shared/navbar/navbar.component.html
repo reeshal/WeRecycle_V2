@@ -10,7 +10,7 @@
   <ul class="main-nav">
     <!-- Admin -->
     <li class="dropdown" *ngIf="isLoggedIn">
-      <a nz-dropdown [nzDropdownMenu]="menu3">
+      <a *ngIf="role == 'ADMIN'" nz-dropdown [nzDropdownMenu]="menu3">
         Manage Bins
         <i nz-icon nzType="down"></i>
       </a>
@@ -56,6 +56,15 @@
         [routerLink]="['Driver/My-Profile']"
         [routerLinkActive]="['active']"
         >My Profile</a
+      >
+    </li>
+
+    <li *ngIf="isLoggedIn">
+      <a
+        *ngIf="role == 'DRIVER'"
+        [routerLink]="['Add-Pickup']"
+        [routerLinkActive]="['active']"
+        >Add Pickup</a
       >
     </li>
 

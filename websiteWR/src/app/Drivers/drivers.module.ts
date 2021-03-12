@@ -6,10 +6,11 @@ import { NgZorroModule } from '../ng-zorro.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DriversRoutingModule } from './drivers-routing.module';
 import { UpdatePasswordComponent } from './driver-profile/update-password/update-password.component';
+import { AddPickupComponent } from './add-pickup/add-pickup.component';
 
 
 @NgModule({
-  declarations: [DriverProfileComponent, UpdatePasswordComponent],
+  declarations: [DriverProfileComponent, UpdatePasswordComponent, AddPickupComponent],
   imports: [
     CommonModule,
     SharedModule,
