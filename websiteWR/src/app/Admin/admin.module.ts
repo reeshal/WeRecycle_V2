@@ -8,6 +8,7 @@ import { ManageDriversComponent } from './manage-drivers/manage-drivers.componen
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { DriverCardComponent } from './manage-drivers/driver-card/driver-card.component';
 import { AddBinsComponent } from './add-bins/add-bins.component';
+import { EditBinsComponent } from './edit-bins/edit-bins.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AddBinsComponent } from './add-bins/add-bins.component';
     AdminProfileComponent,
     DriverCardComponent,
     AddBinsComponent,
+    EditBinsComponent,
   ],
   imports: [
     CommonModule,
