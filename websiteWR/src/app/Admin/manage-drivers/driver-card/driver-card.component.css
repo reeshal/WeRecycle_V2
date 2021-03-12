@@ -1,0 +1,56 @@
+.ant-card-bordered {
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1), 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.ant-card {
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1;
+    font-feature-settings: 'tnum';
+    position: relative;
+    background: #fff;
+}
+
+h4{
+    /* color: #2d8f3f; */
+    color: #19324D;
+    text-align: left;
+    font-weight: bold;
+}
+
+.details{
+    color: grey;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.popupButton{
+	width: 100%;
+	/* background-color: #19324D; */
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+    color: #19324D;
+}
+
+.approveButton{
+    background-color: #2D8F3F;
+    color:#f0f0f0;
+}
+
+.declineButton{
+    background-color: #19324D ;
+    color:#f0f0f0;
+}
+
+.iconCss{
+    position: relative;
+  /* Adjust these values accordingly */
+  top: 4px;
+  left: 5px;
+  float: right;
+}

@@ -16,30 +16,14 @@ export class AuthService {
   ) {}
 
   login(phone: string, password: string): Observable<any> {
-    return this.http.post(`${environment.apiURL}/login`, {
+    return this.http.post(`${environment.apiURL2}/Account/Login`, {
       phoneNumber: phone,
       password,
     });
   }
 
-  register(
-    fullName: string,
-    phoneNumber: string,
-    title: string,
-    password: string,
-    brn: number,
-    email: string,
-    address: string
-  ) {
-    return this.http.post(`${environment.apiURL}/register/business`, {
-      fullName,
-      phoneNumber,
-      title,
-      password,
-      brn,
-      email,
-      address,
-    });
+  register(formData: FormData){
+    return this.http.post(`${environment.apiURL2}/Account/RegisterDriver`,formData);
   }
 
   logout(): void {

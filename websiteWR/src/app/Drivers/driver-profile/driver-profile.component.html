@@ -1,0 +1,89 @@
+<div class="mainBox">
+    <div nz-row>
+        <div nz-col [nzSpan]="18" [nzPush]="6" class="rightBox">
+          <h1 style="text-align: center;">My Profile</h1> 
+          <div class="informationBox"> 
+            <h3>Personal Information</h3>
+            <hr>
+
+            <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+                <div nz-col [nzSpan]="8">
+                  <div class="inner-box">
+                      <p>First Name</p>
+                      <span>Sam</span>
+                  </div>
+                </div>
+                <div nz-col [nzSpan]="8">
+                  <div class="inner-box">
+                      <p>Last Name</p>
+                      <span>Sam</span>
+                  </div>
+                </div>
+                <div nz-col [nzSpan]="8">
+                  <div class="inner-box">
+                      <p>Phone Number</p>
+                      <span>57263859</span>
+                  </div>
+                </div>
+              </div>
+           </div>
+
+           <div class="informationBox" style="margin-top: 50px;">
+            <h3>Personal Documents</h3>
+            <hr>
+            <button 
+                    nz-button 
+                    nzShape="round" 
+                    class="popupButton" 
+                    style="width: 30%;display: block;"
+                >
+                <i nz-icon nzType="idcard"></i>
+                View Id Card
+                <i nz-icon class="iconCss" nzType="right"></i>
+            </button>
+
+            <button 
+                    nz-button 
+                    nzShape="round" 
+                    class="popupButton" 
+                    style="width: 30%;display: block;"
+                >
+                <i nz-icon nzType="home"></i>
+                View Proof of Address
+                <i nz-icon class="iconCss" nzType="right"></i>
+            </button>
+
+            <button 
+                    nz-button 
+                    nzShape="round" 
+                    class="popupButton" 
+                    style="width: 30%;display: block;"
+                >
+                <i nz-icon nzType="car"></i>
+                View Driving License
+                <i nz-icon class="iconCss" nzType="right"></i>
+            </button>
+                
+           </div>
+          
+        </div>
+
+        <div nz-col [nzSpan]="6" [nzPull]="18" class="leftBox">
+            <div class="leftCard"> 
+                <img alt="Photo of region" src="assets/images/truck.jpg" />
+                <h2>First Name </h2>
+                <h3>Driver</h3>
+
+                <button 
+                    nz-button 
+                    nzShape="round" 
+                    class="popupButton" 
+                >
+                <i nz-icon nzType="lock"></i>
+                Change Password
+                <i nz-icon class="iconCss" nzType="right"></i></button>
+    
+            </div>
+        </div>
+      </div>
+</div>

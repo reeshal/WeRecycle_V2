@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { DriverProfileComponent } from './driver-profile/driver-profile.component';
 
 const routes: Routes = [
-  { path: 'Login', component: LoginComponent },
-  { path: 'Register', component: RegisterComponent },
+  {
+    path: 'My-Profile',
+    component: DriverProfileComponent,
+  }
 ];
 
 @NgModule({
@@ -14,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes), CommonModule],
   exports: [RouterModule],
 })
-export class AuthRoutingModule {}
+export class DriversRoutingModule { }

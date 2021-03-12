@@ -1,0 +1,55 @@
+<nz-card nzHoverable style="height:425px; width:260px" [nzCover]="coverTemplate">
+    <nz-card-meta [nzTitle]="title"></nz-card-meta>
+</nz-card>
+
+<ng-template #coverTemplate>
+    <img  height="175" alt="Photo of region" src="assets/images/truck.jpg" />
+</ng-template>
+
+<ng-template #title >
+    <h4>First Name:<span class="details">{{driverObject.firstName}}</span></h4>
+    <h4>Last Name:<span class="details">{{driverObject.lastName}}</span></h4>
+    <h4>Phone Number:<span class="details">{{driverObject.phoneNumber}}</span></h4>
+    <button 
+        nz-button 
+        nzShape="round" 
+        class="popupButton" 
+        (click)="openUrl(driverObject.idCard)"
+    >ID Card<i nz-icon class="iconCss" nzType="right"></i></button>
+    <button 
+        nz-button 
+        nzShape="round" 
+        class="popupButton" 
+        (click)="openUrl(driverObject.proofOfAddress)"
+    >Proof of Address<i nz-icon class="iconCss" nzType="right"></i></button>
+    <button 
+        nz-button 
+        nzShape="round" 
+        class="popupButton" 
+        (click)="openUrl(driverObject.drivingLicense)"
+    >Driving License<i nz-icon class="iconCss" nzType="right"></i></button>
+    
+    <div *ngIf="driverObject.status == 'PENDING'" style="margin-top: 10px;">
+        <nz-button-group>
+            <button 
+                nz-button 
+                (click)="updateDriverStatus(driverObject.id,'APPROVED')"
+                class="approveButton"
+            ><i nz-icon nzType="check"></i>Approve</button>
+            <button 
+                nz-button 
+                (click)="updateDriverStatus(driverObject.id,'DECLINED')"
+                class="declineButton"
+            >Decline<i nz-icon nzType="delete"></i></button>
+          </nz-button-group>
+    </div>
+
+    <div *ngIf="driverObject.status != 'PENDING'" style="margin-top: 10px;">
+        <button 
+            disabled
+            nz-button 
+        >{{driverObject.status}}</button>
+    </div>
+
+    
+</ng-template>

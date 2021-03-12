@@ -3,6 +3,7 @@ img.login-image {
   margin: 0 auto;
 }
 .image-container {
+  margin-top: 10vh;
   text-align: center;
 }
 
@@ -12,12 +13,19 @@ p.error {
 
 .login-page {
   padding: 25px;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .main {
-  width: 80%;
+  border-radius: 30px;
+  width: 90%;
   margin: 0 auto;
   background-color: #fff;
   padding: 25px;
+  height: 70vh;
 }
 
 h1 {

@@ -1,0 +1,56 @@
+.mainBox{
+    margin: 5px;
+    height: 80vh;
+    border-radius: 30px;
+}
+
+.leftBox{
+    border-top-left-radius:30px ;
+    border-bottom-left-radius:30px ;
+    height: 80vh;
+    padding: 10px;
+    text-align: center;
+    background-image: linear-gradient(#19324D, #7b99b9);
+}
+
+.leftCard{
+    display: block;
+    margin: auto;
+    padding-top: 10vh;
+}
+
+.leftCard h2,h3{
+    color: white;
+    margin-top: 10px;
+}
+
+img {
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+}
+
+.iconCss{
+    position: relative;
+  /* Adjust these values accordingly */
+  top: 4px;
+  left: 5px;
+  float: right;
+}
+
+.popupButton{
+	width: 65%;
+	/* background-color: #19324D; */
+    /* display: block; */
+    margin-top: 10px;
+    text-align: left;
+    color: #19324D;
+}
+
+
+.rightBox{
+    height: 80vh;
+    background-color: white;
+    border-top-right-radius:30px ;
+    border-bottom-right-radius:30px ;
+}

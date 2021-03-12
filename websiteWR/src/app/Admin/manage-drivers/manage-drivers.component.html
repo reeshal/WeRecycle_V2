@@ -1,0 +1,55 @@
+<div *ngIf="isLoading">
+    <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="!isLoading">
+    <h1 style="text-align:center">Manage Drivers</h1>
+    <!-- <div nz-row style="margin-bottom: 20px;">
+        <div nz-col  [nzSpan]="6">
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input
+                 type="text" 
+                 nz-input placeholder="Filter (Name or Phone number)" 
+                 (keyup)="applySearch($event)"
+                 [(ngModel)]="search"
+                 />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+            </ng-template>
+        </div>
+
+        <div nz-col nzOffset="1">
+            <nz-select
+                nzPlaceHolder="Status" 
+                [(ngModel)]="selectedStatus"
+                (ngModelChange)="handleStatusChange()">
+                <nz-option nzValue="All" nzLabel="All"></nz-option>
+                <nz-option nzValue="APPROVED" nzLabel="Approved"></nz-option>
+                <nz-option nzValue="PENDING" nzLabel="Pending"></nz-option>
+                <nz-option nzValue="DECLINED" nzLabel="Declined"></nz-option>
+            </nz-select>
+        </div>
+
+        <div nz-col nzOffset="1" *ngIf="showClearButton">
+            <button 
+                nz-button
+                nzShape="round" 
+                (click)="clearFilter()"
+                style="background-color: #ac1010; color: #fff;"
+                >Clear Filters</button> 
+        </div>    
+    </div> -->
+
+    <div style="text-align:center">    
+        <div class="grid">
+            <div *ngFor= "let driver of filteredRows" class="grid-item">
+                <app-driver-card 
+                [driverObject]="driver"
+                [refreshPage]="refreshPage" 
+                ></app-driver-card>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -11,16 +11,34 @@ p.error {
 }
 
 .register-page {
-  padding: 25px;
+  padding-top: 20px;
+  height: 80vh;
 }
 .main {
-  width: 80%;
+  border-radius: 30px;
+  width: 90%;
   margin: 0 auto;
   background-color: #fff;
   padding: 25px;
+  height: 80vh;
+  overflow-y: auto;
 }
 
 h1 {
+  /* color: #2d8f3f; */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom:0px;
+}
+
+.sign_in_text{
   color: #2d8f3f;
-  margin-bottom: 25px;
+  font-weight: bold;
+  margin-left: 5px;
+  text-align: center;
+}
+
+.already_have_acc_text{
+  text-align: center;
+  margin-bottom: 4vh;
 }

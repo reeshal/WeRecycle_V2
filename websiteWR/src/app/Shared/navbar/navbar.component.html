@@ -19,9 +19,17 @@
 
     <li *ngIf="isLoggedIn">
       <a
-        [routerLink]="['User-Management/Drivers']"
+        [routerLink]="['Admin/Manage-Drivers']"
         [routerLinkActive]="['active']"
         >Manage Drivers</a
+      >
+    </li>
+
+    <li *ngIf="isLoggedIn">
+      <a
+        [routerLink]="['Admin/My-Profile']"
+        [routerLinkActive]="['active']"
+        >My Profile</a
       >
     </li>
 
@@ -38,8 +46,8 @@
     </li>
 
     <li *ngIf="!isLoggedIn">
-      <a [routerLink]="['Register-Business']" [routerLinkActive]="['active']"
-        >Register as business</a
+      <a [routerLink]="['Register']" [routerLinkActive]="['active']"
+        >Register</a
       >
     </li>
 

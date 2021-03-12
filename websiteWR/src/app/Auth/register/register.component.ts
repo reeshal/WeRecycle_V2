@@ -1,5 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from '../Services/auth/auth.service';
@@ -15,26 +17,51 @@ export class RegisterComponent implements OnInit {
   hasError: boolean = false;
   passwordVisible: boolean = false;
 
+  selectedIdFile?: File;
+  selectedLicenseFile?: File;
+  selectedAddressFile?: File;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private router: Router,
+    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      fullName: [null, [Validators.required]],
-      title: [null, [Validators.required]],
-      phone: [null, [Validators.required, Validators.pattern('^[0-9]{8}$')]],
-      address: [null, [Validators.required]],
-      brn: [
-        null,
-        [Validators.required, Validators.pattern('^[0-9A-Za-z]{14}$')],
-      ],
-      email: [null, [Validators.required, Validators.email]],
+      firstName: [null, [Validators.required]],
+      lastName: [null, [Validators.required]],
+      phoneNumber: [null, [Validators.required, Validators.pattern('^[0-9]{8}$')]],
       password: [null, [Validators.required, Validators.minLength(8)]],
+      idcardFile: [null, [Validators.required]],
+      licenseFile: [null, [Validators.required]],
+      addressFile: [null, [Validators.required]],
     });
   }
+
+  onLicenseFileChange(event:any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.selectedLicenseFile=file;
+    }
+  }
+
+  onAddressFileChange(event:any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.selectedAddressFile=file;
+    }
+  }
+
+  onIdFileChange(event:any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.selectedIdFile=file;
+    }
+  }
+
 
   submitForm(): void {
     this.hasError = false;
@@ -42,20 +69,21 @@ export class RegisterComponent implements OnInit {
       this.registerForm.controls[i].markAsDirty();
       this.registerForm.controls[i].updateValueAndValidity();
     }
-
+  
     if (this.registerForm.valid) {
+      const form = new FormData();
+      form.append("PhoneNumber",this.registerForm.get('phoneNumber')!.value)
+      form.append("FirstName",this.registerForm.get('firstName')!.value);
+      form.append("LastName",this.registerForm.get('lastName')!.value);
+      form.append("Password",this.registerForm.get('password')!.value);
+      form.append("IdCard",this.selectedIdFile!);
+      form.append("DrivingLicense",this.selectedLicenseFile!);
+      form.append("ProofOfAddress",this.selectedAddressFile!);
+
       this.isLoading = true;
 
       this.authService
-        .register(
-          this.registerForm.get('fullName')!.value,
-          this.registerForm.get('phone')!.value,
-          this.registerForm.get('title')!.value,
-          this.registerForm.get('password')!.value,
-          this.registerForm.get('brn')!.value,
-          this.registerForm.get('email')!.value,
-          this.registerForm.get('address')!.value
-        )
+        .register(form)
         .pipe(
           finalize(() => {
             this.isLoading = false;
@@ -77,7 +105,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  titleChange(value: string): void {
-    this.registerForm.get('title')!.setValue(value);
+  changePage(){
+    this.router.navigateByUrl('/Login');
   }
 }

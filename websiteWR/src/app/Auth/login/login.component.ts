@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { StorageService } from 'src/app/Shared/services/Storage/storage.service';
 import { AuthRes } from '../Models/AuthRes.model';
@@ -18,16 +19,17 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       phone: [
-        '57263859',
+        '51111111',
         [Validators.required, Validators.pattern('^[0-9]{8}$')],
       ],
-      password: ['admin', [Validators.required]],
+      password: ['1234', [Validators.required]],
     });
   }
 
@@ -52,19 +54,16 @@ export class LoginComponent implements OnInit {
           })
         )
         .subscribe(
-          (data: any) => {
+          (data: AuthRes) => {
             console.log(data);
-            // this.storageService.createCookie('id', data.id.toString(), 1);
-            // this.storageService.createCookie(
-            //   'fullName',
-            //   data.firstName + '' + data.lastName,
-            //   1
-            // );
+            this.storageService.createCookie('id', data.id.toString(), 1);
             this.storageService.createCookie('token', data.token, 1);
-            this.storageService.createCookie('fullname', data.fullname, 1);
-            // this.storageService.createCookie('role', data.role, 1);
-
-            window.location.href = '/User-Management/Registered-Users';
+            this.storageService.createCookie('role', data.role, 1);
+            this.storageService.createCookie('status',data.status,1);
+            // this.storageService.createCookie('fullname', data.fullname, 1);
+            
+            // window.location.href = '/User-Management/Registered-Users';
+            this.router.navigate(['/Admin/Manage-Drivers']);
           },
           (err: any) => {
             console.log(err.message);
