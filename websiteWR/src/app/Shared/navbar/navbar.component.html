@@ -1,5 +1,5 @@
 <header class="header">
-  <!-- <h1 class="logo"><a href="#">Flexbox</a></h1> -->
+
   <img
     src="assets/images/logo.png"
     alt=""
@@ -7,7 +7,7 @@
     height="50px"
     width="50px"
   />
-  <!-- <links> -->
+ 
   <ul class="main-nav">
     <!-- Admin -->
     <li class="dropdown" *ngIf="isLoggedIn">
@@ -38,6 +38,7 @@
 
     <li *ngIf="isLoggedIn">
       <a
+        *ngIf="role=='ADMIN'"
         [routerLink]="['Admin/Manage-Drivers']"
         [routerLinkActive]="['active']"
         >Manage Drivers</a
@@ -46,7 +47,14 @@
 
     <li *ngIf="isLoggedIn">
       <a
+        *ngIf="role=='ADMIN'"
         [routerLink]="['Admin/My-Profile']"
+        [routerLinkActive]="['active']"
+        >My Profile</a
+      >
+      <a
+        *ngIf="role=='DRIVER'"
+        [routerLink]="['Driver/My-Profile']"
         [routerLinkActive]="['active']"
         >My Profile</a
       >
@@ -70,7 +78,11 @@
       >
     </li>
 
-    <li class="dropdown" *ngIf="isLoggedIn">
+    <li *ngIf="isLoggedIn">
+      <a (click)="logout()">Logout</a>
+    </li>
+
+    <!-- <li class="dropdown" *ngIf="isLoggedIn">
       <a nz-dropdown [nzDropdownMenu]="menu">
         {{ fullname }}
         <i nz-icon nzType="down"></i>
@@ -78,7 +90,7 @@
       <nz-dropdown-menu #menu="nzDropdownMenu">
         <a nz-menu-item class="dropdown-content" (click)="logout()">Logout</a>
       </nz-dropdown-menu>
-    </li>
+    </li> -->
   </ul>
-  <!-- </links> -->
+  
 </header>

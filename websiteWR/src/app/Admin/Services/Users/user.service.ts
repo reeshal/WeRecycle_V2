@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
   constructor(private http: HttpClient) {}
-
+  
   getDrivers():Observable<any> {
     return this.http.get(`${environment.apiURL2}/Account/Drivers`);
   }
@@ -18,5 +18,15 @@ export class UserService {
       `${environment.apiURL2}/Account/UpdateStatus?driverId=${driverId}&newStatus=${status}`,
       JSON.stringify('')
     );
+  }
+
+  // to change url
+  updatePassword(jsonBody:any):Observable<any>{
+    return this.http.post(`${environment.apiURL2}/Account/Driver`, jsonBody);
+  }
+
+  // to change url
+  getAdminDetail():Observable<any> {
+    return this.http.get(`${environment.apiURL2}/Account/Drivers`);
   }
 }

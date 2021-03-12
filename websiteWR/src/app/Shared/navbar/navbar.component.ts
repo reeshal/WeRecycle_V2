@@ -9,7 +9,7 @@ import { StorageService } from '../services/Storage/storage.service';
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
-  fullname: string = '';
+  role: string = '';
 
   constructor(
     private authService: AuthService,
@@ -18,7 +18,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isAuthenticated();
-    this.fullname = this.storageService.getCookie('fullname');
+    this.role=this.storageService.getCookie('role');
+    console.log(this.role);
+    // this.fullname = this.storageService.getCookie('fullname');
   }
 
   logout(): void {
