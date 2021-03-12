@@ -14,18 +14,16 @@ export class BinService {
   }
 
   addBin(
-    lat: number,
-    lng: number,
-    image: string,
+    latitude: number,
+    longitude: number,
     material: string,
-    description: string
+    address: string
   ) {
-    return this.http.post(`${environment.apiURL}/bins`, {
-      lat,
-      lng,
-      image,
+    return this.http.post(`${environment.apiURL}/Bins/New`, {
+      latitude,
+      longitude,
       material,
-      description,
+      address,
     });
   }
 }

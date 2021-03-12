@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as mapboxgl from 'mapbox-gl';
+import { finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Bin } from '../Models/Bin.model';
 import { BinService } from '../Services/Bin/bin.service';
@@ -18,7 +19,7 @@ export class ManageBinsComponent implements OnInit {
   style = 'mapbox://styles/mapbox/light-v10';
   lat = -20.3476;
   lng = 57.3652;
-  currentView = 'add';
+  currentView = 'view';
   addBinForm!: FormGroup;
 
   marker: any;
@@ -86,13 +87,27 @@ export class ManageBinsComponent implements OnInit {
   submitAddForm(): void {
     if (this.addBinForm.valid) {
       this.isLoading2 = true;
-      const data = {
-        address: this.addBinForm.get('address')?.value,
-        latitude: this.selectedLocation.lat,
-        longitude: this.selectedLocation.lng,
-        material: this.addBinForm.get('material')?.value,
-      };
-      console.log(data);
+
+      this.binsService
+        .addBin(
+          this.selectedLocation.lat,
+          this.selectedLocation.lng,
+          this.addBinForm.get('material')?.value,
+          this.addBinForm.get('address')?.value
+        )
+        .pipe(
+          finalize(() => {
+            this.isLoading2 = false;
+          })
+        )
+        .subscribe(
+          (data: any) => {
+            console.log(data);
+          },
+          (err: any) => {
+            console.log(err.message);
+          }
+        );
     }
   }
 
