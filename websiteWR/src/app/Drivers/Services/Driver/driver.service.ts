@@ -16,4 +16,8 @@ export class DriverService {
   updatePassword(jsonBody: any): Observable<any> {
     return this.http.post(`${environment.apiURL}/Account/Driver`, jsonBody);
   }
+
+  addPickup(formData: FormData) {
+    return this.http.post(`${environment.apiURL}/Routes/New`, formData);
+  }
 }
