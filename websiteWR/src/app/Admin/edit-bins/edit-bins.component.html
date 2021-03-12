@@ -9,8 +9,80 @@
           nzShowIcon
         ></nz-alert>
       </div>
+
       <div *ngIf="currentView == 'edit'">
-        <h1>Change location</h1>
+        <h1>Edit Bin</h1>
+
+        <form nz-form [formGroup]="editBinForm" (ngSubmit)="handleEditForm()">
+          <nz-form-item>
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Choose material accepted"
+              formControlName="selectedMaterial"
+            >
+              <nz-option
+                *ngFor="let m of binMaterials"
+                nzLabel="{{ m }}"
+                nzValue="{{ m }}"
+              ></nz-option>
+            </nz-select>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control>
+              <nz-input-group nzPrefixIcon="home">
+                <input
+                  type="text"
+                  nz-input
+                  formControlName="address"
+                  placeholder="Address"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-alert
+            *ngIf="selectedLocation.lat == 0"
+            nzType="info"
+            nzMessage="Click on the map for a new location."
+            nzShowIcon
+          ></nz-alert>
+          <br />
+          <nz-card *ngIf="selectedLocation.lat != 0">
+            <p>New Latitude: {{ selectedLocation.lat }}</p>
+            <p>New Longitude: {{ selectedLocation.lng }}</p>
+          </nz-card>
+
+          <div class="addButtons">
+            <button
+              class="locationBtn"
+              [disabled]="!editBinForm.valid"
+              nz-button
+              [nzType]="'primary'"
+              [nzLoading]="isLoading2"
+              type="submit"
+            >
+              Save bin
+            </button>
+            <button
+              type="button"
+              class="locationBtn"
+              nz-button
+              nzType="primary"
+              nzDanger
+              (click)="handleDelete()"
+            >
+              Delete bin
+            </button>
+            <button
+              *ngIf="!isLoading2"
+              (click)="reset()"
+              nz-button
+              nzType="default"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

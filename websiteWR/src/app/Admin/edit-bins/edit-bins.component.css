@@ -18,8 +18,12 @@ div.addButtons {
 .left-container {
   padding: 15px 25px;
 }
-button.submitAddBtn {
+button.locationBtn {
   margin-right: 10px;
+}
+
+nz-card {
+  background-color: #f8f8f8;
 }
 
 @media screen and (min-width: 1400px) {

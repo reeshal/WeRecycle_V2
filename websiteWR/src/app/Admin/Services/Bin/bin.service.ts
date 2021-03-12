@@ -36,4 +36,8 @@ export class BinService {
       address,
     });
   }
+
+  updateBin(body: any) {
+    return this.http.patch(`${environment.apiURL}/Bins/Update`, body);
+  }
 }

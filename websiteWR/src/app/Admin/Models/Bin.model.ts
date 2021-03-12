@@ -3,4 +3,5 @@ export interface Bin {
   latitude: number;
   longitude: number;
   material: string;
+  address: string;
 }
