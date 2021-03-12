@@ -12,8 +12,15 @@ export class BinService {
   getAllBins(): Observable<any> {
     return this.http.get(`${environment.apiURL}/Bins/Get`);
   }
+
   getBinMaterials(): Observable<any> {
     return this.http.get(`${environment.apiURL}/Bins/GetBinMaterials`);
+  }
+
+  deleteBin(id: number): Observable<any> {
+    return this.http.delete(`${environment.apiURL}/Bins/Delete?id=${id}`, {
+      responseType: 'text',
+    });
   }
 
   addBin(

@@ -1,0 +1,30 @@
+::ng-deep :root {
+  --main-color: #29c32f;
+}
+
+h1 {
+  color: var(--main-color) !important;
+  margin-bottom: 10%;
+}
+
+div.addButtons {
+  margin-top: 25px;
+}
+
+.map {
+  height: 590px;
+  width: 100%;
+}
+.left-container {
+  padding: 15px 25px;
+}
+button.submitAddBtn {
+  margin-right: 10px;
+}
+
+@media screen and (min-width: 1400px) {
+  .map {
+    height: 900px;
+    width: 100%;
+  }
+}
