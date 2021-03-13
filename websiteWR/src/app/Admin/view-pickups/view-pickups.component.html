@@ -1,7 +1,12 @@
 <app-spinner *ngIf="isLoading"></app-spinner>
 
 <div class="container" *ngIf="!isLoading">
-  <nz-table #pickupTable [nzPageSize]="10" [nzData]="pickups">
+  <h3>Selected Date:</h3>
+  <nz-date-picker
+    [(ngModel)]="selectedDate"
+    (ngModelChange)="onChange($event)"
+  ></nz-date-picker>
+  <nz-table #pickupTable [nzPageSize]="10" [nzData]="filteredPickups">
     <thead>
       <tr>
         <th>Date</th>

@@ -19,9 +19,10 @@ export class ViewPickupsComponent implements OnInit {
   ) {}
 
   isLoading: boolean = true;
-
+  selectedDate = new Date();
   pickups: any;
-
+  filteredPickups: any;
+  // ,
   ngOnInit() {
     this.pickupService
       .getPickups()
@@ -43,11 +44,24 @@ export class ViewPickupsComponent implements OnInit {
               };
             })[0];
           });
+
+          this.filterPickupsByDate();
         },
         (err: any) => {
           console.log(err.message);
         }
       );
+  }
+  onChange(result: Date): void {
+    this.selectedDate = result;
+    this.filterPickupsByDate();
+  }
+
+  filterPickupsByDate(): void {
+    this.filteredPickups = this.pickups.filter(
+      (p: any) =>
+        p.date == formatDate(this.selectedDate, 'dd MMMM YYYY', 'en-US')
+    );
   }
 
   createImageModal(urlBefore: string, urlAFter: string): void {

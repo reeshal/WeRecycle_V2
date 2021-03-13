@@ -2,3 +2,8 @@
   padding: 50px;
   /* background: #f8f8f8; */
 }
+h3 {
+  display: inline-block;
+  margin-right: 15px;
+  margin-bottom: 35px;
+}
