@@ -1,28 +1,29 @@
-<div class="container" *ngIf="!isLoading">
-  <nz-timeline nzMode="alternate">
-    <nz-timeline-item [nzDot]="dotTemplate" *ngFor="let p of pickupDates">
-      <nz-tag [nzColor]="'#29c32f'">{{ p }}</nz-tag>
-      <br /><br />
-      <nz-table [nzData]="['']">
-        <thead>
-          <tr>
-            <th>Driver ID</th>
-            <th>Weight</th>
-            <th>View images</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="getPickups(p).length > 0">
-          <tr *ngFor="let pickup of getPickups(p)">
-            <td>{{ pickup.driverId }}</td>
-            <td>{{ pickup.weight }}</td>
-            <td><button nz-button nzType="default">View images</button></td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </nz-timeline-item>
+<app-spinner *ngIf="isLoading"></app-spinner>
 
-    <ng-template #dotTemplate>
-      <i nz-icon nzType="clock-circle-o" style="font-size: 16px"></i>
-    </ng-template>
-  </nz-timeline>
+<div class="container" *ngIf="!isLoading">
+  <nz-table #pickupTable [nzPageSize]="10" [nzData]="pickups">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Driver ID</th>
+        <th>Weight Recorded (No. of Bags)</th>
+        <th>View images uploaded</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pickup of pickupTable.data">
+        <td>{{ pickup.date }}</td>
+        <td>{{ pickup.driverId }}</td>
+        <td>{{ pickup.weight }}</td>
+        <td>
+          <button
+            nz-button
+            (click)="createImageModal(pickup.imageBefore, pickup.imageAfter)"
+          >
+            View images
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
 </div>

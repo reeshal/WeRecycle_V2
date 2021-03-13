@@ -1,9 +1,11 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Pickup } from '../Models/Pickup.model';
 import { PickupService } from '../Services/Pickup/pickup.service';
+import { ImageModalComponent } from './image-modal/image-modal.component';
 
 @Component({
   selector: 'app-view-pickups',
@@ -11,12 +13,14 @@ import { PickupService } from '../Services/Pickup/pickup.service';
   styleUrls: ['./view-pickups.component.css'],
 })
 export class ViewPickupsComponent implements OnInit {
-  constructor(private pickupService: PickupService) {}
+  constructor(
+    private pickupService: PickupService,
+    private modal: NzModalService
+  ) {}
 
   isLoading: boolean = true;
 
-  pickupsByDate = new Map();
-  pickupDates: any;
+  pickups: any;
 
   ngOnInit() {
     this.pickupService
@@ -28,18 +32,17 @@ export class ViewPickupsComponent implements OnInit {
       )
       .subscribe(
         (data: Pickup[]) => {
-          data.forEach((d: Pickup) => {
-            const formattedDate = formatDate(d.date, 'dd MMMM YYYY', 'en-US');
-            if (this.pickupsByDate.has(formattedDate)) {
-              this.pickupsByDate.set(formattedDate, [
-                ...this.pickupsByDate.get(formattedDate),
-                d,
-              ]);
-            } else {
-              this.pickupsByDate.set(formattedDate, [d]);
-            }
+          this.pickups = data.map((p: Pickup) => {
+            return p.pickups.map((z) => {
+              return {
+                date: formatDate(p.date, 'dd MMMM YYYY', 'en-US'),
+                driverId: p.driverId,
+                weight: z.weight ? z.weight : '-',
+                imageBefore: `${environment.imageURL}${z.beforeImage}`,
+                imageAfter: `${environment.imageURL}${z.afterImage}`,
+              };
+            })[0];
           });
-          this.pickupDates = this.pickupsByDate.keys();
         },
         (err: any) => {
           console.log(err.message);
@@ -47,19 +50,15 @@ export class ViewPickupsComponent implements OnInit {
       );
   }
 
-  getPickups(d: Date): any {
-    const pickups: Pickup[] = this.pickupsByDate.get(d);
-
-    const result = pickups.map((p: Pickup) => {
-      return p.pickups.map((z) => {
-        return {
-          driverId: p.driverId,
-          weight: z.weight ? z.weight : '-',
-          imageBefore: `${environment.imageURL}${z.beforeImage}`,
-          imageAfter: `${environment.imageURL}${z.afterImage}`,
-        };
-      })[0];
+  createImageModal(urlBefore: string, urlAFter: string): void {
+    this.modal.create({
+      nzTitle: 'Images uploaded by driver',
+      nzContent: ImageModalComponent,
+      nzClosable: false,
+      nzComponentParams: {
+        imageBefore: urlBefore,
+        imageAfter: urlAFter,
+      },
     });
-    return result;
   }
 }

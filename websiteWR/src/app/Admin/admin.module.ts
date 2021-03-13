@@ -10,6 +10,7 @@ import { DriverCardComponent } from './manage-drivers/driver-card/driver-card.co
 import { AddBinsComponent } from './add-bins/add-bins.component';
 import { EditBinsComponent } from './edit-bins/edit-bins.component';
 import { ViewPickupsComponent } from './view-pickups/view-pickups.component';
+import { ImageModalComponent } from './view-pickups/image-modal/image-modal.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ViewPickupsComponent } from './view-pickups/view-pickups.component';
     AddBinsComponent,
     EditBinsComponent,
     ViewPickupsComponent,
+    ImageModalComponent,
   ],
   imports: [
     CommonModule,
