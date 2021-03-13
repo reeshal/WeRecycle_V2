@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { finalize } from 'rxjs/operators';
-import { DriverService } from '../Services/Driver/driver.service';
+import { PickupService } from '../Services/Pickup/pickup.service';
 
 @Component({
   selector: 'app-add-pickup',
@@ -10,7 +10,7 @@ import { DriverService } from '../Services/Driver/driver.service';
 })
 export class AddPickupComponent implements OnInit {
   constructor(
-    private driverService: DriverService,
+    private pickupService: PickupService,
     private modal: NzModalService
   ) {}
 
@@ -39,11 +39,12 @@ export class AddPickupComponent implements OnInit {
     form.append('Weight', this.weight.toString());
     form.append('Date', this.date.toISOString());
 
-    console.log(this.selectedAfterFile?.name);
-    console.log(this.selectedBeforeFile?.name);
+    // console.log(this.selectedAfterFile?.name);
+    // console.log(this.selectedBeforeFile?.name);
     this.isLoading = true;
 
-    this.driverService
+    console.log(form.get('AfterImage'));
+    this.pickupService
       .addPickup(form)
       .pipe(
         finalize(() => {
@@ -56,6 +57,13 @@ export class AddPickupComponent implements OnInit {
             nzTitle: 'Success',
             nzContent: 'Your pickup has been recorded. ',
           });
+          this.current = 0;
+          this.date = new Date();
+          this.weight = 0;
+          this.selectedBeforeFile = undefined;
+          this.selectedAfterFile = undefined;
+          this.beforeImageUrl = '';
+          this.afterImageUrl = '';
         },
         (err: any) => {
           console.log(err.message);

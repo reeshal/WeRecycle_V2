@@ -1,0 +1,28 @@
+<div class="container" *ngIf="!isLoading">
+  <nz-timeline nzMode="alternate">
+    <nz-timeline-item [nzDot]="dotTemplate" *ngFor="let p of pickupDates">
+      <nz-tag [nzColor]="'#29c32f'">{{ p }}</nz-tag>
+      <br /><br />
+      <nz-table [nzData]="['']">
+        <thead>
+          <tr>
+            <th>Driver ID</th>
+            <th>Weight</th>
+            <th>View images</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="getPickups(p).length > 0">
+          <tr *ngFor="let pickup of getPickups(p)">
+            <td>{{ pickup.driverId }}</td>
+            <td>{{ pickup.weight }}</td>
+            <td><button nz-button nzType="default">View images</button></td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-timeline-item>
+
+    <ng-template #dotTemplate>
+      <i nz-icon nzType="clock-circle-o" style="font-size: 16px"></i>
+    </ng-template>
+  </nz-timeline>
+</div>

@@ -13,11 +13,19 @@ import { environment } from 'src/environments/environment';
 export class InterceptorService implements HttpInterceptor {
   constructor(private storageService: StorageService) {}
   urlToNotUse: string = `${environment.apiURL}/Account/RegisterDriver`;
+  urlToNotUse2: string = `${environment.apiURL}/Routes/New`;
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     // console.log(req.url);
     if (req.url == this.urlToNotUse) {
       return next.handle(req);
+    }
+    if (req.url == this.urlToNotUse2) {
+      const token = this.storageService.getCookie('token');
+      const new_req = req.clone({
+        headers: req.headers.append('Authorization', `Bearer ${token}`),
+      });
+      return next.handle(new_req);
     }
     const token = this.storageService.getCookie('token');
     const new_req = req.clone({

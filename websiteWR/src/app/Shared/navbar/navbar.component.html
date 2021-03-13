@@ -68,6 +68,15 @@
       >
     </li>
 
+    <li *ngIf="isLoggedIn">
+      <a
+        *ngIf="role == 'ADMIN'"
+        [routerLink]="['View-Pickups']"
+        [routerLinkActive]="['active']"
+        >View Pickups</a
+      >
+    </li>
+
     <li>
       <a [routerLink]="['Prices']" [routerLinkActive]="['active']">Prices</a>
     </li>

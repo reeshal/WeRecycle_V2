@@ -9,6 +9,7 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { DriverCardComponent } from './manage-drivers/driver-card/driver-card.component';
 import { AddBinsComponent } from './add-bins/add-bins.component';
 import { EditBinsComponent } from './edit-bins/edit-bins.component';
+import { ViewPickupsComponent } from './view-pickups/view-pickups.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { EditBinsComponent } from './edit-bins/edit-bins.component';
     DriverCardComponent,
     AddBinsComponent,
     EditBinsComponent,
+    ViewPickupsComponent,
   ],
   imports: [
     CommonModule,

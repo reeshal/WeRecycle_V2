@@ -6,5 +6,5 @@ export const environment = {
   },
   apiURL: 'https://localhost:44372/api',
   // apiURL: 'https://dcbackend.conveyor.cloud/api',
-  imageURL: 'http://localhost:44372/',
+  imageURL: 'https://localhost:44372/',
 };

@@ -6,14 +6,10 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class DriverService {
+export class PickupService {
   constructor(private http: HttpClient) {}
 
-  getDriverDetails(): Observable<any> {
-    return this.http.get(`${environment.apiURL}/Account/Driver`);
-  }
-
-  updatePassword(jsonBody: any): Observable<any> {
-    return this.http.post(`${environment.apiURL}/Account/Driver`, jsonBody);
+  getPickups(): Observable<any> {
+    return this.http.get(`${environment.apiURL}/Routes/All`);
   }
 }

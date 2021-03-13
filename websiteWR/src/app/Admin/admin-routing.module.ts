@@ -5,8 +5,13 @@ import { ManageDriversComponent } from './manage-drivers/manage-drivers.componen
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { AddBinsComponent } from './add-bins/add-bins.component';
 import { EditBinsComponent } from './edit-bins/edit-bins.component';
+import { ViewPickupsComponent } from './view-pickups/view-pickups.component';
 
 const routes: Routes = [
+  {
+    path: 'View-Pickups',
+    component: ViewPickupsComponent,
+  },
   {
     path: 'Edit-Bins',
     component: EditBinsComponent,
