@@ -59,17 +59,15 @@ export class LoginComponent implements OnInit {
             this.storageService.createCookie('id', data.id.toString(), 1);
             this.storageService.createCookie('token', data.token, 1);
             this.storageService.createCookie('role', data.role, 1);
-            this.storageService.createCookie('status',data.status,1);
+            this.storageService.createCookie('status', data.status, 1);
             // this.storageService.createCookie('fullname', data.fullname, 1);
-            
+
             // window.location.href = '/User-Management/Registered-Users';
-            if(data.role=='ADMIN'){
+            if (data.role == 'ADMIN') {
               this.router.navigate(['/Admin/Manage-Drivers']);
+            } else {
+              this.router.navigate(['/Driver/Add-Pickup']);
             }
-            else{
-              this.router.navigate(['/Driver/My-Profile']);
-            }
-            
           },
           (err: any) => {
             console.log(err.message);

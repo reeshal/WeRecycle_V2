@@ -19,7 +19,7 @@
           nz-menu-item
           href="#"
           class="dropdown-content"
-          [routerLink]="['Edit-Bins']"
+          [routerLink]="['Admin/Edit-Bins']"
           [routerLinkActive]="['active']"
           >Edit Bin</a
         >
@@ -28,7 +28,7 @@
           nz-menu-item
           href="#"
           class="dropdown-content"
-          [routerLink]="['Add-Bins']"
+          [routerLink]="['Admin/Add-Bins']"
           [routerLinkActive]="['active']"
           >Add Bin</a
         >
@@ -47,7 +47,7 @@
     <li *ngIf="isLoggedIn">
       <a
         *ngIf="role == 'DRIVER'"
-        [routerLink]="['Add-Pickup']"
+        [routerLink]="['Driver/Add-Pickup']"
         [routerLinkActive]="['active']"
         >Add Pickup</a
       >
@@ -56,7 +56,7 @@
     <li *ngIf="isLoggedIn">
       <a
         *ngIf="role == 'ADMIN'"
-        [routerLink]="['View-Pickups']"
+        [routerLink]="['Admin/View-Pickups']"
         [routerLinkActive]="['active']"
         >View Pickups</a
       >
