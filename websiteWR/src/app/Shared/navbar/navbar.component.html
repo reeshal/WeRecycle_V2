@@ -46,21 +46,6 @@
 
     <li *ngIf="isLoggedIn">
       <a
-        *ngIf="role == 'ADMIN'"
-        [routerLink]="['Admin/My-Profile']"
-        [routerLinkActive]="['active']"
-        >My Profile</a
-      >
-      <a
-        *ngIf="role == 'DRIVER'"
-        [routerLink]="['Driver/My-Profile']"
-        [routerLinkActive]="['active']"
-        >My Profile</a
-      >
-    </li>
-
-    <li *ngIf="isLoggedIn">
-      <a
         *ngIf="role == 'DRIVER'"
         [routerLink]="['Add-Pickup']"
         [routerLinkActive]="['active']"
@@ -74,6 +59,21 @@
         [routerLink]="['View-Pickups']"
         [routerLinkActive]="['active']"
         >View Pickups</a
+      >
+    </li>
+
+    <li *ngIf="isLoggedIn">
+      <a
+        *ngIf="role == 'ADMIN'"
+        [routerLink]="['Admin/My-Profile']"
+        [routerLinkActive]="['active']"
+        >My Profile</a
+      >
+      <a
+        *ngIf="role == 'DRIVER'"
+        [routerLink]="['Driver/My-Profile']"
+        [routerLinkActive]="['active']"
+        >My Profile</a
       >
     </li>
 
