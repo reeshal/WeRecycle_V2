@@ -7,17 +7,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DriversRoutingModule } from './drivers-routing.module';
 import { UpdatePasswordComponent } from './driver-profile/update-password/update-password.component';
 import { AddPickupComponent } from './add-pickup/add-pickup.component';
-
+import { DriverGuard } from './driver.guard';
 
 @NgModule({
-  declarations: [DriverProfileComponent, UpdatePasswordComponent, AddPickupComponent],
+  declarations: [
+    DriverProfileComponent,
+    UpdatePasswordComponent,
+    AddPickupComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,
     NgZorroModule,
     FormsModule,
     ReactiveFormsModule,
-    DriversRoutingModule
-  ]
+    DriversRoutingModule,
+  ],
+  providers: [DriverGuard],
 })
-export class DriversModule { }
+export class DriversModule {}

@@ -10,7 +10,7 @@ import { AuthService } from '../Auth/Services/auth/auth.service';
 import { StorageService } from '../Shared/services/Storage/storage.service';
 
 @Injectable()
-export class AdminGuard implements CanActivate, CanActivateChild {
+export class DriverGuard implements CanActivate, CanActivateChild {
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -25,14 +25,8 @@ export class AdminGuard implements CanActivate, CanActivateChild {
     if (this.authService.isAuthenticated()) {
       const role = this.storageService.getCookie('role');
 
-      if (role == 'ADMIN') {
-        if (
-          next_path == 'Edit-Bins' ||
-          next_path == 'View-Pickups' ||
-          next_path == 'Add-Bins' ||
-          next_path == 'Manage-Drivers' ||
-          next_path == 'My-Profile'
-        ) {
+      if (role == 'DRIVER') {
+        if (next_path == 'Add-Pickup' || next_path == 'My-Profile') {
           return true;
         }
       }
