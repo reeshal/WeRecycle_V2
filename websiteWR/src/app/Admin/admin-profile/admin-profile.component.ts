@@ -44,7 +44,7 @@ export class AdminProfileComponent implements OnInit {
   handleChangePassword(){
     if(this.changePasswordForm.valid){
       let jsonBody ={
-        oldPassword: this.changePasswordForm.get('oldPassword')!.value,
+        currentPassword: this.changePasswordForm.get('oldPassword')!.value,
         newPassword: this.changePasswordForm.get('newPassword')!.value,
       };
       console.log(jsonBody);
@@ -55,15 +55,24 @@ export class AdminProfileComponent implements OnInit {
         nzOkText: 'Yes',
         nzOkType: 'danger',
         nzOnOk: () => {
-          this.userService.updatePassword(jsonBody).pipe(finalize(
+          this.userService.updatePassword(jsonBody).pipe(
+            
+            finalize(
             ()=>{
               this.fetchAdminDetail();
             }
           )).subscribe(
-            () => {
+            (response) => {
+              response 
+              ?
               this.modal.success({
                 nzTitle: 'Success',
                 nzContent: 'Your password has been changed successfully'
+              })
+              :
+              this.modal.error({
+                nzTitle: 'Error',
+                nzContent: 'Your current password was wrong.'
               });
             },
             (err) => {
