@@ -13,12 +13,10 @@ export class DriverService {
     return this.http.get(`${environment.apiURL}/Account/Driver`);
   }
 
-<<<<<<< HEAD
   updatePassword(jsonBody: any): Observable<any> {
-    return this.http.post(`${environment.apiURL}/Account/Driver`, jsonBody);
-=======
-  updatePassword(jsonBody:any):Observable<any>{
-    return this.http.patch(`${environment.apiURL2}/Account/UpdatePassword`, jsonBody);
->>>>>>> origin/newreeshal
+    return this.http.patch(
+      `${environment.apiURL}/Account/UpdatePassword`,
+      jsonBody
+    );
   }
 }
