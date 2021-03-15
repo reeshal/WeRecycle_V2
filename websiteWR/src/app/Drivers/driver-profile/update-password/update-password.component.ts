@@ -32,7 +32,7 @@ export class UpdatePasswordComponent implements OnInit {
   handleChangePassword(){
     if(this.changePasswordForm.valid){
       let jsonBody ={
-        oldPassword: this.changePasswordForm.get('oldPassword')!.value,
+        currentPassword: this.changePasswordForm.get('oldPassword')!.value,
         newPassword: this.changePasswordForm.get('newPassword')!.value,
       };
       console.log(jsonBody);
@@ -48,10 +48,17 @@ export class UpdatePasswordComponent implements OnInit {
               this.handleCancel(true);
             }
           )).subscribe(
-            () => {
+            (response) => {
+              response 
+              ?
               this.modal.success({
                 nzTitle: 'Success',
                 nzContent: 'Your password has been changed successfully'
+              })
+              :
+              this.modal.error({
+                nzTitle: 'Error',
+                nzContent: 'Your current password was wrong.'
               });
             },
             (err) => {

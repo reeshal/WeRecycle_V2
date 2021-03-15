@@ -3,6 +3,5 @@ export interface Admin {
     phoneNumber: string;
     firstName: string;
     lastName: string;
-    status: string;
   }
   

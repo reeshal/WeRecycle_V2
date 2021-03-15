@@ -14,7 +14,7 @@ export class DriverService {
   }
 
   updatePassword(jsonBody:any):Observable<any>{
-    return this.http.post(`${environment.apiURL2}/Account/Driver`, jsonBody);
+    return this.http.patch(`${environment.apiURL2}/Account/UpdatePassword`, jsonBody);
   }
   
 }

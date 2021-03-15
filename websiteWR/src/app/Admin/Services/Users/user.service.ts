@@ -20,13 +20,11 @@ export class UserService {
     );
   }
 
-  // to change url
   updatePassword(jsonBody:any):Observable<any>{
-    return this.http.post(`${environment.apiURL2}/Account/Driver`, jsonBody);
+    return this.http.patch(`${environment.apiURL2}/Account/UpdatePassword`, jsonBody);
   }
 
-  // to change url
   getAdminDetail():Observable<any> {
-    return this.http.get(`${environment.apiURL2}/Account/Drivers`);
+    return this.http.get(`${environment.apiURL2}/Account/Admin`);
   }
 }

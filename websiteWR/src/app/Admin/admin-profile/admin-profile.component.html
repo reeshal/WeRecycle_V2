@@ -1,4 +1,8 @@
-<div class="mainBox">
+<div *ngIf="isLoading">
+  <app-spinner></app-spinner>
+</div>
+
+<div class="mainBox" *ngIf="!isLoading">
     <div nz-row>
         <div nz-col [nzSpan]="18" [nzPush]="6" class="rightBox">
           <h1 style="text-align: center;">My Profile</h1>
@@ -11,22 +15,19 @@
                     <div nz-col [nzSpan]="8">
                         <div class="inner-box">
                             <p>First Name</p>
-                            <!-- <span>{{adminObject.firstName}}</span> -->
-                            <span>Admin Details</span>
+                            <span>{{adminObject.firstName}}</span>
                         </div>
                         </div>
                         <div nz-col [nzSpan]="8">
                         <div class="inner-box">
                             <p>Last Name</p>
-                            <!-- <span>{{adminObject.lastName}}</span> -->
-                            <span>Admin Details</span>
+                            <span>{{adminObject.lastName}}</span>
                         </div>
                         </div>
                         <div nz-col [nzSpan]="8">
                         <div class="inner-box">
                             <p>Phone Number</p>
-                            <!-- <span>{{adminObject.phoneNumber}}</span> -->
-                            <span>Admin Details</span>
+                            <span>{{adminObject.phoneNumber}}</span>
                         </div>
                     </div>
                 </div>
