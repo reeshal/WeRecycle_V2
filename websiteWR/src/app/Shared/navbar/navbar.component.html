@@ -9,7 +9,7 @@
 
   <ul class="main-nav">
     <!-- Admin -->
-    <li class="dropdown" *ngIf="isLoggedIn">
+    <!-- <li class="dropdown" *ngIf="isLoggedIn">
       <a *ngIf="role == 'ADMIN'" nz-dropdown [nzDropdownMenu]="menu3">
         Manage Bins
         <i nz-icon nzType="down"></i>
@@ -33,8 +33,16 @@
           >Add Bin</a
         >
       </nz-dropdown-menu>
-    </li>
+    </li> -->
 
+    <li *ngIf="isLoggedIn">
+      <a
+        *ngIf="role == 'ADMIN'"
+        [routerLink]="['Admin/Manage-Bins']"
+        [routerLinkActive]="['active']"
+        >Manage Bins</a
+      >
+    </li>
     <li *ngIf="isLoggedIn">
       <a
         *ngIf="role == 'ADMIN'"

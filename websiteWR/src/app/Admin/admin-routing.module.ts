@@ -7,6 +7,7 @@ import { AddBinsComponent } from './add-bins/add-bins.component';
 import { EditBinsComponent } from './edit-bins/edit-bins.component';
 import { ViewPickupsComponent } from './view-pickups/view-pickups.component';
 import { AdminGuard } from './admin.guard';
+import { BinActionsComponent } from './bin-actions/bin-actions.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,11 @@ const routes: Routes = [
   {
     path: 'Manage-Drivers',
     component: ManageDriversComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'Manage-Bins',
+    component: BinActionsComponent,
     canActivate: [AdminGuard],
   },
   {

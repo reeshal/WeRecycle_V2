@@ -31,7 +31,8 @@ export class AdminGuard implements CanActivate, CanActivateChild {
           next_path == 'View-Pickups' ||
           next_path == 'Add-Bins' ||
           next_path == 'Manage-Drivers' ||
-          next_path == 'My-Profile'
+          next_path == 'My-Profile' ||
+          next_path == 'Manage-Bins'
         ) {
           return true;
         }
