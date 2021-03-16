@@ -5,6 +5,6 @@ export const environment = {
       'pk.eyJ1IjoiaXNmYWFxZyIsImEiOiJja2dvdzdjeWswNGdsMnF0ZHc2dWt5bGN1In0.OArOPU3qPBbZft81qCm6Tw',
   },
   // apiURL: 'https://wrapi.isfaaq.me/api',
-  apiURL: 'https://localhost:44372/api',
-  imageURL: 'https://localhost:44372/',
+  apiURL: 'http://localhost:5000/api',
+  imageURL: 'http://localhost:5000/',
 };

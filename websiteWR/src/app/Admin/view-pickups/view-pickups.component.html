@@ -12,14 +12,14 @@
     <thead>
       <tr>
         <th>Date</th>
-        <th>Driver ID</th>
+        <th>Driver</th>
         <th>Pickups made</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let pickup of pickupTable.data">
         <td>{{ formatDisplayDate(pickup.date) }}</td>
-        <td>{{ pickup.driverId }}</td>
+        <td>{{ pickup.driverName }}</td>
         <td>
           <button nz-button (click)="createPickupModal(pickup.pickups)">
             View {{ pickup.pickups.length }} pickups made

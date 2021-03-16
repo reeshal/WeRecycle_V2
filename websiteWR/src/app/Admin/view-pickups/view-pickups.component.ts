@@ -44,6 +44,7 @@ export class ViewPickupsComponent implements OnInit {
               return {
                 id: p.id,
                 driverId: p.driverId,
+                driverName: p.driverName,
                 date: new Date(this.formatDisplayDate(p.date)),
                 pickups: p.pickups,
               };
