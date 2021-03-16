@@ -16,15 +16,19 @@ export class AppComponent {
     authService: AuthService,
     storageService: StorageService
   ) {
-    const isLoggedIn = authService.isAuthenticated();
-    if (isLoggedIn) {
-      const role = storageService.getCookie('role');
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        const isLoggedIn = authService.isAuthenticated();
+        if (isLoggedIn && val.url === '/') {
+          const role = storageService.getCookie('role');
 
-      if (role == 'ADMIN') {
-        this.router.navigate(['/Admin/Manage-Bins']);
-      } else {
-        this.router.navigate(['/Driver/Add-Pickup']);
+          if (role == 'ADMIN') {
+            this.router.navigate(['/Admin/Manage-Bins']);
+          } else {
+            this.router.navigate(['/Driver/Add-Pickup']);
+          }
+        }
       }
-    }
+    });
   }
 }
