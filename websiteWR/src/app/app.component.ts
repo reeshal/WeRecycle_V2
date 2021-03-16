@@ -21,7 +21,7 @@ export class AppComponent {
       const role = storageService.getCookie('role');
 
       if (role == 'ADMIN') {
-        // this.router.navigate(['/Admin/Manage-Bins']);
+        this.router.navigate(['/Admin/Manage-Bins']);
       } else {
         this.router.navigate(['/Driver/Add-Pickup']);
       }
