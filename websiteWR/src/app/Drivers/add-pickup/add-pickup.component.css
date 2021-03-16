@@ -19,3 +19,11 @@ button {
 div.container {
   padding: 5% 20%;
 }
+div.form {
+  padding: 5% 30%;
+}
+
+h2{
+  margin-bottom: 25px;
+  color: #29c32f;
+}

@@ -11,4 +11,7 @@ export class PickupService {
   addPickup(formData: FormData) {
     return this.http.post(`${environment.apiURL}/Routes/New`, formData);
   }
+  updatePickup(formData: FormData) {
+    return this.http.patch(`${environment.apiURL}/Routes/AddPickup`, formData);
+  }
 }

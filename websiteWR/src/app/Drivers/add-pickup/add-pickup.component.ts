@@ -1,4 +1,6 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { finalize } from 'rxjs/operators';
 import { PickupService } from '../Services/Pickup/pickup.service';
@@ -11,10 +13,11 @@ import { PickupService } from '../Services/Pickup/pickup.service';
 export class AddPickupComponent implements OnInit {
   constructor(
     private pickupService: PickupService,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void {}
+  pickupForm!: FormGroup;
   current = 0;
   date = new Date();
   selectedBeforeFile?: File;
@@ -23,6 +26,16 @@ export class AddPickupComponent implements OnInit {
   afterImageUrl: any;
   weight: number = 0;
   isLoading: boolean = false;
+  isValid: boolean = false;
+  routeId: number;
+
+  currentPickup: number = 1;
+
+  ngOnInit(): void {
+    this.pickupForm = this.fb.group({
+      numberOfPickups: ['1', [Validators.required, Validators.min(1)]],
+    });
+  }
 
   pre(): void {
     this.current -= 1;
@@ -39,36 +52,65 @@ export class AddPickupComponent implements OnInit {
     form.append('Weight', this.weight.toString());
     form.append('Date', this.date.toISOString());
 
-    // console.log(this.selectedAfterFile?.name);
-    // console.log(this.selectedBeforeFile?.name);
+    const noOfPickups: number = +this.pickupForm.get('numberOfPickups')?.value;
+
     this.isLoading = true;
 
-    console.log(form.get('AfterImage'));
-    this.pickupService
-      .addPickup(form)
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-        })
-      )
-      .subscribe(
-        () => {
-          this.modal.success({
-            nzTitle: 'Success',
-            nzContent: 'Your pickup has been recorded. ',
-          });
-          this.current = 0;
-          this.date = new Date();
-          this.weight = 0;
-          this.selectedBeforeFile = undefined;
-          this.selectedAfterFile = undefined;
-          this.beforeImageUrl = '';
-          this.afterImageUrl = '';
-        },
-        (err: any) => {
-          console.log(err.message);
-        }
-      );
+    if (this.currentPickup == 1 || noOfPickups == 1) {
+      this.pickupService
+        .addPickup(form)
+        .pipe(
+          finalize(() => {
+            this.isLoading = false;
+          })
+        )
+        .subscribe(
+          (data: any) => {
+            if (this.currentPickup == noOfPickups) {
+              this.modal.success({
+                nzTitle: 'Success',
+                nzContent: 'Your pickup has been recorded. ',
+              });
+              this.pickupForm.reset();
+              this.isValid = false;
+              this.reset();
+            } else {
+              this.currentPickup++;
+              this.reset();
+              this.routeId = data['id'];
+              this.date = new Date(data['date']);
+            }
+          },
+          (err: any) => {
+            console.log(err.message);
+          }
+        );
+    } else if (this.currentPickup <= noOfPickups) {
+      form.append('RouteId', this.routeId.toString());
+      this.pickupService
+        .updatePickup(form)
+        .pipe(
+          finalize(() => {
+            this.isLoading = false;
+          })
+        )
+        .subscribe(
+          (data: any) => {
+            if (this.currentPickup == noOfPickups) {
+              this.modal.success({
+                nzTitle: 'Success',
+                nzContent: 'Your pickup has been recorded. ',
+              });
+              this.pickupForm.reset();
+              this.isValid = false;
+            }
+            this.reset();
+          },
+          (err: any) => {
+            console.log(err.message);
+          }
+        );
+    }
   }
 
   onChange(result: Date): void {
@@ -117,5 +159,26 @@ export class AddPickupComponent implements OnInit {
         reader.readAsDataURL(file);
       }
     }
+  }
+
+  submitForm(): void {
+    for (const i in this.pickupForm.controls) {
+      this.pickupForm.controls[i].markAsDirty();
+      this.pickupForm.controls[i].updateValueAndValidity();
+    }
+    if (this.pickupForm.valid) {
+      this.isValid = true;
+    }
+  }
+
+  reset() {
+    this.current = 0;
+    this.date = new Date();
+    this.weight = 0;
+    this.selectedBeforeFile = undefined;
+    this.selectedAfterFile = undefined;
+    this.beforeImageUrl = '';
+    this.afterImageUrl = '';
+    this.routeId = -1;
   }
 }

@@ -14,13 +14,14 @@ export class InterceptorService implements HttpInterceptor {
   constructor(private storageService: StorageService) {}
   urlToNotUse: string = `${environment.apiURL}/Account/RegisterDriver`;
   urlToNotUse2: string = `${environment.apiURL}/Routes/New`;
+  urlToNotUse3: string = `${environment.apiURL}/Routes/AddPickup`;
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     // console.log(req.url);
     if (req.url == this.urlToNotUse) {
       return next.handle(req);
     }
-    if (req.url == this.urlToNotUse2) {
+    if (req.url == this.urlToNotUse2 || req.url == this.urlToNotUse3) {
       const token = this.storageService.getCookie('token');
       const new_req = req.clone({
         headers: req.headers.append('Authorization', `Bearer ${token}`),
