@@ -1,0 +1,16 @@
+<nz-table #pickupsTable [nzPageSize]="5" [nzData]="pickups">
+  <thead>
+    <tr>
+      <th>Weight recorded (No of Bags)</th>
+      <th>Image before</th>
+      <th>Image after</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pickup of pickupsTable.data">
+      <td>{{ pickup.weight }}</td>
+      <td><img src="{{ pickup.imageBefore }}" /></td>
+      <td><img src="{{ pickup.imageAfter }}" /></td>
+    </tr>
+  </tbody>
+</nz-table>

@@ -5,7 +5,7 @@ import { finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Pickup } from '../Models/Pickup.model';
 import { PickupService } from '../Services/Pickup/pickup.service';
-import { ImageModalComponent } from './image-modal/image-modal.component';
+import { ViewPickupModalComponent } from './view-pickup-modal/view-pickup-modal.component';
 
 @Component({
   selector: 'app-view-pickups',
@@ -41,17 +41,13 @@ export class ViewPickupsComponent implements OnInit {
               return 1;
             })
             .map((p: Pickup) => {
-              return p.pickups.map((z) => {
-                return {
-                  date: new Date(this.formatDisplayDate(p.date)),
-                  driverId: p.driverId,
-                  weight: z.weight ? z.weight : '-',
-                  imageBefore: `${environment.imageURL}${z.beforeImage}`,
-                  imageAfter: `${environment.imageURL}${z.afterImage}`,
-                };
-              })[0];
+              return {
+                id: p.id,
+                driverId: p.driverId,
+                date: new Date(this.formatDisplayDate(p.date)),
+                pickups: p.pickups,
+              };
             });
-          console.log(this.pickups);
           this.filterPickupsByDate();
         },
         (err: any) => {
@@ -74,14 +70,14 @@ export class ViewPickupsComponent implements OnInit {
     );
   }
 
-  createImageModal(urlBefore: string, urlAFter: string): void {
+  createPickupModal(pickups: Pickup[]): void {
     this.modal.create({
-      nzTitle: 'Images uploaded by driver',
-      nzContent: ImageModalComponent,
+      nzTitle: 'Pickups made',
+      nzContent: ViewPickupModalComponent,
       nzClosable: false,
+      nzWidth: '800px',
       nzComponentParams: {
-        imageBefore: urlBefore,
-        imageAfter: urlAFter,
+        pickups,
       },
     });
   }

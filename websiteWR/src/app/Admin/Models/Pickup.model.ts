@@ -1,4 +1,5 @@
 export interface Pickup {
+  id: number;
   date: Date;
   driverId: number;
   pickups: {

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImageModalComponent } from './image-modal.component';
+import { ViewPickupModalComponent } from './view-pickup-modal.component';
 
-describe('ImageModalComponent', () => {
-  let component: ImageModalComponent;
-  let fixture: ComponentFixture<ImageModalComponent>;
+describe('ViewPickupModalComponent', () => {
+  let component: ViewPickupModalComponent;
+  let fixture: ComponentFixture<ViewPickupModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImageModalComponent ]
+      declarations: [ ViewPickupModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImageModalComponent);
+    fixture = TestBed.createComponent(ViewPickupModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

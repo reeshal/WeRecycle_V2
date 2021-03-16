@@ -13,21 +13,16 @@
       <tr>
         <th>Date</th>
         <th>Driver ID</th>
-        <th>Weight Recorded (No. of Bags)</th>
-        <th>View images uploaded</th>
+        <th>Pickups made</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let pickup of pickupTable.data">
         <td>{{ formatDisplayDate(pickup.date) }}</td>
         <td>{{ pickup.driverId }}</td>
-        <td>{{ pickup.weight }}</td>
         <td>
-          <button
-            nz-button
-            (click)="createImageModal(pickup.imageBefore, pickup.imageAfter)"
-          >
-            View images
+          <button nz-button (click)="createPickupModal(pickup.pickups)">
+            View {{ pickup.pickups.length }} pickups made
           </button>
         </td>
       </tr>

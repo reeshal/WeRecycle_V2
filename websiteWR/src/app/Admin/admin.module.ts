@@ -10,9 +10,9 @@ import { DriverCardComponent } from './manage-drivers/driver-card/driver-card.co
 import { AddBinsComponent } from './add-bins/add-bins.component';
 import { EditBinsComponent } from './edit-bins/edit-bins.component';
 import { ViewPickupsComponent } from './view-pickups/view-pickups.component';
-import { ImageModalComponent } from './view-pickups/image-modal/image-modal.component';
 import { AdminGuard } from './admin.guard';
 import { BinActionsComponent } from './bin-actions/bin-actions.component';
+import { ViewPickupModalComponent } from './view-pickups/view-pickup-modal/view-pickup-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +22,8 @@ import { BinActionsComponent } from './bin-actions/bin-actions.component';
     AddBinsComponent,
     EditBinsComponent,
     ViewPickupsComponent,
-    ImageModalComponent,
     BinActionsComponent,
+    ViewPickupModalComponent,
   ],
   imports: [
     CommonModule,
