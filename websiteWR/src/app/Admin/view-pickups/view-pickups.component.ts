@@ -19,10 +19,10 @@ export class ViewPickupsComponent implements OnInit {
   ) {}
 
   isLoading: boolean = true;
-  selectedDate = new Date();
+  selectedDate = [new Date(), new Date()];
   pickups: any;
   filteredPickups: any;
-  // ,
+
   ngOnInit() {
     this.pickupService
       .getPickups()
@@ -33,18 +33,25 @@ export class ViewPickupsComponent implements OnInit {
       )
       .subscribe(
         (data: Pickup[]) => {
-          this.pickups = data.map((p: Pickup) => {
-            return p.pickups.map((z) => {
-              return {
-                date: formatDate(p.date, 'dd MMMM YYYY', 'en-US'),
-                driverId: p.driverId,
-                weight: z.weight ? z.weight : '-',
-                imageBefore: `${environment.imageURL}${z.beforeImage}`,
-                imageAfter: `${environment.imageURL}${z.afterImage}`,
-              };
-            })[0];
-          });
-
+          this.pickups = data
+            .sort((a: Pickup, b: Pickup) => {
+              if (a.date >= b.date) {
+                return -1;
+              }
+              return 1;
+            })
+            .map((p: Pickup) => {
+              return p.pickups.map((z) => {
+                return {
+                  date: new Date(this.formatDisplayDate(p.date)),
+                  driverId: p.driverId,
+                  weight: z.weight ? z.weight : '-',
+                  imageBefore: `${environment.imageURL}${z.beforeImage}`,
+                  imageAfter: `${environment.imageURL}${z.afterImage}`,
+                };
+              })[0];
+            });
+          console.log(this.pickups);
           this.filterPickupsByDate();
         },
         (err: any) => {
@@ -52,15 +59,18 @@ export class ViewPickupsComponent implements OnInit {
         }
       );
   }
-  onChange(result: Date): void {
+
+  onChange(result: Date[]): void {
+    // console.log('onChange: ', result);
     this.selectedDate = result;
     this.filterPickupsByDate();
   }
 
   filterPickupsByDate(): void {
+    const startDate = new Date(this.formatDisplayDate(this.selectedDate[0]));
+    const endDate = new Date(this.formatDisplayDate(this.selectedDate[1]));
     this.filteredPickups = this.pickups.filter(
-      (p: any) =>
-        p.date == formatDate(this.selectedDate, 'dd MMMM YYYY', 'en-US')
+      (p: any) => p.date >= startDate && p.date <= endDate
     );
   }
 
@@ -74,5 +84,9 @@ export class ViewPickupsComponent implements OnInit {
         imageAfter: urlAFter,
       },
     });
+  }
+
+  formatDisplayDate(d: Date) {
+    return formatDate(d, 'dd MMMM YYYY', 'en-US');
   }
 }

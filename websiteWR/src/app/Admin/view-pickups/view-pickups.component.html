@@ -1,11 +1,13 @@
 <app-spinner *ngIf="isLoading"></app-spinner>
 
 <div class="container" *ngIf="!isLoading">
-  <h3>Selected Date:</h3>
-  <nz-date-picker
+  <h3>Date Range:</h3>
+
+  <nz-range-picker
+    [nzAllowClear]="false"
     [(ngModel)]="selectedDate"
     (ngModelChange)="onChange($event)"
-  ></nz-date-picker>
+  ></nz-range-picker>
   <nz-table #pickupTable [nzPageSize]="10" [nzData]="filteredPickups">
     <thead>
       <tr>
@@ -17,7 +19,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let pickup of pickupTable.data">
-        <td>{{ pickup.date }}</td>
+        <td>{{ formatDisplayDate(pickup.date) }}</td>
         <td>{{ pickup.driverId }}</td>
         <td>{{ pickup.weight }}</td>
         <td>
