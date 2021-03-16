@@ -55,6 +55,7 @@ export class AddPickupComponent implements OnInit {
     const noOfPickups: number = +this.pickupForm.get('numberOfPickups')?.value;
 
     this.isLoading = true;
+    console.log(this.pickupForm);
 
     if (this.currentPickup == 1 || noOfPickups == 1) {
       this.pickupService

@@ -1,5 +1,5 @@
 <div class="form" *ngIf="!isValid">
-  <h2>Choose number of bins emptied:</h2>
+  <h2>Number of Bins collected:</h2>
   <form nz-form [formGroup]="pickupForm" (ngSubmit)="submitForm()">
     <nz-form-item>
       <nz-form-control nzErrorTip="Please enter atleast 1 pickup!">
@@ -13,6 +13,19 @@
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
+    <h3>Date of collection:</h3>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <nz-date-picker 
+          [nzAllowClear]="false" 
+          [(ngModel)]="date"
+          [ngModelOptions]="{standalone: true}"
+          (ngModelChange)="onChange($event)">
+          </nz-date-picker>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
     <button nz-button [nzType]="'primary'" nzBlock>Next</button>
   </form>
 </div>
@@ -21,7 +34,6 @@
     <h2>Enter information for pickup: {{ currentPickup }}</h2>
     <br /><br />
     <nz-steps [nzCurrent]="current">
-      <nz-step nzTitle="Pickup Date"></nz-step>
       <nz-step nzTitle="Image Before"></nz-step>
       <nz-step nzTitle="Image After"></nz-step>
       <nz-step nzTitle="Weight"></nz-step>
@@ -29,14 +41,6 @@
 
     <div class="steps-content">
       <div *ngIf="current == 0">
-        Choose pickup date: &nbsp;
-        <nz-date-picker
-          [nzAllowClear]="false"
-          [(ngModel)]="date"
-          (ngModelChange)="onChange($event)"
-        ></nz-date-picker>
-      </div>
-      <div *ngIf="current == 1">
         <nz-input-group>
           <input
             #beforefile
@@ -56,7 +60,7 @@
           />
         </nz-input-group>
       </div>
-      <div *ngIf="current == 2">
+      <div *ngIf="current == 1">
         <nz-input-group>
           <input
             #afterfile
@@ -76,7 +80,7 @@
           />
         </nz-input-group>
       </div>
-      <div *ngIf="current == 3">
+      <div *ngIf="current == 2">
         Choose number of bags: &nbsp;
         <input
           style="display: inline; width: 200px"
@@ -94,7 +98,7 @@
         nz-button
         nzType="default"
         (click)="next()"
-        *ngIf="current < 3"
+        *ngIf="current < 2"
         [disabled]="
           (current == 1 && !selectedBeforeFile) ||
           (current == 2 && !selectedAfterFile)
@@ -102,7 +106,7 @@
       >
         <span>Next</span>
       </button>
-      <button nz-button nzType="primary" (click)="done()" *ngIf="current === 3">
+      <button nz-button nzType="primary" (click)="done()" *ngIf="current === 2">
         <span>Done</span>
       </button>
     </div>
